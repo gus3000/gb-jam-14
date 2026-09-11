@@ -1,7 +1,7 @@
 class_name Utils
 
 enum Direction {UP, DOWN, LEFT, RIGHT}
-const RAY_LENGTH: int = 500
+const RAY_LENGTH: int = 1
 
 static func vector2_from_direction(direction: Utils.Direction) -> Vector2:
 	match direction:

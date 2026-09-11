@@ -5,7 +5,7 @@ const Direction := Utils.Direction
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
 @export var RANGE: int = 32
-@export_custom(PROPERTY_HINT_NONE, "suffix:ms") var MINING_COOLDOWN: int = 600
+@export_custom(PROPERTY_HINT_NONE, "suffix:ms") var MINING_COOLDOWN: int = 300
 @export var JUMP_FORCE: int = 200
 @export var HOLDING_JUMP_FORCE: int = 400
 
@@ -17,16 +17,30 @@ var last_mined_block_timestamp: int = 0
 
 @onready var raycast_up: RayCast2D = $Rays/Up
 @onready var raycast_down: RayCast2D = $Rays/Down
-@onready var raycast_left: RayCast2D = $Rays/Left
-@onready var raycast_right: RayCast2D = $Rays/Right
+@onready var raycast_left_bottom: RayCast2D = $Rays/LeftBottom
+@onready var raycast_left_top: RayCast2D = $Rays/LeftTop
+@onready var raycast_right_bottom: RayCast2D = $Rays/RightBottom
+@onready var raycast_right_top: RayCast2D = $Rays/RightTop
 
 var raycasts: Dictionary = {}
 
+var looked_at_raycasts: Array[RayCast2D]:
+	get:
+		#stupid workaround cause Godot arrays are stupid
+		var out: Array[RayCast2D]
+		out.assign(raycasts[facing_direction])
+		return out
+
 var looked_at_raycast: RayCast2D:
-	get: return raycasts[facing_direction]
+	get:
+		for ray in looked_at_raycasts:
+			if ray.is_colliding():
+				return ray
+		return null
 
 var looked_at_point: Vector2:
-	get: return looked_at_raycast.get_collision_point()
+	get:
+		return looked_at_raycast.get_collision_point()
 
 var looked_at_tilemap: MineableTimeMap:
 	get: return looked_at_raycast.get_collider()
@@ -35,10 +49,10 @@ var looked_at_tilemap: MineableTimeMap:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	raycasts = {
-		Direction.UP: raycast_up,
-		Direction.DOWN: raycast_down,
-		Direction.LEFT: raycast_left,
-		Direction.RIGHT: raycast_right,
+		Direction.UP: [raycast_up],
+		Direction.DOWN: [raycast_down],
+		Direction.LEFT: [raycast_left_bottom, raycast_left_top],
+		Direction.RIGHT: [raycast_right_bottom, raycast_right_top],
 	}
 
 
@@ -84,13 +98,15 @@ func handle_mining(direction: Direction) -> void:
 func mine_block(direction: Direction) -> void:
 	print("trying to mine", Utils.string_from_direction(direction))
 	print("thus using raycast", looked_at_raycast)
-	if not looked_at_raycast.is_colliding():
+	if not looked_at_raycast != null:
 		print("not colliding")
 		return
 	var collide_point := looked_at_point
 	print("point to mine :", collide_point)
 	if collide_point == null:
 		return
+	print("with normal", looked_at_raycast.get_collision_normal())
+	collide_point -= looked_at_raycast.get_collision_normal()
 	print("collider to mine :", looked_at_raycast.get_collider())
 	looked_at_tilemap.mine_block(collide_point)
 #endregion
@@ -101,7 +117,7 @@ func handle_jumping(delta: float) -> void:
 		print("jumping !")
 	elif holding_jump:
 		velocity.y -= (HOLDING_JUMP_FORCE * delta)
-		# print("holding jump")
+	# print("holding jump")
 	pass
 
 func _physics_process(delta: float) -> void:

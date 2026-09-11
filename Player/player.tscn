@@ -40,10 +40,18 @@ target_position = Vector2(0, -10)
 position = Vector2(0, -1)
 target_position = Vector2(0, 10)
 
-[node name="Left" type="RayCast2D" parent="Rays" unique_id=1448745531]
-position = Vector2(-4, -7)
+[node name="LeftBottom" type="RayCast2D" parent="Rays" unique_id=1448745531]
+position = Vector2(-1, -4)
 target_position = Vector2(-10, 0)
 
-[node name="Right" type="RayCast2D" parent="Rays" unique_id=208754842]
-position = Vector2(4, -7)
+[node name="LeftTop" type="RayCast2D" parent="Rays" unique_id=513094052]
+position = Vector2(-1, -10)
+target_position = Vector2(-10, 0)
+
+[node name="RightBottom" type="RayCast2D" parent="Rays" unique_id=208754842]
+position = Vector2(1, -4)
+target_position = Vector2(10, 0)
+
+[node name="RightTop" type="RayCast2D" parent="Rays" unique_id=1514838633]
+position = Vector2(1, -10)
 target_position = Vector2(10, 0)

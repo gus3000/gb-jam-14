@@ -18,8 +18,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dayrp"]
-radius = 2.0
-height = 16.0
+radius = 3.5
+height = 12.0
 
 [node name="Player" type="CharacterBody2D" unique_id=963057457]
 
@@ -27,14 +27,23 @@ height = 16.0
 sprite_frames = SubResource("SpriteFrames_hvfyp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809159382]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 shape = SubResource("CapsuleShape2D_dayrp")
 
 [node name="Rays" type="Node2D" parent="." unique_id=455368027]
 
 [node name="Up" type="RayCast2D" parent="Rays" unique_id=1193002424]
-position = Vector2(0, -16)
+position = Vector2(0, -13)
 target_position = Vector2(0, -10)
 
 [node name="Down" type="RayCast2D" parent="Rays" unique_id=1801110351]
+position = Vector2(0, -1)
 target_position = Vector2(0, 10)
+
+[node name="Left" type="RayCast2D" parent="Rays" unique_id=1448745531]
+position = Vector2(-4, -7)
+target_position = Vector2(-10, 0)
+
+[node name="Right" type="RayCast2D" parent="Rays" unique_id=208754842]
+position = Vector2(4, -7)
+target_position = Vector2(10, 0)

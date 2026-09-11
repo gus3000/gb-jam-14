@@ -14,8 +14,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Gameboy Godot Template"
-run/main_scene="uid://kmm7668m6b7c"
+config/name="Gb-jam-14"
+run/main_scene="uid://oykbfv1nnuyu"
 config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=60
 boot_splash/show_image=false
@@ -24,7 +24,6 @@ boot_splash/show_image=false
 
 window/size/viewport_width=160
 window/size/viewport_height=144
-window/size/mode=3
 window/size/borderless=true
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
@@ -71,3 +70,4 @@ jump={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.5254902, 0.41960785, 0.69411767, 1)

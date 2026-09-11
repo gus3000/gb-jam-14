@@ -27,5 +27,14 @@ height = 16.0
 sprite_frames = SubResource("SpriteFrames_hvfyp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809159382]
-position = Vector2(0, 8)
+position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_dayrp")
+
+[node name="Rays" type="Node2D" parent="." unique_id=455368027]
+
+[node name="Up" type="RayCast2D" parent="Rays" unique_id=1193002424]
+position = Vector2(0, -16)
+target_position = Vector2(0, -10)
+
+[node name="Down" type="RayCast2D" parent="Rays" unique_id=1801110351]
+target_position = Vector2(0, 10)

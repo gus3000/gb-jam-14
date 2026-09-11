@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dan68l7kljdkg"]
+
+[ext_resource type="Texture2D" uid="uid://drvcccl1y2vjs" path="res://Assets/Sprites/Debug.png" id="1_qeufh"]
+
+[node name="DebugPoint" type="Sprite2D" unique_id=488640714]
+texture = ExtResource("1_qeufh")

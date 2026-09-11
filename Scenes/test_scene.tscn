@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c712blpx0eaxx" path="res://Scenes/startup_animation.tscn" id="1_r5l72"]
 [ext_resource type="PackedScene" uid="uid://snr34p2tj46r" path="res://Scenes/gameboy_shader.tscn" id="2_50ct6"]
+[ext_resource type="PackedScene" uid="uid://oykbfv1nnuyu" path="res://Scenes/digging.tscn" id="3_50ct6"]
 
 [node name="test_scene" type="Node2D" unique_id=2008706374]
 
@@ -14,3 +15,6 @@ follow_viewport_enabled = true
 [node name="Startup Animation" parent="Canvas Layer" unique_id=669741113 instance=ExtResource("1_r5l72")]
 
 [node name="Gameboy Shader" parent="Canvas Layer" unique_id=834538827 instance=ExtResource("2_50ct6")]
+
+[node name="Digging" parent="." unique_id=33198676 instance=ExtResource("3_50ct6")]
+position = Vector2(-80, -72)

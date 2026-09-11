@@ -17,7 +17,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" unique_id=1227295312]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dayrp"]
+radius = 2.0
+height = 16.0
+
+[node name="Player" type="CharacterBody2D" unique_id=963057457]
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1676894190]
 sprite_frames = SubResource("SpriteFrames_hvfyp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809159382]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_dayrp")

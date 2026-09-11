@@ -2,6 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://dy68d218nfilj" path="res://Assets/Tilesets/placeholder_tileset.tres" id="1_3ekd2"]
 [ext_resource type="PackedScene" uid="uid://cgt26y14xtpnr" path="res://Player/player.tscn" id="2_ihd0w"]
+[ext_resource type="Script" uid="uid://buk2gua80kfmb" path="res://Player/Scripts/player.gd" id="3_q8e0t"]
 
 [node name="Digging" type="Node2D" unique_id=33198676]
 
@@ -11,3 +12,4 @@ tile_set = ExtResource("1_3ekd2")
 
 [node name="Player" parent="." unique_id=1227295312 instance=ExtResource("2_ihd0w")]
 position = Vector2(77, 27)
+script = ExtResource("3_q8e0t")

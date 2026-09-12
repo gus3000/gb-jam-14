@@ -4,3 +4,4 @@
 /build/linux/*
 /build/web/*
 /build/windows/*
+/.DS_Store

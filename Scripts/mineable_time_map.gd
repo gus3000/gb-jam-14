@@ -27,5 +27,5 @@ func get_block_position(collision_position: Vector2) -> Vector2:
 	var local_coords := map_to_local(map_pos)
 	var global_coords := to_global(local_coords)
 
-	print("block : ", local_collision_pos, map_pos, local_coords, global_coords,)
+	# print("block : ", local_collision_pos, map_pos, local_coords, global_coords,)
 	return global_coords

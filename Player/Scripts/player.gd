@@ -1,24 +1,25 @@
+class_name Player
 extends CharacterBody2D
 
 const Direction := Utils.Direction
 const PlayerAnimation := PlayerSprite.PlayerAnimation
 
-signal started_mining
 signal current_animation(player_animation: PlayerAnimation, direction: Direction)
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
 @export var RANGE: int = 32
-@export_custom(PROPERTY_HINT_NONE, "suffix:ms") var MINING_COOLDOWN: int = 300
 @export var JUMP_FORCE: int = 200
 @export var HOLDING_JUMP_FORCE: int = 400
 
 var facing_direction: Direction = Direction.RIGHT
-var mining: bool = false
+var last_left_right_direction: Direction = Direction.RIGHT
+var powering: bool = false
 var jumping: bool = false
 var walking: bool = false
 var holding_jump: bool = false
-var last_mined_block_timestamp: int = 0
+
+@onready var power_core:PowerCore = $PowerCore
 
 @onready var raycast_up: RayCast2D = $Rays/Up
 @onready var raycast_down: RayCast2D = $Rays/Down
@@ -45,10 +46,15 @@ var looked_at_raycast: RayCast2D:
 
 var looked_at_point: Vector2:
 	get:
-		return looked_at_raycast.get_collision_point()
+		if looked_at_raycast == null:
+			return Vector2.ZERO
+		return looked_at_raycast.get_collision_point() - looked_at_raycast.get_collision_normal()
 
 var looked_at_tilemap: MineableTimeMap:
-	get: return looked_at_raycast.get_collider()
+	get:
+		if looked_at_point == Vector2.ZERO:
+			return null
+		return looked_at_raycast.get_collider()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -66,8 +72,9 @@ func _input(event: InputEvent) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	print(global_position)
 	handle_horizontal_movement()
-	mining = Input.is_action_pressed("mine")
+	powering = Input.is_action_pressed("power")
 	handle_vertical_movement()
 
 	handle_animation_state()
@@ -77,6 +84,7 @@ func handle_horizontal_movement() -> void:
 	velocity.x = Input.get_axis("left", "right") * SPEED
 	if velocity.x != 0:
 		facing_direction = Direction.LEFT if velocity.x < 0 else Direction.RIGHT
+		last_left_right_direction = facing_direction
 		walking = true
 	else:
 		walking = false
@@ -90,6 +98,9 @@ func handle_vertical_movement() -> void:
 	var looking: float = Input.get_axis("up", "down")
 	if looking != 0:
 		facing_direction = Direction.UP if looking < 0 else Direction.DOWN
+	elif facing_direction in [Direction.LEFT,
+		Direction.RIGHT]:  # we stopped looking up or down, let's reset to the last left or right
+		facing_direction = last_left_right_direction
 
 func handle_animation_state() -> void:
 	if jumping:
@@ -104,52 +115,20 @@ func handle_animation_state() -> void:
 	current_animation.emit(PlayerAnimation.IDLE, facing_direction)
 	pass
 
-#region ///mining
-func handle_mining(direction: Direction) -> void:
-	var now: int = Time.get_ticks_msec()
-	if now - last_mined_block_timestamp >= MINING_COOLDOWN:
-		last_mined_block_timestamp = now
-		mine_block(direction)
-
-# func get_mined_point(direction: Direction) -> Dictionary:
-# 	var ray: RayCast2D = raycasts[direction]
-# 	var point = ray.get_collision_point()
-# 	
-# 	return result
-
-func mine_block(direction: Direction) -> void:
-	print("trying to mine", Utils.string_from_direction(direction))
-	print("thus using raycast", looked_at_raycast)
-	if not looked_at_raycast != null:
-		print("not colliding")
-		return
-	var collide_point := looked_at_point
-	print("point to mine :", collide_point)
-	if collide_point == null:
-		return
-	print("with normal", looked_at_raycast.get_collision_normal())
-	collide_point -= looked_at_raycast.get_collision_normal()
-	print("collider to mine :", looked_at_raycast.get_collider())
-
-	started_mining.emit()
-	looked_at_tilemap.mine_block(collide_point)
-#endregion
-
 func handle_jumping(delta: float) -> void:
 	if jumping:
 		velocity.y = -JUMP_FORCE
 		print("jumping !")
 	elif holding_jump:
 		velocity.y -= (HOLDING_JUMP_FORCE * delta)
-	# print("holding jump")
 	pass
 
 func _physics_process(delta: float) -> void:
-	if mining:
-		handle_mining(facing_direction)
+	if powering:
+		power_core.use()
+		
 	if jumping or holding_jump:
 		handle_jumping(delta)
 	velocity.y = min(velocity.y + GRAVITY * delta, GRAVITY)
-	# print("facing direction :", Utils.string_from_direction(facing_direction))
 	move_and_slide()
 	pass

@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cptsvl4gafntt"]
+
+[ext_resource type="Texture2D" uid="uid://dhhpop5jgkynr" path="res://Assets/Sprites/gbjam14_shop.png" id="1_a0mxf"]
+[ext_resource type="Script" uid="uid://1pkx1g2jv3hg" path="res://Scripts/shop.gd" id="1_fdj0q"]
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Fonts/game-boy-startup-font.otf" id="2_2shtd"]
+[ext_resource type="Texture2D" uid="uid://dx1h243s03uhq" path="res://Assets/Sprites/gbjam14_sign.png" id="2_io27d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onpc1"]
+size = Vector2(80, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_onpc1"]
+font = ExtResource("2_2shtd")
+font_color = Color(1, 0.9372549, 1, 1)
+outline_color = Color(0.2784314, 0.11764706, 0.29803923, 1)
+shadow_size = 0
+shadow_color = Color(0.2784314, 0.11764706, 0.29803923, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfer4"]
+size = Vector2(80, 32)
+
+[node name="Shop" type="Area2D" unique_id=1957846300]
+script = ExtResource("1_fdj0q")
+
+[node name="Vision" type="CollisionShape2D" parent="." unique_id=1598746954]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_onpc1")
+
+[node name="Gbjam14Shop" type="Sprite2D" parent="." unique_id=1933287469]
+position = Vector2(0, -16)
+texture = ExtResource("1_a0mxf")
+
+[node name="Sign" type="Area2D" parent="." unique_id=295379704]
+
+[node name="Label" type="Label" parent="Sign" unique_id=1973391863]
+visible = false
+offset_left = -64.0
+offset_top = -56.0
+offset_right = -9.0
+offset_bottom = -33.0
+text = "SHOP"
+label_settings = SubResource("LabelSettings_onpc1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gbjam14Sign" type="Sprite2D" parent="Sign" unique_id=1904553171]
+position = Vector2(-40, -16)
+texture = ExtResource("2_io27d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sign" unique_id=737543981]
+position = Vector2(-40, -16)
+shape = SubResource("RectangleShape2D_xfer4")
+debug_color = Color(0.8331486, 0.3205262, 0.580624, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="Sign" to="." method="_on_sign_body_entered"]
+[connection signal="body_exited" from="Sign" to="." method="_on_sign_body_exited"]

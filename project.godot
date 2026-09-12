@@ -24,6 +24,7 @@ boot_splash/show_image=false
 
 window/size/viewport_width=160
 window/size/viewport_height=144
+window/size/mode=3
 window/size/initial_position_type=3
 window/size/borderless=true
 window/size/window_width_override=1080

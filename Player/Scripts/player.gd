@@ -1,26 +1,25 @@
+class_name Player
 extends CharacterBody2D
 
 const Direction := Utils.Direction
 const PlayerAnimation := PlayerSprite.PlayerAnimation
 
-signal started_mining
 signal current_animation(player_animation: PlayerAnimation, direction: Direction)
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
 @export var RANGE: int = 32
-@export_custom(PROPERTY_HINT_NONE, "suffix:ms") var MINING_COOLDOWN: int = 300
 @export var JUMP_FORCE: int = 200
 @export var HOLDING_JUMP_FORCE: int = 400
-@export var debug_point: Sprite2D
 
 var facing_direction: Direction = Direction.RIGHT
 var last_left_right_direction: Direction = Direction.RIGHT
-var mining: bool = false
+var powering: bool = false
 var jumping: bool = false
 var walking: bool = false
 var holding_jump: bool = false
-var last_mined_block_timestamp: int = 0
+
+@onready var power_core:PowerCore = $PowerCore
 
 @onready var raycast_up: RayCast2D = $Rays/Up
 @onready var raycast_down: RayCast2D = $Rays/Down
@@ -75,11 +74,10 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	print(global_position)
 	handle_horizontal_movement()
-	mining = Input.is_action_pressed("mine")
+	powering = Input.is_action_pressed("power")
 	handle_vertical_movement()
 
 	handle_animation_state()
-	highlight_minable_block()
 	pass
 
 func handle_horizontal_movement() -> void:
@@ -117,55 +115,20 @@ func handle_animation_state() -> void:
 	current_animation.emit(PlayerAnimation.IDLE, facing_direction)
 	pass
 
-#region ///mining
-func handle_mining() -> void:
-	var now: int = Time.get_ticks_msec()
-	if now - last_mined_block_timestamp >= MINING_COOLDOWN:
-		last_mined_block_timestamp = now
-		mine_block()
-
-func mine_block() -> void:
-	print("trying to mine", Utils.string_from_direction(facing_direction))
-	print("thus using raycast", looked_at_raycast)
-	if not looked_at_raycast != null:
-		print("not colliding")
-		return
-	var collide_point := looked_at_point
-	print("point to mine :", collide_point)
-	if collide_point == null:
-		return
-	# print("with normal", looked_at_raycast.get_collision_normal())
-	# collide_point -= looked_at_raycast.get_collision_normal()
-	print("collider to mine :", looked_at_raycast.get_collider())
-
-	started_mining.emit()
-	looked_at_tilemap.mine_block(collide_point)
-
-func highlight_minable_block() -> void:
-	var l := looked_at_point
-	if l == Vector2.ZERO or looked_at_tilemap == null:
-		debug_point.visible = false
-		return
-	# print(looked_at_point)
-	debug_point.visible = true
-	debug_point.global_position = looked_at_tilemap.get_block_position(l)
-#endregion
-
 func handle_jumping(delta: float) -> void:
 	if jumping:
 		velocity.y = -JUMP_FORCE
 		print("jumping !")
 	elif holding_jump:
 		velocity.y -= (HOLDING_JUMP_FORCE * delta)
-	# print("holding jump")
 	pass
 
 func _physics_process(delta: float) -> void:
-	if mining:
-		handle_mining()
+	if powering:
+		power_core.use()
+		
 	if jumping or holding_jump:
 		handle_jumping(delta)
 	velocity.y = min(velocity.y + GRAVITY * delta, GRAVITY)
-	# print("facing direction :", Utils.string_from_direction(facing_direction))
 	move_and_slide()
 	pass

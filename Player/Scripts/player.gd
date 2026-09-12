@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
 const Direction := Utils.Direction
+const PlayerAnimation := PlayerSprite.PlayerAnimation
 
 signal started_mining
+signal current_animation(player_animation: PlayerAnimation, direction: Direction)
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -14,6 +16,7 @@ signal started_mining
 var facing_direction: Direction = Direction.RIGHT
 var mining: bool = false
 var jumping: bool = false
+var walking: bool = false
 var holding_jump: bool = false
 var last_mined_block_timestamp: int = 0
 
@@ -67,12 +70,16 @@ func _process(delta: float) -> void:
 	mining = Input.is_action_pressed("mine")
 	handle_vertical_movement()
 
+	handle_animation_state()
 	pass
 
 func handle_horizontal_movement() -> void:
 	velocity.x = Input.get_axis("left", "right") * SPEED
 	if velocity.x != 0:
 		facing_direction = Direction.LEFT if velocity.x < 0 else Direction.RIGHT
+		walking = true
+	else:
+		walking = false
 
 func handle_vertical_movement() -> void:
 	if is_on_floor():
@@ -83,6 +90,19 @@ func handle_vertical_movement() -> void:
 	var looking: float = Input.get_axis("up", "down")
 	if looking != 0:
 		facing_direction = Direction.UP if looking < 0 else Direction.DOWN
+
+func handle_animation_state() -> void:
+	if jumping:
+		current_animation.emit(PlayerAnimation.JUMP, facing_direction)
+		return
+	if not is_on_floor():
+		current_animation.emit(PlayerAnimation.FALL, facing_direction)
+		return
+	if walking:
+		current_animation.emit(PlayerAnimation.WALK, facing_direction)
+		return
+	current_animation.emit(PlayerAnimation.IDLE, facing_direction)
+	pass
 
 #region ///mining
 func handle_mining(direction: Direction) -> void:

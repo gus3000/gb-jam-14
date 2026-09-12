@@ -1,23 +1,9 @@
 [gd_scene format=3 uid="uid://cgt26y14xtpnr"]
 
 [ext_resource type="Script" uid="uid://buk2gua80kfmb" path="res://Player/Scripts/player.gd" id="1_btcbx"]
-[ext_resource type="Texture2D" uid="uid://cwpvd2070h5sk" path="res://Player/Sprites/player.png" id="1_l8h54"]
 [ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_4ntmi"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
-atlas = ExtResource("1_l8h54")
-region = Rect2(0, 0, 16, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_hvfyp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4ntmi")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://dxsvforscrt2s" path="res://Player/Sprites/player_sprite_frames.tres" id="2_btcbx"]
+[ext_resource type="Script" uid="uid://cwqul1bpy2gsa" path="res://Player/Scripts/player_sprite.gd" id="3_gwnis"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dayrp"]
 radius = 3.5
@@ -26,8 +12,12 @@ height = 12.0
 [node name="Player" type="CharacterBody2D" unique_id=963057457]
 script = ExtResource("1_btcbx")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1676894190]
-sprite_frames = SubResource("SpriteFrames_hvfyp")
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=110110312]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("2_btcbx")
+animation = &"Walk"
+autoplay = "Idle"
+script = ExtResource("3_gwnis")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809159382]
 position = Vector2(0, -7)
@@ -64,4 +54,5 @@ target_position = Vector2(10, 0)
 [node name="Mining" type="AudioStreamPlayer" parent="Audio" unique_id=1987230043]
 stream = ExtResource("2_4ntmi")
 
+[connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
 [connection signal="started_mining" from="." to="Audio/Mining" method="play"]

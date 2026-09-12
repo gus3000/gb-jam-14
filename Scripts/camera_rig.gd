@@ -12,7 +12,8 @@ func _ready() -> void:
 func _draw() -> void:
 	if not OS.is_debug_build():
 		return
-
+	
+	return
 	var color: Color = Color.RED
 	var width: float = 1
 	var top_left := still_shape.position

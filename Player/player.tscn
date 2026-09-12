@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cgt26y14xtpnr"]
 
+[ext_resource type="Script" uid="uid://buk2gua80kfmb" path="res://Player/Scripts/player.gd" id="1_btcbx"]
 [ext_resource type="Texture2D" uid="uid://cwpvd2070h5sk" path="res://Player/Sprites/player.png" id="1_l8h54"]
+[ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_4ntmi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
 atlas = ExtResource("1_l8h54")
@@ -22,6 +24,7 @@ radius = 3.5
 height = 12.0
 
 [node name="Player" type="CharacterBody2D" unique_id=963057457]
+script = ExtResource("1_btcbx")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1676894190]
 sprite_frames = SubResource("SpriteFrames_hvfyp")
@@ -55,3 +58,10 @@ target_position = Vector2(10, 0)
 [node name="RightTop" type="RayCast2D" parent="Rays" unique_id=1514838633]
 position = Vector2(1, -10)
 target_position = Vector2(10, 0)
+
+[node name="Audio" type="Node" parent="." unique_id=551564286]
+
+[node name="Mining" type="AudioStreamPlayer" parent="Audio" unique_id=1987230043]
+stream = ExtResource("2_4ntmi")
+
+[connection signal="started_mining" from="." to="Audio/Mining" method="play"]

@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const Direction := Utils.Direction
 
+signal started_mining
+
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
 @export var RANGE: int = 32
@@ -108,6 +110,8 @@ func mine_block(direction: Direction) -> void:
 	print("with normal", looked_at_raycast.get_collision_normal())
 	collide_point -= looked_at_raycast.get_collision_normal()
 	print("collider to mine :", looked_at_raycast.get_collider())
+
+	started_mining.emit()
 	looked_at_tilemap.mine_block(collide_point)
 #endregion
 

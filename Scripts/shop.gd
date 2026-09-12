@@ -8,13 +8,13 @@ signal shop_reached();
 signal shop_left();
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	if body is Player:
 		shop_reached.emit()
 		get_parent().get_node("Camera").add_child(SHOP_MENU.instantiate())
 
 	
 func _on_body_exited(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	if body is Player:
 		shop_left.emit();
 		for child in get_parent().get_node("Camera").get_children():
 			if child is CanvasLayer:
@@ -22,10 +22,10 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _on_sign_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	if body is Player:
 		label.show();
 
 
 func _on_sign_body_exited(body: Node2D) -> void:
-	if body is CharacterBody2D:
+	if body is Player:
 		label.hide();

@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://q27iqryt23dv" path="res://Assets/Tilesets/autotile_terrain.tres" id="3_qi2wl"]
 [ext_resource type="PackedScene" uid="uid://cgjwd0e6xv71a" path="res://Scenes/camera.tscn" id="6_0jggw"]
 [ext_resource type="PackedScene" uid="uid://cptsvl4gafntt" path="res://Scenes/shop.tscn" id="6_5qq38"]
+[ext_resource type="PackedScene" uid="uid://dcfyvxas2033x" path="res://Scenes/shopkeeper.tscn" id="7_5qq38"]
 
 [node name="Digging" type="Node2D" unique_id=33198676]
 
@@ -30,3 +31,6 @@ target = NodePath("../Player")
 
 [node name="Shop" parent="." unique_id=1957846300 instance=ExtResource("6_5qq38")]
 position = Vector2(184, 64)
+
+[node name="Shopkeeper" parent="." unique_id=1264099386 instance=ExtResource("7_5qq38")]
+position = Vector2(320, 64)

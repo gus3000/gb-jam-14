@@ -1,45 +1,16 @@
-class_name PowerCore
-extends Node2D
-
-enum Power {PICKAXE, LADDER}
+class_name MiningCore
+extends Node
 
 signal started_mining
 
-
 @export_custom(PROPERTY_HINT_NONE, "suffix:ms") var MINING_COOLDOWN: int = 300
 @export var debug_point: Sprite2D
-@export var current_power: Power = Power.PICKAXE
 
-@onready var player:Player = $".."
-@onready var acquired_powers: Dictionary = {
-	PICKAXE = 0,
-	LADDER = 0,
-	}
+@onready var player: Player = $"../.."
 
 var last_mined_block_timestamp: int = 0
 
 
-func _ready() -> void:
-	pass
-
-
-func _process(delta: float) -> void:
-	highlight_minable_block()
-	pass
-
-func use():
-	use_power(current_power)
-	pass
-
-func use_power(power: Power):
-	print("Using power ", str(power))
-	match(power):
-		Power.PICKAXE:
-			handle_mining()
-	pass
-
-
-#region ///mining
 func handle_mining() -> void:
 	var now: int = Time.get_ticks_msec()
 	if now - last_mined_block_timestamp >= MINING_COOLDOWN:

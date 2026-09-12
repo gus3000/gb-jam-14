@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://buk2gua80kfmb" path="res://Player/Scripts/player.gd" id="1_btcbx"]
 [ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_4ntmi"]
 [ext_resource type="SpriteFrames" uid="uid://dxsvforscrt2s" path="res://Player/Sprites/player_sprite_frames.tres" id="2_btcbx"]
-[ext_resource type="Texture2D" uid="uid://drvcccl1y2vjs" path="res://Assets/Sprites/Debug.png" id="2_k53q1"]
 [ext_resource type="Script" uid="uid://cwqul1bpy2gsa" path="res://Player/Scripts/player_sprite.gd" id="3_gwnis"]
-[ext_resource type="Script" uid="uid://c7r4nrowpmw6k" path="res://Player/Scripts/power_core.gd" id="6_fhl08"]
+[ext_resource type="Texture2D" uid="uid://b0cqee0taqob2" path="res://Assets/Sprites/Placeholder.png" id="4_fhl08"]
+[ext_resource type="Script" uid="uid://c7r4nrowpmw6k" path="res://Player/Scripts/Power/power_core.gd" id="6_fhl08"]
+[ext_resource type="Script" uid="uid://dcmvattwbojxm" path="res://Player/Scripts/Power/mining_core.gd" id="7_vtle1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dayrp"]
 radius = 3.5
@@ -20,6 +21,9 @@ sprite_frames = ExtResource("2_btcbx")
 animation = &"Walk"
 autoplay = "Idle"
 script = ExtResource("3_gwnis")
+
+[node name="DebugPoint" type="Sprite2D" parent="." unique_id=1656146676]
+texture = ExtResource("4_fhl08")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809159382]
 position = Vector2(0, -7)
@@ -57,15 +61,13 @@ target_position = Vector2(10, 0)
 stream = ExtResource("2_4ntmi")
 volume_db = -8.0
 
-[node name="PowerCore" type="Node2D" parent="." unique_id=1060804954 node_paths=PackedStringArray("debug_point")]
+[node name="PowerCore" type="Node2D" parent="." unique_id=1060804954]
 position = Vector2(0, -4)
 script = ExtResource("6_fhl08")
-debug_point = NodePath("DebugPoint")
 
-[node name="DebugPoint" type="Sprite2D" parent="PowerCore" unique_id=1656146676]
-position = Vector2(0, 4)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_k53q1")
+[node name="MiningCore" type="Node2D" parent="PowerCore" unique_id=425965659 node_paths=PackedStringArray("debug_point")]
+script = ExtResource("7_vtle1")
+debug_point = NodePath("../../DebugPoint")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
-[connection signal="started_mining" from="PowerCore" to="Audio/Mining" method="play"]
+[connection signal="started_mining" from="PowerCore/MiningCore" to="Audio/Mining" method="play"]

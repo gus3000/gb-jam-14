@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cgjwd0e6xv71a" path="res://Scenes/camera.tscn" id="6_0jggw"]
 [ext_resource type="PackedScene" uid="uid://cptsvl4gafntt" path="res://Scenes/ship.tscn" id="6_5qq38"]
 [ext_resource type="PackedScene" uid="uid://dcfyvxas2033x" path="res://Scenes/shopkeeper.tscn" id="7_5qq38"]
-[ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key.tscn" id="8_tpmwi"]
+[ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key_object.tscn" id="8_tpmwi"]
+[ext_resource type="FontFile" uid="uid://c42yg4fiusemu" path="res://Assets/Fonts/Everest/Web/Everest Condensed.woff" id="9_ycjfa"]
 
 [node name="Digging" type="Node2D" unique_id=33198676]
 
@@ -30,7 +31,7 @@ position = Vector2(77, 27)
 position = Vector2(77, 22)
 target = NodePath("../Player")
 
-[node name="Shop" parent="." unique_id=1957846300 instance=ExtResource("6_5qq38")]
+[node name="Ship" parent="." unique_id=1957846300 instance=ExtResource("6_5qq38")]
 position = Vector2(184, 64)
 
 [node name="Shopkeeper" parent="." unique_id=1264099386 instance=ExtResource("7_5qq38")]
@@ -39,4 +40,5 @@ position = Vector2(320, 64)
 [node name="Key objects" type="Node2D" parent="." unique_id=541457216]
 
 [node name="Key" parent="Key objects" unique_id=801604029 instance=ExtResource("8_tpmwi")]
-position = Vector2(115, 157)
+position = Vector2(125, 84)
+font = ExtResource("9_ycjfa")

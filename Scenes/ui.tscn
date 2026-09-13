@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bxkw8l8x6rx0g"]
+
+[ext_resource type="Script" uid="uid://b0g3n5mkqgbyy" path="res://Scripts/ui.gd" id="1_2246s"]
+[ext_resource type="LabelSettings" uid="uid://b76tuudykixus" path="res://Assets/Fonts/default_label_settings.tres" id="1_jxero"]
+[ext_resource type="Theme" uid="uid://cuo02oet7himq" path="res://Resources/ui_theme.tres" id="1_nf4gj"]
+[ext_resource type="Texture2D" uid="uid://c67rm6k0f4vl3" path="res://Assets/Sprites/textbox.png" id="1_qdvrb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nf4gj"]
+texture = ExtResource("1_qdvrb")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="Ui" type="CanvasLayer" unique_id=556782816]
+script = ExtResource("1_2246s")
+
+[node name="Dialog" type="VBoxContainer" parent="." unique_id=174421350]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Dialog" unique_id=779129322]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nf4gj")
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialog/PanelContainer" unique_id=130607577]
+layout_mode = 2
+theme = ExtResource("1_nf4gj")
+
+[node name="Label" type="Label" parent="Dialog/PanelContainer/MarginContainer" unique_id=161414353]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "It's locked!
+oops"
+label_settings = ExtResource("1_jxero")
+horizontal_alignment = 1
+vertical_alignment = 1

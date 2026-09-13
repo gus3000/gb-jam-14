@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dcfyvxas2033x" path="res://Scenes/shopkeeper.tscn" id="7_5qq38"]
 [ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key_object.tscn" id="8_tpmwi"]
 [ext_resource type="FontFile" uid="uid://c42yg4fiusemu" path="res://Assets/Fonts/Everest/Web/Everest Condensed.woff" id="9_ycjfa"]
+[ext_resource type="PackedScene" uid="uid://bxkw8l8x6rx0g" path="res://Scenes/ui.tscn" id="10_h3u42"]
 
 [node name="Digging" type="Node2D" unique_id=33198676]
 
@@ -42,3 +43,7 @@ position = Vector2(320, 64)
 [node name="Key" parent="Key objects" unique_id=801604029 instance=ExtResource("8_tpmwi")]
 position = Vector2(125, 84)
 font = ExtResource("9_ycjfa")
+
+[node name="Ui" parent="." unique_id=192981869 instance=ExtResource("10_h3u42")]
+
+[connection signal="obtain_key_object" from="Player" to="Ui" method="_on_player_obtain_key_object"]

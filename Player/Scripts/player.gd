@@ -3,8 +3,10 @@ extends CharacterBody2D
 
 const Direction := Utils.Direction
 const PlayerAnimation := PlayerSprite.PlayerAnimation
+const KeyObjectType := KeyObject.KeyObjectType
 
 signal current_animation(player_animation: PlayerAnimation, direction: Direction)
+signal obtain_key_object(object_type: KeyObjectType)
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -98,8 +100,8 @@ func handle_vertical_movement() -> void:
 	var looking: float = Input.get_axis("up", "down")
 	if looking != 0:
 		facing_direction = Direction.UP if looking < 0 else Direction.DOWN
-	elif facing_direction in [Direction.LEFT,
-		Direction.RIGHT]:  # we stopped looking up or down, let's reset to the last left or right
+	elif facing_direction in [Direction.LEFT, Direction.RIGHT]:
+		# we stopped looking up or down, let's reset to the last left or right
 		facing_direction = last_left_right_direction
 
 func handle_animation_state() -> void:
@@ -122,6 +124,12 @@ func handle_jumping(delta: float) -> void:
 	elif holding_jump:
 		velocity.y -= (HOLDING_JUMP_FORCE * delta)
 	pass
+
+func obtain(object_type: KeyObjectType):
+	# print("YOU GOT THE ", KeyObjectType.keys()[object_type])
+	obtain_key_object.emit(object_type)
+	pass
+
 
 func _physics_process(delta: float) -> void:
 	if jumping or holding_jump:

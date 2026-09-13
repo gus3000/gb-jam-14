@@ -189,6 +189,7 @@ sprite_frames = SubResource("SpriteFrames_dayrp")
 script = ExtResource("8_od3ui")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
+[connection signal="obtain_key_object" from="." to="Bag" method="_on_player_obtain_key_object"]
 [connection signal="block_mined" from="PowerCore/MiningCore" to="Audio/Mining" method="play"]
 [connection signal="started_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="start_mining"]
 [connection signal="stopped_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="stop_mining"]

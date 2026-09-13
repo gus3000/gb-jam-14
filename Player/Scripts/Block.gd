@@ -15,3 +15,8 @@ func _init(_x: int, _y: int, _toughness: float):
 
 func _to_string() -> String:
 	return "Block(%s,%s,%s)" % [x, y, toughness]
+
+func equals(block: Block) -> bool:
+	if block == null:
+		return false
+	return x == block.x and y == block.y and is_equal_approx(toughness, block.toughness)

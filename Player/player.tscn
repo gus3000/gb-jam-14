@@ -3,11 +3,64 @@
 [ext_resource type="Script" uid="uid://buk2gua80kfmb" path="res://Player/Scripts/player.gd" id="1_btcbx"]
 [ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_4ntmi"]
 [ext_resource type="SpriteFrames" uid="uid://dxsvforscrt2s" path="res://Player/Sprites/player_sprite_frames.tres" id="2_btcbx"]
+[ext_resource type="Script" uid="uid://d0cs3i5likofj" path="res://Player/Scripts/Bag/bag.gd" id="2_x3vf3"]
 [ext_resource type="Script" uid="uid://cwqul1bpy2gsa" path="res://Player/Scripts/player_sprite.gd" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://y1ycgbqoijw0" path="res://Assets/Sprites/Placeholder/Placeholder-aim.png" id="4_vtle1"]
 [ext_resource type="Script" uid="uid://c7r4nrowpmw6k" path="res://Player/Scripts/Power/power_core.gd" id="6_fhl08"]
 [ext_resource type="Script" uid="uid://dcmvattwbojxm" path="res://Player/Scripts/Power/mining_core.gd" id="7_vtle1"]
 [ext_resource type="Script" uid="uid://7y62e1ni4scf" path="res://Player/Scripts/Power/mining_indicator.gd" id="8_od3ui"]
+[ext_resource type="Texture2D" uid="uid://cotce84cjdvek" path="res://Assets/Sprites/Placeholder/Placeholder-bag.png" id="9_00tjw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu6f8"]
+atlas = ExtResource("9_00tjw")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
+atlas = ExtResource("9_00tjw")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfmf2"]
+atlas = ExtResource("9_00tjw")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
+atlas = ExtResource("9_00tjw")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4eilc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu6f8")
+}],
+"loop": 1,
+"name": &"30",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkpta")
+}],
+"loop": 1,
+"name": &"60",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfmf2")
+}],
+"loop": 1,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pisgm")
+}],
+"loop": 1,
+"name": &"full",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dayrp"]
 radius = 3.5
@@ -63,6 +116,14 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" unique_id=963057457]
 script = ExtResource("1_btcbx")
+
+[node name="Bag" type="Node2D" parent="." unique_id=1939375753]
+script = ExtResource("2_x3vf3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bag" unique_id=225718913]
+position = Vector2(-5, -5)
+sprite_frames = SubResource("SpriteFrames_4eilc")
+animation = &"30"
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=110110312]
 position = Vector2(0, -8)

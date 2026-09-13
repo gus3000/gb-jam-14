@@ -11,6 +11,8 @@ enum PlayerAnimation {
 	LAND,
 }
 
+@onready var bag:Node2D = $"../Bag"
+
 @onready var animations: Dictionary[PlayerAnimation, String] = {
 	PlayerAnimation.IDLE: "Idle",
 	PlayerAnimation.WALK: "Walk",
@@ -36,7 +38,11 @@ func handle_direction_change(new_direction: Direction) -> void:
 	if new_direction == last_held_direction:
 		return
 	last_held_direction = new_direction
+	flip()
+
+func flip()->void:
 	flip_h = not flip_h
+	bag.scale.x = -bag.scale.x
 
 func slot_animation(player_animation: PlayerAnimation, direction: Direction) -> void:
 	var anim := animations[player_animation]

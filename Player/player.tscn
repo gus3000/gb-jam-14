@@ -81,26 +81,32 @@ shape = SubResource("CapsuleShape2D_dayrp")
 [node name="Up" type="RayCast2D" parent="Rays" unique_id=1193002424]
 position = Vector2(0, -13)
 target_position = Vector2(0, -10)
+collision_mask = 2
 
 [node name="Down" type="RayCast2D" parent="Rays" unique_id=1801110351]
 position = Vector2(0, -1)
 target_position = Vector2(0, 10)
+collision_mask = 2
 
 [node name="LeftBottom" type="RayCast2D" parent="Rays" unique_id=1448745531]
 position = Vector2(-1, -4)
 target_position = Vector2(-10, 0)
+collision_mask = 2
 
 [node name="LeftTop" type="RayCast2D" parent="Rays" unique_id=513094052]
 position = Vector2(-1, -10)
 target_position = Vector2(-10, 0)
+collision_mask = 2
 
 [node name="RightBottom" type="RayCast2D" parent="Rays" unique_id=208754842]
 position = Vector2(1, -4)
 target_position = Vector2(10, 0)
+collision_mask = 2
 
 [node name="RightTop" type="RayCast2D" parent="Rays" unique_id=1514838633]
 position = Vector2(1, -10)
 target_position = Vector2(10, 0)
+collision_mask = 2
 
 [node name="Audio" type="Node" parent="." unique_id=551564286]
 
@@ -119,7 +125,6 @@ debug_point = NodePath("MiningIndicator")
 [node name="MiningIndicator" type="AnimatedSprite2D" parent="PowerCore/MiningCore" unique_id=1310198372]
 position = Vector2(0, 4)
 sprite_frames = SubResource("SpriteFrames_dayrp")
-animation = &"blinking"
 script = ExtResource("8_od3ui")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]

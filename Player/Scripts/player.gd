@@ -18,7 +18,7 @@ var jumping: bool = false
 var walking: bool = false
 var holding_jump: bool = false
 
-@onready var power_core:PowerCore = $PowerCore
+@onready var power_core: PowerCore = $PowerCore
 
 @onready var raycast_up: RayCast2D = $Rays/Up
 @onready var raycast_down: RayCast2D = $Rays/Down
@@ -53,7 +53,10 @@ var looked_at_tilemap: MineableTimeMap:
 	get:
 		if looked_at_point == Vector2.ZERO:
 			return null
-		return looked_at_raycast.get_collider()
+		var col := looked_at_raycast.get_collider()
+		if col is not MineableTimeMap:
+			return null
+		return col
 
 
 # Called when the node enters the scene tree for the first time.
@@ -120,7 +123,7 @@ func handle_jumping(delta: float) -> void:
 		velocity.y -= (HOLDING_JUMP_FORCE * delta)
 	pass
 
-func _physics_process(delta: float) -> void:		
+func _physics_process(delta: float) -> void:
 	if jumping or holding_jump:
 		handle_jumping(delta)
 	velocity.y = min(velocity.y + GRAVITY * delta, GRAVITY)

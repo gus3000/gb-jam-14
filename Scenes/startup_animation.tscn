@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c712blpx0eaxx"]
 
 [ext_resource type="Script" uid="uid://id4t8mmu0ttu" path="res://Scripts/Startup/startup_sequence.gd" id="1_msgjv"]
-[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Fonts/game-boy-startup-font.otf" id="2_miqi0"]
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="2_miqi0"]
 [ext_resource type="AudioStream" uid="uid://onesrv8e64oh" path="res://Assets/Audio/SFX/nintendo-game-boy-startup.mp3" id="3_r2jo5"]
 
 [sub_resource type="Animation" id="Animation_r2pn4"]

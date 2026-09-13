@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dx73sdghq4d41"
-path="res://.godot/imported/game-boy-startup-font.otf-1f7623c6938a2828c5e9246d6a7e233f.fontdata"
+path="res://.godot/imported/game-boy-startup-font.otf-3e221a4cd18b0222990078e494ffdf19.fontdata"
 
 [deps]
 
-source_file="res://Fonts/game-boy-startup-font.otf"
-dest_files=["res://.godot/imported/game-boy-startup-font.otf-1f7623c6938a2828c5e9246d6a7e233f.fontdata"]
+source_file="res://Assets/Fonts/game-boy-startup-font.otf"
+dest_files=["res://.godot/imported/game-boy-startup-font.otf-3e221a4cd18b0222990078e494ffdf19.fontdata"]
 
 [params]
 

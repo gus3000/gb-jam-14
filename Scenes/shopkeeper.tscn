@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnhhmamw7bs8d" path="res://Scripts/shopkeeper.gd" id="1_fdy00"]
 [ext_resource type="Texture2D" uid="uid://drvcccl1y2vjs" path="res://Assets/Sprites/Debug.png" id="2_rla2l"]
-[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Fonts/game-boy-startup-font.otf" id="3_bcyy5"]
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="3_bcyy5"]
 [ext_resource type="Texture2D" uid="uid://bhud50jx6ntbw" path="res://Assets/Sprites/npc.png" id="4_vce3n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8vd5c"]

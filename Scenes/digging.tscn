@@ -42,6 +42,7 @@ position = Vector2(320, 64)
 
 [node name="Key" parent="Key objects" unique_id=801604029 instance=ExtResource("8_tpmwi")]
 position = Vector2(125, 84)
+object_type = 1
 font = ExtResource("9_ycjfa")
 
 [node name="Ui" parent="." unique_id=192981869 instance=ExtResource("10_h3u42")]

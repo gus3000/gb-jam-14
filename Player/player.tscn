@@ -66,13 +66,9 @@ animations = [{
 radius = 3.5
 height = 12.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_00tjw"]
-atlas = ExtResource("4_vtle1")
-region = Rect2(0, 0, 8, 8)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_x3vf3"]
 atlas = ExtResource("4_vtle1")
-region = Rect2(8, 0, 8, 8)
+region = Rect2(0, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_apopc"]
 atlas = ExtResource("4_vtle1")
@@ -89,9 +85,6 @@ region = Rect2(0, 0, 8, 8)
 [sub_resource type="SpriteFrames" id="SpriteFrames_dayrp"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_00tjw")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x3vf3")
 }, {
@@ -186,6 +179,7 @@ debug_point = NodePath("MiningIndicator")
 [node name="MiningIndicator" type="AnimatedSprite2D" parent="PowerCore/MiningCore" unique_id=1310198372]
 position = Vector2(0, 4)
 sprite_frames = SubResource("SpriteFrames_dayrp")
+animation = &"blinking"
 script = ExtResource("8_od3ui")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]

@@ -88,6 +88,8 @@ position = Vector2(-40, -16)
 shape = SubResource("RectangleShape2D_xfer4")
 debug_color = Color(0.8331486, 0.3205262, 0.580624, 0.41960785)
 
+[node name="Animations" type="Node2D" parent="." unique_id=1697023610]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="body_entered" from="Sign" to="." method="_on_sign_body_entered"]

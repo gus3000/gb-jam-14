@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0cqee0taqob2"
-path="res://.godot/imported/Placeholder.png-66eee474033f222eb37e00dcccd6957a.ctex"
+uid="uid://bmj7wjn4q4qca"
+path="res://.godot/imported/Placeholder-ship.png-8dba7ef67c3e23abe5c167238113758d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Placeholder.png"
-dest_files=["res://.godot/imported/Placeholder.png-66eee474033f222eb37e00dcccd6957a.ctex"]
+source_file="res://Assets/Sprites/Placeholder/Placeholder-ship.png"
+dest_files=["res://.godot/imported/Placeholder-ship.png-8dba7ef67c3e23abe5c167238113758d.ctex"]
 
 [params]
 

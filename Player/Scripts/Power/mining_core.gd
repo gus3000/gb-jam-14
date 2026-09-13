@@ -2,44 +2,80 @@ class_name MiningCore
 extends Node
 
 signal started_mining
+signal block_mined
+signal stopped_mining
 
-@export_custom(PROPERTY_HINT_NONE, "suffix:ms") var MINING_COOLDOWN: int = 300
-@export var debug_point: Sprite2D
+@export var mining_power: int = 1
+@export var debug_point: AnimatedSprite2D
 
 @onready var player: Player = $"../.."
 
-var last_mined_block_timestamp: int = 0
+var started_mining_timestamp: int = 0  #ms
+var mined_block: Block = null
 
+var is_mining: int:
+	get: return started_mining_timestamp != 0
+var current_mining_time: int:
+	get: return Time.get_ticks_msec() - started_mining_timestamp
 
-func handle_mining() -> void:
-	var now: int = Time.get_ticks_msec()
-	if now - last_mined_block_timestamp >= MINING_COOLDOWN:
-		last_mined_block_timestamp = now
-		mine_block()
-
-func mine_block() -> void:
-	print("trying to mine", Utils.string_from_direction(player.facing_direction))
-	print("thus using raycast", player.looked_at_raycast)
-	if not player.looked_at_raycast != null:
-		print("not colliding")
+func handle_mining(powering: bool) -> void:
+	if block_to_mine() == null:
 		return
-	var collide_point := player.looked_at_point
-	print("point to mine :", collide_point)
-	if collide_point == null:
-		return
-	# print("with normal", looked_at_raycast.get_collision_normal())
-	# collide_point -= looked_at_raycast.get_collision_normal()
-	print("collider to mine :", player.looked_at_raycast.get_collider())
+	if not powering and is_mining:
+		stop_mining()
 
+	elif powering and not is_mining:
+		start_mining()
+	elif powering:
+		continue_mining()
+
+func start_mining() -> void:
+	started_mining_timestamp = Time.get_ticks_msec()
+	mined_block = block_to_mine()
+	print("started mining block ", mined_block)
 	started_mining.emit()
-	player.looked_at_tilemap.mine_block(collide_point)
+
+func continue_mining() -> void:
+	if current_mining_time > mining_time(mined_block, mining_power):
+		player.looked_at_tilemap.mine_block(mined_block)
+		block_mined.emit()
+		stop_mining()
+	pass
+
+func stop_mining() -> void:
+	started_mining_timestamp = 0
+	mined_block = null
+	stopped_mining.emit()
+	
+
+func mining_time(block: Block, _mining_power: int) -> float:
+	return block.toughness / _mining_power
+
+func block_to_mine() -> Block:
+	# print("trying to mine", Utils.string_from_direction(player.facing_direction))
+	# print("thus using raycast", player.looked_at_raycast)
+	if not player.looked_at_raycast != null:
+		# print("not colliding")
+		return null
+	var collide_point := player.looked_at_point
+	# print("point to mine :", collide_point)
+	if collide_point == null:
+		return null
+	# print("collider to mine :", player.looked_at_raycast.get_collider())
+
+	return player.looked_at_tilemap.get_block_at_point(collide_point)
+
 
 func highlight_minable_block() -> void:
 	var l := player.looked_at_point
 	if l == Vector2.ZERO or player.looked_at_tilemap == null:
 		debug_point.visible = false
 		return
-	# print(looked_at_point)
+
 	debug_point.visible = true
 	debug_point.global_position = player.looked_at_tilemap.get_block_position(l)
-	#endregion
+
+func process(powering: bool) -> void:
+	highlight_minable_block()
+	handle_mining(powering)
+	

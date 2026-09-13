@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cptsvl4gafntt"]
 
-[ext_resource type="Texture2D" uid="uid://dhhpop5jgkynr" path="res://Assets/Sprites/gbjam14_shop.png" id="1_a0mxf"]
 [ext_resource type="Script" uid="uid://1pkx1g2jv3hg" path="res://Scripts/shop.gd" id="1_fdj0q"]
 [ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="2_2shtd"]
+[ext_resource type="Texture2D" uid="uid://bmj7wjn4q4qca" path="res://Assets/Sprites/Placeholder/Placeholder-ship.png" id="2_6ejuo"]
 [ext_resource type="Texture2D" uid="uid://dx1h243s03uhq" path="res://Assets/Sprites/gbjam14_sign.png" id="2_io27d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_onpc1"]
@@ -27,7 +27,7 @@ shape = SubResource("RectangleShape2D_onpc1")
 
 [node name="Gbjam14Shop" type="Sprite2D" parent="." unique_id=1933287469]
 position = Vector2(0, -16)
-texture = ExtResource("1_a0mxf")
+texture = ExtResource("2_6ejuo")
 
 [node name="Sign" type="Area2D" parent="." unique_id=295379704]
 
@@ -37,7 +37,7 @@ offset_left = -64.0
 offset_top = -56.0
 offset_right = -9.0
 offset_bottom = -33.0
-text = "SHOP"
+text = "SHIP"
 label_settings = SubResource("LabelSettings_onpc1")
 horizontal_alignment = 1
 vertical_alignment = 1

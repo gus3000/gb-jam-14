@@ -4,13 +4,62 @@
 [ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_4ntmi"]
 [ext_resource type="SpriteFrames" uid="uid://dxsvforscrt2s" path="res://Player/Sprites/player_sprite_frames.tres" id="2_btcbx"]
 [ext_resource type="Script" uid="uid://cwqul1bpy2gsa" path="res://Player/Scripts/player_sprite.gd" id="3_gwnis"]
-[ext_resource type="Texture2D" uid="uid://b0cqee0taqob2" path="res://Assets/Sprites/Placeholder.png" id="4_fhl08"]
+[ext_resource type="Texture2D" uid="uid://y1ycgbqoijw0" path="res://Assets/Sprites/Placeholder/Placeholder-aim.png" id="4_vtle1"]
 [ext_resource type="Script" uid="uid://c7r4nrowpmw6k" path="res://Player/Scripts/Power/power_core.gd" id="6_fhl08"]
 [ext_resource type="Script" uid="uid://dcmvattwbojxm" path="res://Player/Scripts/Power/mining_core.gd" id="7_vtle1"]
+[ext_resource type="Script" uid="uid://7y62e1ni4scf" path="res://Player/Scripts/Power/mining_indicator.gd" id="8_od3ui"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dayrp"]
 radius = 3.5
 height = 12.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00tjw"]
+atlas = ExtResource("4_vtle1")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3vf3"]
+atlas = ExtResource("4_vtle1")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apopc"]
+atlas = ExtResource("4_vtle1")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5htga"]
+atlas = ExtResource("4_vtle1")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5o4e"]
+atlas = ExtResource("4_vtle1")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dayrp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00tjw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3vf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apopc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5htga")
+}],
+"loop": 1,
+"name": &"blinking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5o4e")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D" unique_id=963057457]
 script = ExtResource("1_btcbx")
@@ -22,9 +71,6 @@ animation = &"Walk"
 autoplay = "Idle"
 frame_progress = 0.19286154
 script = ExtResource("3_gwnis")
-
-[node name="DebugPoint" type="Sprite2D" parent="." unique_id=1656146676]
-texture = ExtResource("4_fhl08")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809159382]
 position = Vector2(0, -7)
@@ -68,7 +114,15 @@ script = ExtResource("6_fhl08")
 
 [node name="MiningCore" type="Node2D" parent="PowerCore" unique_id=425965659 node_paths=PackedStringArray("debug_point")]
 script = ExtResource("7_vtle1")
-debug_point = NodePath("../../DebugPoint")
+debug_point = NodePath("MiningIndicator")
+
+[node name="MiningIndicator" type="AnimatedSprite2D" parent="PowerCore/MiningCore" unique_id=1310198372]
+position = Vector2(0, 4)
+sprite_frames = SubResource("SpriteFrames_dayrp")
+animation = &"blinking"
+script = ExtResource("8_od3ui")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
-[connection signal="started_mining" from="PowerCore/MiningCore" to="Audio/Mining" method="play"]
+[connection signal="block_mined" from="PowerCore/MiningCore" to="Audio/Mining" method="play"]
+[connection signal="started_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="start_mining"]
+[connection signal="stopped_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="stop_mining"]

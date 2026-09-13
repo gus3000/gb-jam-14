@@ -1,31 +1,23 @@
 class_name MineableTimeMap
 extends TileMapLayer
 
+@export var toughness_per_depth_unit: float = 100
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass  # Replace with function body.
+func mine_block(block: Block) -> void:
+	erase_cell(block.position)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-# func get_block(collision_position: Vector2)->Block:
-# 	var local_pos = local_to_map(collision_position)
-
-
-func mine_block(collision_position: Vector2) -> void:
+func get_block_map_position(collision_position: Vector2) -> Vector2i:
 	var local_collision_pos := to_local(collision_position)
-	var map_pos := local_to_map(local_collision_pos)
-	print(map_pos)
-	erase_cell(map_pos)
+	return local_to_map(local_collision_pos)
 
 func get_block_position(collision_position: Vector2) -> Vector2:
-	var local_collision_pos := to_local(collision_position)
-	var map_pos := local_to_map(local_collision_pos)
+	var map_pos := get_block_map_position(collision_position)
 	var local_coords := map_to_local(map_pos)
 	var global_coords := to_global(local_coords)
 
 	# print("block : ", local_collision_pos, map_pos, local_coords, global_coords,)
 	return global_coords
+
+func get_block_at_point(collision_position: Vector2) -> Block:
+	var pos := get_block_map_position(collision_position)
+	return Block.new(pos.x, pos.y, pos.y * toughness_per_depth_unit)

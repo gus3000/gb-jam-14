@@ -23,7 +23,8 @@ enum PlayerAnimation {
 var last_held_direction: Direction = Direction.RIGHT
 
 func _ready() -> void:
-	print("sprite frames : ", sprite_frames)
+	pass
+	# print("sprite frames : ", sprite_frames)
 
 
 func _process(delta: float) -> void:

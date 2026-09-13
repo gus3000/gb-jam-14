@@ -3,29 +3,25 @@ extends Node2D
 
 enum Power {MINING, LADDER}
 
-
 @export var current_power: Power = Power.MINING
 
 @onready var acquired_powers: Dictionary = {
 	PICKAXE = 0,
 	LADDER = 0,
 }
-@onready var mining_core:MiningCore = $MiningCore
+@onready var mining_core: MiningCore = $MiningCore
+
+var powering: bool = false
 
 func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	if current_power == Power.MINING:
-		mining_core.highlight_minable_block()
-	pass
+	powering = Input.is_action_pressed("power")
 
-func use():
-	use_power(current_power)
-	pass
-
-func use_power(power: Power):
-	match (power):
+	match current_power:
 		Power.MINING:
-			mining_core.handle_mining()
+			mining_core.process(powering)
+		Power.LADDER:
+			pass
 	pass

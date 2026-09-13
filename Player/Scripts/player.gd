@@ -14,7 +14,6 @@ signal current_animation(player_animation: PlayerAnimation, direction: Direction
 
 var facing_direction: Direction = Direction.RIGHT
 var last_left_right_direction: Direction = Direction.RIGHT
-var powering: bool = false
 var jumping: bool = false
 var walking: bool = false
 var holding_jump: bool = false
@@ -73,7 +72,6 @@ func _input(event: InputEvent) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	handle_horizontal_movement()
-	powering = Input.is_action_pressed("power")
 	handle_vertical_movement()
 
 	handle_animation_state()
@@ -122,10 +120,7 @@ func handle_jumping(delta: float) -> void:
 		velocity.y -= (HOLDING_JUMP_FORCE * delta)
 	pass
 
-func _physics_process(delta: float) -> void:
-	if powering:
-		power_core.use()
-		
+func _physics_process(delta: float) -> void:		
 	if jumping or holding_jump:
 		handle_jumping(delta)
 	velocity.y = min(velocity.y + GRAVITY * delta, GRAVITY)

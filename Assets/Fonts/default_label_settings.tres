@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://b76tuudykixus"]
+
+[ext_resource type="FontFile" uid="uid://cvarswaveh67x" path="res://Assets/Fonts/CONCHARS/CONCHARS.png" id="1_wpa50"]
+
+[resource]
+font = ExtResource("1_wpa50")
+font_size = 8
+shadow_size = 0

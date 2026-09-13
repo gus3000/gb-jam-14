@@ -12,12 +12,8 @@ enum Power {MINING, LADDER}
 }
 @onready var mining_core:MiningCore = $MiningCore
 
-
-
-
 func _ready() -> void:
 	pass
-
 
 func _process(delta: float) -> void:
 	if current_power == Power.MINING:
@@ -29,7 +25,6 @@ func use():
 	pass
 
 func use_power(power: Power):
-	# print("Using power ", str(power))
 	match (power):
 		Power.MINING:
 			mining_core.handle_mining()

@@ -11,7 +11,7 @@ enum PlayerAnimation {
 	LAND,
 }
 
-@onready var bag:Node2D = $"../Bag"
+@onready var bag:Node2D = $"../PowerCore/Bag"
 
 @onready var animations: Dictionary[PlayerAnimation, String] = {
 	PlayerAnimation.IDLE: "Idle",

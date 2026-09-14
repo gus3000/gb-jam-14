@@ -2,7 +2,7 @@ class_name MiningCore
 extends AbilityCore
 
 signal started_mining
-signal block_mined
+signal block_mined(block: Block)
 signal stopped_mining
 
 @export var debug_point: AnimatedSprite2D
@@ -42,7 +42,7 @@ func start_mining() -> void:
 func continue_mining() -> void:
 	if current_mining_time > mining_time(mined_block, power_level):
 		player.looked_at_tilemap.mine_block(mined_block)
-		block_mined.emit()
+		block_mined.emit(mined_block)
 		stop_mining()
 	pass
 

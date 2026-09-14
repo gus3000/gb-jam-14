@@ -8,6 +8,8 @@ const KeyObjectType := KeyObject.KeyObjectType
 signal current_animation(player_animation: PlayerAnimation, direction: Direction)
 signal obtain_key_object(object_type: KeyObjectType)
 signal observation(message:String)
+signal changed_equipped_key_object(object_type: KeyObjectType)
+
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000

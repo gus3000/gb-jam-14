@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://buk2gua80kfmb" path="res://Player/Scripts/player.gd" id="1_btcbx"]
 [ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_4ntmi"]
 [ext_resource type="SpriteFrames" uid="uid://dxsvforscrt2s" path="res://Player/Sprites/player_sprite_frames.tres" id="2_btcbx"]
-[ext_resource type="Script" uid="uid://d0cs3i5likofj" path="res://Player/Scripts/Bag/bag.gd" id="2_x3vf3"]
+[ext_resource type="Script" uid="uid://d0cs3i5likofj" path="res://Player/Scripts/Power/Bag/bag.gd" id="2_x3vf3"]
 [ext_resource type="Script" uid="uid://cwqul1bpy2gsa" path="res://Player/Scripts/player_sprite.gd" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://nfbrmnxwtmmt" path="res://Assets/Sprites/Placeholder/Placeholder-bag-simple.png" id="4_p5o4e"]
 [ext_resource type="Texture2D" uid="uid://y1ycgbqoijw0" path="res://Assets/Sprites/Placeholder/Placeholder-aim.png" id="4_vtle1"]
@@ -13,57 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cotce84cjdvek" path="res://Assets/Sprites/Placeholder/Placeholder-bag.png" id="9_00tjw"]
 [ext_resource type="Texture2D" uid="uid://bhtwxpx6pctix" path="res://Assets/Sprites/Placeholder/Placeholder-flame.png" id="11_apopc"]
 [ext_resource type="Script" uid="uid://cibkd0wpqwwc3" path="res://Player/Scripts/Power/jetpack_core.gd" id="12_5htga"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gu6f8"]
-atlas = ExtResource("9_00tjw")
-region = Rect2(8, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
-atlas = ExtResource("9_00tjw")
-region = Rect2(16, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lfmf2"]
-atlas = ExtResource("9_00tjw")
-region = Rect2(0, 0, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
-atlas = ExtResource("9_00tjw")
-region = Rect2(24, 0, 8, 8)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_4eilc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gu6f8")
-}],
-"loop": 1,
-"name": &"30",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dkpta")
-}],
-"loop": 1,
-"name": &"60",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lfmf2")
-}],
-"loop": 1,
-"name": &"empty",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pisgm")
-}],
-"loop": 1,
-"name": &"full",
-"speed": 5.0
-}]
+[ext_resource type="Script" uid="uid://bht5yy6x7gqkq" path="res://Player/Scripts/Power/Bag/bag_sprite.gd" id="13_gu6f8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dayrp"]
 radius = 3.5
@@ -146,21 +96,66 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu6f8"]
+atlas = ExtResource("9_00tjw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkpta"]
+atlas = ExtResource("9_00tjw")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfmf2"]
+atlas = ExtResource("9_00tjw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pisgm"]
+atlas = ExtResource("9_00tjw")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hshwv"]
+atlas = ExtResource("9_00tjw")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4eilc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu6f8")
+}],
+"loop": 1,
+"name": &"30",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkpta")
+}],
+"loop": 1,
+"name": &"60",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfmf2")
+}],
+"loop": 1,
+"name": &"empty",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pisgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hshwv")
+}],
+"loop": 1,
+"name": &"full",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D" unique_id=963057457]
 script = ExtResource("1_btcbx")
-
-[node name="Bag" type="Node2D" parent="." unique_id=1939375753]
-script = ExtResource("2_x3vf3")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bag" unique_id=225718913]
-visible = false
-position = Vector2(-5, -5)
-sprite_frames = SubResource("SpriteFrames_4eilc")
-animation = &"30"
-
-[node name="Sprite2D" type="Sprite2D" parent="Bag" unique_id=1843347751]
-position = Vector2(-5, -5)
-texture = ExtResource("4_p5o4e")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=110110312]
 position = Vector2(0, -8)
@@ -237,8 +232,28 @@ sprite_frames = SubResource("SpriteFrames_dayrp")
 animation = &"blinking"
 script = ExtResource("8_od3ui")
 
+[node name="Bag" type="Node2D" parent="PowerCore" unique_id=1939375753]
+position = Vector2(0, 4)
+script = ExtResource("2_x3vf3")
+
+[node name="BagSprite" type="AnimatedSprite2D" parent="PowerCore/Bag" unique_id=225718913]
+z_index = -1
+position = Vector2(-5, -5)
+sprite_frames = SubResource("SpriteFrames_4eilc")
+animation = &"empty"
+autoplay = "empty"
+script = ExtResource("13_gu6f8")
+
+[node name="Sprite2D" type="Sprite2D" parent="PowerCore/Bag" unique_id=1843347751]
+visible = false
+z_index = -1
+position = Vector2(-5, -5)
+texture = ExtResource("4_p5o4e")
+
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
-[connection signal="obtain_key_object" from="." to="Bag" method="_on_player_obtain_key_object"]
+[connection signal="obtain_key_object" from="." to="PowerCore/Bag" method="_on_player_obtain_key_object"]
 [connection signal="block_mined" from="PowerCore/MiningCore" to="Audio/Mining" method="play"]
+[connection signal="block_mined" from="PowerCore/MiningCore" to="PowerCore/Bag" method="_on_mining_core_block_mined"]
 [connection signal="started_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="start_mining"]
 [connection signal="stopped_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="stop_mining"]
+[connection signal="dirt_amount_changed" from="PowerCore/Bag" to="PowerCore/Bag/BagSprite" method="_on_bag_dirt_amount_changed"]

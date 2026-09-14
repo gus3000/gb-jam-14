@@ -2,6 +2,7 @@ class_name MineableTimeMap
 extends TileMapLayer
 
 @export var toughness_per_depth_unit: float = 100
+@export var starting_layer = 8
 
 func mine_block(block: Block) -> void:
 	erase_cell(block.position)
@@ -20,4 +21,4 @@ func get_block_position(collision_position: Vector2) -> Vector2:
 
 func get_block_at_point(collision_position: Vector2) -> Block:
 	var pos := get_block_map_position(collision_position)
-	return Block.new(pos.x, pos.y, pos.y * toughness_per_depth_unit)
+	return Block.new(pos.x, pos.y, (pos.y - starting_layer+1) * toughness_per_depth_unit)

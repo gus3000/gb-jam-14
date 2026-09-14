@@ -1,10 +1,15 @@
 class_name PowerCore
 extends Node2D
 
+const KeyObjectType := KeyObject.KeyObjectType
+
 enum Power {MINING, JETPACK}
+
+
 
 @export var current_power: Power = Power.MINING
 
+@onready var player:Player = $".."
 @onready var mining_core: MiningCore = $MiningCore
 @onready var jetpack_core: JetpackCore = $JetpackCore
 
@@ -26,6 +31,7 @@ func cycle_power() -> void:
 		cycle_power()
 		return
 	equipped_core.boot()
+	player.changed_equipped_key_object.emit()
 
 
 func _unhandled_input(event: InputEvent) -> void:

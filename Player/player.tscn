@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://dcmvattwbojxm" path="res://Player/Scripts/Power/mining_core.gd" id="7_vtle1"]
 [ext_resource type="Script" uid="uid://7y62e1ni4scf" path="res://Player/Scripts/Power/mining_indicator.gd" id="8_od3ui"]
 [ext_resource type="Texture2D" uid="uid://cotce84cjdvek" path="res://Assets/Sprites/Placeholder/Placeholder-bag.png" id="9_00tjw"]
+[ext_resource type="Texture2D" uid="uid://bhtwxpx6pctix" path="res://Assets/Sprites/Placeholder/Placeholder-flame.png" id="11_apopc"]
+[ext_resource type="Script" uid="uid://cibkd0wpqwwc3" path="res://Player/Scripts/Power/jetpack_core.gd" id="12_5htga"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gu6f8"]
 atlas = ExtResource("9_00tjw")
@@ -65,6 +67,42 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dayrp"]
 radius = 3.5
 height = 12.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1ygp"]
+atlas = ExtResource("11_apopc")
+region = Rect2(0, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o28un"]
+atlas = ExtResource("11_apopc")
+region = Rect2(8, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n471f"]
+atlas = ExtResource("11_apopc")
+region = Rect2(16, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7emwf"]
+atlas = ExtResource("11_apopc")
+region = Rect2(24, 0, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3vf3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1ygp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o28un")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n471f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7emwf")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x3vf3"]
 atlas = ExtResource("4_vtle1")
@@ -172,12 +210,24 @@ volume_db = -8.0
 position = Vector2(0, -4)
 script = ExtResource("6_fhl08")
 
+[node name="JetpackCore" type="Node2D" parent="PowerCore" unique_id=143064491]
+script = ExtResource("12_5htga")
+power_level = 0
+
+[node name="Flames" type="AnimatedSprite2D" parent="PowerCore/JetpackCore" unique_id=402932181]
+position = Vector2(1, 7)
+sprite_frames = SubResource("SpriteFrames_x3vf3")
+autoplay = "default"
+frame = 3
+frame_progress = 0.5883597
+
 [node name="MiningCore" type="Node2D" parent="PowerCore" unique_id=425965659 node_paths=PackedStringArray("debug_point")]
 script = ExtResource("7_vtle1")
 debug_point = NodePath("MiningIndicator")
 
 [node name="MiningIndicator" type="AnimatedSprite2D" parent="PowerCore/MiningCore" unique_id=1310198372]
-position = Vector2(0, 4)
+visible = false
+position = Vector2(15, 0)
 sprite_frames = SubResource("SpriteFrames_dayrp")
 animation = &"blinking"
 script = ExtResource("8_od3ui")

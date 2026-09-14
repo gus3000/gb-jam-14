@@ -1,14 +1,13 @@
 class_name MiningCore
-extends Node
+extends AbilityCore
 
 signal started_mining
 signal block_mined
 signal stopped_mining
 
-@export var mining_power: int = 1
 @export var debug_point: AnimatedSprite2D
 
-@onready var player: Player = $"../.."
+@onready var mining_indicator:MiningIndicator = $MiningIndicator
 
 var started_mining_timestamp: int = 0  #ms
 var mined_block: Block = null
@@ -41,7 +40,7 @@ func start_mining() -> void:
 	started_mining.emit()
 
 func continue_mining() -> void:
-	if current_mining_time > mining_time(mined_block, mining_power):
+	if current_mining_time > mining_time(mined_block, power_level):
 		player.looked_at_tilemap.mine_block(mined_block)
 		block_mined.emit()
 		stop_mining()
@@ -80,7 +79,14 @@ func highlight_minable_block() -> void:
 	debug_point.visible = true
 	debug_point.global_position = player.looked_at_tilemap.get_block_position(l)
 
-func process(powering: bool) -> void:
+func process(delta:float, powering: bool) -> void:
 	highlight_minable_block()
 	handle_mining(powering)
-	
+
+func boot() -> void:
+	print("boot MINING")
+	mining_indicator.show()
+	pass
+
+func shutdown() -> void:
+	mining_indicator.hide()

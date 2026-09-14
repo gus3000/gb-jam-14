@@ -17,7 +17,7 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	powering = Input.is_action_pressed("power")
+	powering = Input.is_action_pressed("gb_b")
 
 	match current_power:
 		Power.MINING:

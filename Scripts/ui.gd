@@ -57,5 +57,5 @@ func show_message(message: String) -> void:
 
 
 func _on_player_changed_equipped_key_object(object_type: KeyObject.KeyObjectType) -> void:
-	power_icon.change_power
+	
 	pass

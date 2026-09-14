@@ -1,5 +1,10 @@
 class_name Block
-extends Node
+extends RefCounted
+
+enum Type {
+	NORMAL,
+	BEDROCK,
+}
 
 var x: int
 var y: int
@@ -20,3 +25,6 @@ func equals(block: Block) -> bool:
 	if block == null:
 		return false
 	return x == block.x and y == block.y and is_equal_approx(toughness, block.toughness)
+
+func operator():
+	pass

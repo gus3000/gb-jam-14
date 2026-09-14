@@ -9,12 +9,12 @@ Odis : art
 
 zach : code
 
+bosphoros : art, ideas
+
+gremlins : art
+
 ## Additional thanks
 
 qlix : ideas
-
-bosphoros : sprites, ideas
-
-gremlins : sprites
 
 SASisonchick : ideas

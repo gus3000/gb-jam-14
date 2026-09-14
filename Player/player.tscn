@@ -233,7 +233,7 @@ animation = &"blinking"
 script = ExtResource("8_od3ui")
 
 [node name="Bag" type="Node2D" parent="PowerCore" unique_id=1939375753]
-position = Vector2(0, 4)
+position = Vector2(0, 3)
 script = ExtResource("2_x3vf3")
 
 [node name="BagSprite" type="AnimatedSprite2D" parent="PowerCore/Bag" unique_id=225718913]

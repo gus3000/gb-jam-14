@@ -15,6 +15,7 @@ enum MessageKey {
 
 @onready var dialog: Control = $Dialog
 @onready var label: Label = $Dialog/PanelContainer/MarginContainer/Label
+@onready var power_icon: UiPowerIcon = $PowerIcon
 
 var message_queue: Array[String] = []
 
@@ -53,3 +54,8 @@ func show_message(message: String) -> void:
 	print("end message : ", message)
 	is_showing_message = false
 	dialog.hide()
+
+
+func _on_player_changed_equipped_key_object(object_type: KeyObject.KeyObjectType) -> void:
+	power_icon.change_power
+	pass

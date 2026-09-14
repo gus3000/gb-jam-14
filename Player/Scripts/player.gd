@@ -105,10 +105,7 @@ func handle_horizontal_movement() -> void:
 		walking = false
 
 func handle_vertical_movement() -> void:
-	if is_on_floor():
-		jumping = false
-
-	jumping = not jumping and Input.is_action_just_pressed("gb_a")
+	jumping = is_on_floor() and Input.is_action_just_pressed("gb_a")
 	holding_jump = Input.is_action_pressed("gb_a")
 	var looking: float = Input.get_axis("up", "down")
 	

@@ -7,6 +7,7 @@ const KeyObjectType := KeyObject.KeyObjectType
 
 signal current_animation(player_animation: PlayerAnimation, direction: Direction)
 signal obtain_key_object(object_type: KeyObjectType)
+signal observation(message:String)
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -74,7 +75,17 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("cheat"):
+		unlock_cheat()
+
+func _physics_process(delta: float) -> void:
+	if jumping or holding_jump:
+		handle_jumping(delta)
+	velocity.y = min(velocity.y + GRAVITY * delta, GRAVITY)
+	move_and_slide()
+	pass
+
 func _process(delta: float) -> void:
 	handle_horizontal_movement()
 	handle_vertical_movement()
@@ -131,10 +142,7 @@ func obtain(object_type: KeyObjectType):
 	obtain_key_object.emit(object_type)
 	pass
 
-
-func _physics_process(delta: float) -> void:
-	if jumping or holding_jump:
-		handle_jumping(delta)
-	velocity.y = min(velocity.y + GRAVITY * delta, GRAVITY)
-	move_and_slide()
-	pass
+func unlock_cheat()->void:
+	for core in power_core.cores:
+		core.power_level = 10
+	observation.emit("Unlocked\neverything !")

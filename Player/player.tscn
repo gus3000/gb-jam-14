@@ -5,6 +5,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dxsvforscrt2s" path="res://Player/Sprites/player_sprite_frames.tres" id="2_btcbx"]
 [ext_resource type="Script" uid="uid://d0cs3i5likofj" path="res://Player/Scripts/Bag/bag.gd" id="2_x3vf3"]
 [ext_resource type="Script" uid="uid://cwqul1bpy2gsa" path="res://Player/Scripts/player_sprite.gd" id="3_gwnis"]
+[ext_resource type="Texture2D" uid="uid://nfbrmnxwtmmt" path="res://Assets/Sprites/Placeholder/Placeholder-bag-simple.png" id="4_p5o4e"]
 [ext_resource type="Texture2D" uid="uid://y1ycgbqoijw0" path="res://Assets/Sprites/Placeholder/Placeholder-aim.png" id="4_vtle1"]
 [ext_resource type="Script" uid="uid://c7r4nrowpmw6k" path="res://Player/Scripts/Power/power_core.gd" id="6_fhl08"]
 [ext_resource type="Script" uid="uid://dcmvattwbojxm" path="res://Player/Scripts/Power/mining_core.gd" id="7_vtle1"]
@@ -152,9 +153,14 @@ script = ExtResource("1_btcbx")
 script = ExtResource("2_x3vf3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bag" unique_id=225718913]
+visible = false
 position = Vector2(-5, -5)
 sprite_frames = SubResource("SpriteFrames_4eilc")
 animation = &"30"
+
+[node name="Sprite2D" type="Sprite2D" parent="Bag" unique_id=1843347751]
+position = Vector2(-5, -5)
+texture = ExtResource("4_p5o4e")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=110110312]
 position = Vector2(0, -8)
@@ -212,7 +218,6 @@ script = ExtResource("6_fhl08")
 
 [node name="JetpackCore" type="Node2D" parent="PowerCore" unique_id=143064491]
 script = ExtResource("12_5htga")
-power_level = 0
 
 [node name="Flames" type="AnimatedSprite2D" parent="PowerCore/JetpackCore" unique_id=402932181]
 position = Vector2(1, 7)

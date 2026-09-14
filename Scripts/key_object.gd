@@ -5,11 +5,13 @@ extends Node2D
 enum KeyObjectType {
 	PICKAXE,
 	SHIP_KEY,
+	BAG,
 }
 
 const KeyObjectTypeDescriptor: Dictionary = {
 	KeyObjectType.PICKAXE: "Pickaxe",
 	KeyObjectType.SHIP_KEY: "Ship's key",
+	KeyObjectType.BAG: "Your bag",
 }
 
 @export var object_type: KeyObjectType

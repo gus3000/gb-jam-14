@@ -8,10 +8,8 @@ enum MessageKey {
 	RECEIVED_KEY_OBJECT,
 }
 
-
 @export var message_duration: float = 2.0
 @export var messages: Dictionary[MessageKey, String] = {
-	MessageKey.ARBITRARY_TEXT: "%s",
 	MessageKey.RECEIVED_KEY_OBJECT: "Retrieved your\n%s !",
 }
 
@@ -35,8 +33,11 @@ func _process(delta: float) -> void:
 
 func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	queue_message(MessageKey.RECEIVED_KEY_OBJECT, [KeyObjectTypeDescriptor[object_type]])
-	queue_message(MessageKey.ARBITRARY_TEXT, ["Congratulations !"])
-	queue_message(MessageKey.ARBITRARY_TEXT, ["You have\nseveral dialogs\nin a row"])
+	queue_string("Congratulations !")
+	queue_string("You have\nseveral dialogs\nin a row")
+
+func queue_string(message: String):
+	message_queue.push_back(message)
 
 func queue_message(messageKey: MessageKey, context: Array=[]) -> void:
 	# print(messages[messageKey] % context)
@@ -52,5 +53,3 @@ func show_message(message: String) -> void:
 	print("end message : ", message)
 	is_showing_message = false
 	dialog.hide()
-
-	pass

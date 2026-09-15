@@ -18,5 +18,5 @@ func _on_player_started_mining(block: Block) -> void:
 	if block.type == TerrainType.BEDROCK:
 		mining_fail.play()
 
-func _on_player_block_mined(block: Block) -> void:
+func _on_player_block_mined(_block: Block) -> void:
 	mining.play()

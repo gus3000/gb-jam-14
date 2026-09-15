@@ -75,8 +75,8 @@ func _ready() -> void:
 	}
 
 
-func _input(event: InputEvent) -> void:
-	pass
+#func _input(event: InputEvent) -> void:
+#	pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("cheat"):
@@ -89,7 +89,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	handle_horizontal_movement()
 	handle_vertical_movement()
 
@@ -152,3 +152,7 @@ func unlock_cheat() -> void:
 	for object_type in KeyObjectType.values():
 		bag._on_player_obtain_key_object(object_type)
 	observation.emit("Unlocked\neverything !")
+
+
+func _on_power_core_changed_equipped_core(ability_core: AbilityCore) -> void:
+	changed_equipped_core.emit(ability_core)

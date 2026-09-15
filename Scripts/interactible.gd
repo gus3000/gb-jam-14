@@ -2,7 +2,7 @@ extends Area2D
 
 signal interact
 
-func _process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var player: Player = GameController.player
 	if not overlaps_body(player):
 		return

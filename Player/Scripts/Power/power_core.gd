@@ -5,7 +5,7 @@ const KeyObjectType := KeyObject.KeyObjectType
 
 enum Power {MINING, JETPACK}
 
-
+signal changed_equipped_core(ability_core: AbilityCore)
 
 @export var current_power: Power = Power.MINING
 
@@ -31,8 +31,7 @@ func cycle_power() -> void:
 		cycle_power()
 		return
 	equipped_core.boot()
-	player.changed_equipped_core.emit(equipped_core)
-
+	changed_equipped_core.emit(equipped_core)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("gb_select"):

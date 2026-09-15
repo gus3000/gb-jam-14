@@ -80,7 +80,7 @@ func highlight_minable_block() -> void:
 	debug_point.visible = true
 	debug_point.global_position = player.looked_at_tilemap.get_block_position(l)
 
-func process(delta: float, powering: bool) -> void:
+func process(_delta: float, powering: bool) -> void:
 	highlight_minable_block()
 	handle_mining(powering)
 

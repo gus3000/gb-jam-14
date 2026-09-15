@@ -38,7 +38,7 @@ func _draw() -> void:
 # draw_line(Vector2.ZERO, get_travel_vector(0.05), Color.DARK_CYAN, 2, false)
 #endregion
 
-func get_travel_vector(delta: float) -> Vector2:
+func get_travel_vector() -> Vector2:
 
 	var local := target_local_coords
 
@@ -58,8 +58,8 @@ func get_travel_vector(delta: float) -> Vector2:
 
 	return Vector2(x, y)
 
-func _process(delta: float) -> void:
-	var travel_vector := get_travel_vector(delta)
+func _process(_delta: float) -> void:
+	var travel_vector := get_travel_vector()
 	# print("travel_vector : ", travel_vector)
 	position += travel_vector
 	pass

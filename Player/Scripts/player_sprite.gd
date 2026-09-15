@@ -29,7 +29,7 @@ func _ready() -> void:
 	# print("sprite frames : ", sprite_frames)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func handle_direction_change(new_direction: Direction) -> void:

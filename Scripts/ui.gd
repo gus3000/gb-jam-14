@@ -25,7 +25,7 @@ var is_showing_message: bool = false
 func _ready() -> void:
 	dialog.hide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_showing_message:
 		return
 
@@ -55,5 +55,5 @@ func show_message(message: String) -> void:
 	dialog.hide()
 
 
-func _on_player_changed_equipped_core(ability_core: AbilityCore) -> void:
+func _on_player_changed_equipped_core(_ability_core: AbilityCore) -> void:
 	pass

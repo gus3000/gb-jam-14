@@ -1,13 +1,13 @@
 class_name MiningCore
 extends AbilityCore
 
-signal started_mining
+signal started_mining(block: Block)
 signal block_mined(block: Block)
-signal stopped_mining
+signal stopped_mining(block: Block)
 
 @export var debug_point: AnimatedSprite2D
 
-@onready var mining_indicator:MiningIndicator = $MiningIndicator
+@onready var mining_indicator: MiningIndicator = $MiningIndicator
 
 var started_mining_timestamp: int = 0  #ms
 var mined_block: Block = null
@@ -16,6 +16,7 @@ var is_mining: int:
 	get: return started_mining_timestamp != 0
 var current_mining_time: int:
 	get: return Time.get_ticks_msec() - started_mining_timestamp
+
 
 func handle_mining(powering: bool) -> void:
 	var new_mined_block := block_to_mine()
@@ -37,7 +38,7 @@ func start_mining() -> void:
 	started_mining_timestamp = Time.get_ticks_msec()
 	mined_block = block_to_mine()
 	print("started mining block ", mined_block)
-	started_mining.emit()
+	started_mining.emit(mined_block)
 
 func continue_mining() -> void:
 	if current_mining_time > mining_time(mined_block, power_level):
@@ -48,8 +49,8 @@ func continue_mining() -> void:
 
 func stop_mining() -> void:
 	started_mining_timestamp = 0
+	stopped_mining.emit(mined_block)
 	mined_block = null
-	stopped_mining.emit()
 
 
 func mining_time(block: Block, _mining_power: int) -> float:
@@ -79,7 +80,7 @@ func highlight_minable_block() -> void:
 	debug_point.visible = true
 	debug_point.global_position = player.looked_at_tilemap.get_block_position(l)
 
-func process(delta:float, powering: bool) -> void:
+func process(delta: float, powering: bool) -> void:
 	highlight_minable_block()
 	handle_mining(powering)
 

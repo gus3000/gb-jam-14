@@ -23,6 +23,7 @@ boot_splash/show_image=false
 [autoload]
 
 GameController="*uid://xj0nvpg23it0"
+AudioController="*uid://cp8jb37xta0p8"
 
 [display]
 

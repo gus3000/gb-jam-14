@@ -23,6 +23,7 @@ var walking: bool = false
 var holding_jump: bool = false
 
 @onready var power_core: PowerCore = $PowerCore
+@onready var mining_core: MiningCore = $PowerCore/MiningCore
 @onready var bag: Bag = $PowerCore/Bag
 
 @onready var raycast_up: RayCast2D = $Rays/Up
@@ -65,7 +66,7 @@ var looked_at_tilemap: DiggableTileMap:
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func _ready() -> void:	
 	raycasts = {
 		Direction.UP: [raycast_up],
 		Direction.DOWN: [raycast_down],

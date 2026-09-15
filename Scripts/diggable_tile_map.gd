@@ -54,7 +54,7 @@ func get_block_position(collision_position: Vector2) -> Vector2:
 func get_block_at_point(collision_position: Vector2) -> Block:
 	var pos := get_block_map_position(collision_position)
 	var data := get_cell_tile_data(pos)
-	print("cell at %s : %s" % [pos, data.terrain])
+	# print("cell at %s : %s" % [pos, data.terrain])
 
 	# return Block.new(pos.x, pos.y, (pos.y - ground_boundaries.position.y + 1) * toughness_per_depth_unit)
 	return Block.new(pos.x, pos.y, terrains[data.terrain])

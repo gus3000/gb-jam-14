@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cgt26y14xtpnr"]
 
 [ext_resource type="Script" uid="uid://buk2gua80kfmb" path="res://Player/Scripts/player.gd" id="1_btcbx"]
-[ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_4ntmi"]
 [ext_resource type="SpriteFrames" uid="uid://dxsvforscrt2s" path="res://Player/Sprites/player_sprite_frames.tres" id="2_btcbx"]
 [ext_resource type="Script" uid="uid://d0cs3i5likofj" path="res://Player/Scripts/Power/Bag/bag.gd" id="2_x3vf3"]
 [ext_resource type="Script" uid="uid://cwqul1bpy2gsa" path="res://Player/Scripts/player_sprite.gd" id="3_gwnis"]
@@ -201,12 +200,6 @@ position = Vector2(1, -10)
 target_position = Vector2(10, 0)
 collision_mask = 2
 
-[node name="Audio" type="Node" parent="." unique_id=551564286]
-
-[node name="Mining" type="AudioStreamPlayer" parent="Audio" unique_id=1987230043]
-stream = ExtResource("2_4ntmi")
-volume_db = -8.0
-
 [node name="PowerCore" type="Node2D" parent="." unique_id=1060804954]
 position = Vector2(0, -4)
 script = ExtResource("6_fhl08")
@@ -246,7 +239,6 @@ script = ExtResource("13_gu6f8")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
 [connection signal="obtain_key_object" from="." to="PowerCore/Bag" method="_on_player_obtain_key_object"]
-[connection signal="block_mined" from="PowerCore/MiningCore" to="Audio/Mining" method="play"]
 [connection signal="block_mined" from="PowerCore/MiningCore" to="PowerCore/Bag" method="_on_mining_core_block_mined"]
 [connection signal="started_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="start_mining"]
 [connection signal="stopped_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="stop_mining"]

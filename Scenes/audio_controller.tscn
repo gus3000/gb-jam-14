@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cp8jb37xta0p8"]
+
+[ext_resource type="Script" uid="uid://drhayyj4p6d0x" path="res://Scripts/audio_controller.gd" id="1_sa2nx"]
+[ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_btkaq"]
+
+[node name="AudioController" type="Node" unique_id=660215452]
+script = ExtResource("1_sa2nx")
+
+[node name="Mining" type="AudioStreamPlayer" parent="." unique_id=89195976]
+stream = ExtResource("2_btkaq")
+volume_db = -8.0
+
+[node name="MiningFail" type="AudioStreamPlayer" parent="." unique_id=1906771092]
+stream = ExtResource("2_btkaq")
+volume_db = -8.0
+pitch_scale = 4.0

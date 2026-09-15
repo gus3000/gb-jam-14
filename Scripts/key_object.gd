@@ -6,6 +6,7 @@ enum KeyObjectType {
 	PICKAXE,
 	SHIP_KEY,
 	BAG,
+	JETPACK
 }
 
 const KeyObjectTypeDescriptor: Dictionary = {

@@ -3,16 +3,12 @@ extends RefCounted
 
 const TerrainType := DiggableTileMap.TerrainType
 
-enum Type {
-	NORMAL,
-	BEDROCK,
-}
-
 const TOUGHNESS_PER_DEPTH_UNIT: float = 100
 const STARTING_LAYER: int = 8
 
 var x: int
 var y: int
+var type: TerrainType
 var toughness: float
 
 var position: Vector2i:
@@ -21,6 +17,7 @@ var position: Vector2i:
 func _init(_x: int, _y: int, terrain_type: TerrainType):
 	x = _x
 	y = _y
+	type = terrain_type
 	match terrain_type:
 		TerrainType.FANCY_STONE, TerrainType.STONE:
 			toughness = (y - STARTING_LAYER + 1) * TOUGHNESS_PER_DEPTH_UNIT

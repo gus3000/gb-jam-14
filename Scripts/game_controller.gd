@@ -54,9 +54,12 @@ func _ready() -> void:
 
 
 func enter_ship() -> void:
-	# ui.queue_string("Entered ship")
 	load_scene_additive(LoadableSceneEnum.SHIP_INTERIOR)
 	pass
+
+func leave_ship() -> void:
+	print("gc leave ship")
+	unload_scene_additive(LoadableSceneEnum.SHIP_INTERIOR)
 
 # We want to keep the overworld loaded at all times, so we use this custom function
 func load_scene_additive(scene: LoadableSceneEnum) -> void:
@@ -66,6 +69,8 @@ func load_scene_additive(scene: LoadableSceneEnum) -> void:
 	assert(scene_to_load != null)
 
 	var instance: Node = scene_to_load.instantiate()
+	loadable_scene.instance = instance
+	loadable_scene.return_point = player.global_position
 	main_scene.remove_child(world)
 	main_scene.add_child(instance)
 	player.position = Vector2.ZERO
@@ -85,7 +90,7 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 	player.position = return_point
 	camera.position = return_point
 	leave_fixed_scene.emit()
-	
+
 
 func earthquake() -> void:
 	# ui.queue_string("boom !")

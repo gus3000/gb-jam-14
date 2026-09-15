@@ -3,6 +3,7 @@
 [ext_resource type="FontFile" uid="uid://cvarswaveh67x" path="res://Assets/Fonts/CONCHARS/CONCHARS.png" id="1_wpa50"]
 
 [resource]
+line_spacing = 1.0
 font = ExtResource("1_wpa50")
 font_size = 8
 shadow_size = 0

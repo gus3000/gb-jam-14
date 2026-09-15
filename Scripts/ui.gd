@@ -55,6 +55,5 @@ func show_message(message: String) -> void:
 	dialog.hide()
 
 
-func _on_player_changed_equipped_key_object(object_type: KeyObject.KeyObjectType) -> void:
-	
+func _on_player_changed_equipped_core(ability_core: AbilityCore) -> void:
 	pass

@@ -31,7 +31,7 @@ func cycle_power() -> void:
 		cycle_power()
 		return
 	equipped_core.boot()
-	player.changed_equipped_key_object.emit()
+	player.changed_equipped_core.emit(equipped_core)
 
 
 func _unhandled_input(event: InputEvent) -> void:

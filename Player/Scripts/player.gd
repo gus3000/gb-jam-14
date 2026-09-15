@@ -7,9 +7,8 @@ const KeyObjectType := KeyObject.KeyObjectType
 
 signal current_animation(player_animation: PlayerAnimation, direction: Direction)
 signal obtain_key_object(object_type: KeyObjectType)
-signal observation(message:String)
-signal changed_equipped_key_object(object_type: KeyObjectType)
-
+signal observation(message: String)
+signal changed_equipped_core(ability_core: AbilityCore)
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -24,6 +23,7 @@ var walking: bool = false
 var holding_jump: bool = false
 
 @onready var power_core: PowerCore = $PowerCore
+@onready var bag: Bag = $PowerCore/Bag
 
 @onready var raycast_up: RayCast2D = $Rays/Up
 @onready var raycast_down: RayCast2D = $Rays/Down
@@ -108,7 +108,7 @@ func handle_vertical_movement() -> void:
 	jumping = is_on_floor() and Input.is_action_just_pressed("gb_a")
 	holding_jump = Input.is_action_pressed("gb_a")
 	var looking: float = Input.get_axis("up", "down")
-	
+
 	if looking != 0:
 		facing_direction = Direction.UP if looking < 0 else Direction.DOWN
 	elif facing_direction in [Direction.LEFT, Direction.RIGHT]:
@@ -141,7 +141,13 @@ func obtain(object_type: KeyObjectType):
 	obtain_key_object.emit(object_type)
 	pass
 
-func unlock_cheat()->void:
+func has_key_object(object_type: KeyObjectType) -> bool:
+	return bag.has_key_object(object_type)
+
+func unlock_cheat() -> void:
 	for core in power_core.cores:
 		core.power_level = 10
+	bag.power_level = 10
+	for object_type in KeyObjectType.values():
+		bag._on_player_obtain_key_object(object_type)
 	observation.emit("Unlocked\neverything !")

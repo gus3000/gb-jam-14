@@ -5,7 +5,6 @@
 [ext_resource type="SpriteFrames" uid="uid://dxsvforscrt2s" path="res://Player/Sprites/player_sprite_frames.tres" id="2_btcbx"]
 [ext_resource type="Script" uid="uid://d0cs3i5likofj" path="res://Player/Scripts/Power/Bag/bag.gd" id="2_x3vf3"]
 [ext_resource type="Script" uid="uid://cwqul1bpy2gsa" path="res://Player/Scripts/player_sprite.gd" id="3_gwnis"]
-[ext_resource type="Texture2D" uid="uid://nfbrmnxwtmmt" path="res://Assets/Sprites/Placeholder/Placeholder-bag-simple.png" id="4_p5o4e"]
 [ext_resource type="Texture2D" uid="uid://y1ycgbqoijw0" path="res://Assets/Sprites/Placeholder/Placeholder-aim.png" id="4_vtle1"]
 [ext_resource type="Script" uid="uid://c7r4nrowpmw6k" path="res://Player/Scripts/Power/power_core.gd" id="6_fhl08"]
 [ext_resource type="Script" uid="uid://dcmvattwbojxm" path="res://Player/Scripts/Power/mining_core.gd" id="7_vtle1"]
@@ -158,6 +157,7 @@ animations = [{
 script = ExtResource("1_btcbx")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=110110312]
+z_index = 1
 position = Vector2(0, -8)
 sprite_frames = ExtResource("2_btcbx")
 animation = &"Walk"
@@ -237,18 +237,12 @@ position = Vector2(0, 3)
 script = ExtResource("2_x3vf3")
 
 [node name="BagSprite" type="AnimatedSprite2D" parent="PowerCore/Bag" unique_id=225718913]
-z_index = -1
+visible = false
 position = Vector2(-5, -5)
 sprite_frames = SubResource("SpriteFrames_4eilc")
 animation = &"empty"
 autoplay = "empty"
 script = ExtResource("13_gu6f8")
-
-[node name="Sprite2D" type="Sprite2D" parent="PowerCore/Bag" unique_id=1843347751]
-visible = false
-z_index = -1
-position = Vector2(-5, -5)
-texture = ExtResource("4_p5o4e")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
 [connection signal="obtain_key_object" from="." to="PowerCore/Bag" method="_on_player_obtain_key_object"]

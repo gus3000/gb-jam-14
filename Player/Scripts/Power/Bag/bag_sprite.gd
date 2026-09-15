@@ -10,7 +10,17 @@ var animations: Dictionary[float, String] = {
 	0: "empty",
 }
 
+func _process(_delta: float) -> void:
+	if bag.power_level == 0:
+		hide()
+	else:
+		show()
+	pass
+
+
 func _on_bag_dirt_amount_changed() -> void:
+	if bag.power_level == 0:
+		return
 	var ratio: float = bag.dirt / bag.max_dirt
 	print("ratio : ", ratio)
 	for threshold in animations.keys():

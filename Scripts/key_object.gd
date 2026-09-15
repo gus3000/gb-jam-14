@@ -11,7 +11,7 @@ enum KeyObjectType {
 const KeyObjectTypeDescriptor: Dictionary = {
 	KeyObjectType.PICKAXE: "Pickaxe",
 	KeyObjectType.SHIP_KEY: "Ship's key",
-	KeyObjectType.BAG: "Your bag",
+	KeyObjectType.BAG: "Bag",
 }
 
 @export var object_type: KeyObjectType

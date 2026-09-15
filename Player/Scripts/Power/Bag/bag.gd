@@ -1,18 +1,13 @@
 class_name Bag
-extends AbilityCore
+extends Node2D
 
 const KeyObjectType := KeyObject.KeyObjectType
 
 signal dirt_amount_changed
 
-@export var dirt_per_power_level: float = 1000  #TODO use array instead
-
+var power_level: int = 0
 var dirt: float = 0
-var objects: Dictionary[KeyObjectType, int] = {
-
-}
-
-var has_ship_key: bool = false  #TODO
+var objects: Dictionary[KeyObjectType, int]
 
 var max_dirt: float:
 	get: match (power_level):
@@ -24,9 +19,14 @@ var max_dirt: float:
 		5: return 100000
 		_: return 1000000000
 
+func _ready() -> void:
+	for object_type in KeyObjectType.values():
+		objects[object_type] = 0
+	pass
+
 func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	print("bag received key object")
-	#TODO
+	objects[object_type] = 1
 	pass
 
 
@@ -43,11 +43,5 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_increase_bag"):
 		add_dirt(100)
 
-func process(delta: float, powering: bool) -> void:
-	pass
-
-func boot() -> void:
-	pass
-
-func shutdown() -> void:
-	pass
+func has_key_object(object_type: KeyObjectType) -> bool:
+	return object_type in objects.keys() and objects[object_type] > 0

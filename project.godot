@@ -41,6 +41,9 @@ window/stretch/scale_mode="integer"
 player=""
 terrain=""
 ui=""
+world=""
+main_scene=""
+camera=""
 
 [input]
 

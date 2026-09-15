@@ -228,6 +228,7 @@ script = ExtResource("8_od3ui")
 [node name="Bag" type="Node2D" parent="PowerCore" unique_id=1939375753]
 position = Vector2(0, 3)
 script = ExtResource("2_x3vf3")
+power_level = 1
 
 [node name="BagSprite" type="AnimatedSprite2D" parent="PowerCore/Bag" unique_id=225718913]
 visible = false

@@ -5,7 +5,7 @@ const KeyObjectType := KeyObject.KeyObjectType
 
 signal dirt_amount_changed
 
-var power_level: int = 0
+@export var power_level: int = 0
 var dirt: float = 0
 var objects: Dictionary[KeyObjectType, int]
 

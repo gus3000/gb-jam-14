@@ -33,6 +33,8 @@ var terrain: DiggableTileMap
 var ui: Ui
 var world: Node2D
 
+var player_start_position: Vector2
+
 func _ready() -> void:
 	camera = get_tree().get_first_node_in_group("camera")
 	main_scene = get_tree().get_first_node_in_group("main_scene")
@@ -51,6 +53,7 @@ func _ready() -> void:
 				Vector2(0, -50)
 		)
 	}
+	player_start_position = player.position
 
 
 func enter_ship() -> void:
@@ -70,9 +73,9 @@ func load_scene_additive(scene: LoadableSceneEnum) -> void:
 
 	var instance: Node = scene_to_load.instantiate()
 	loadable_scene.instance = instance
-	loadable_scene.return_point = player.global_position
-	main_scene.remove_child(world)
-	main_scene.add_child(instance)
+	loadable_scene.return_point = player.position
+	main_scene.remove_child.call_deferred(world)
+	main_scene.add_child.call_deferred(instance)
 	player.position = Vector2.ZERO
 	camera.position = loadable_scene.camera_position
 	enter_fixed_scene.emit()
@@ -85,8 +88,10 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 
 	assert(scene_node != null)
 	assert(return_point != null)
-	main_scene.remove_child(scene_node)
-	main_scene.add_child(world)
+	# TODO use call_deferred() to remove
+
+	main_scene.remove_child.call_deferred(scene_node)
+	main_scene.add_child.call_deferred(world)
 	player.position = return_point
 	camera.position = return_point
 	leave_fixed_scene.emit()
@@ -95,3 +100,14 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 func earthquake() -> void:
 	# ui.queue_string("boom !")
 	pass
+
+func teleport_to_start() -> void:
+	# TODO add transition
+	ui.queue_string("Teleported to start")
+	ui.queue_string("Hopefully there\nwill be a\nnice animation\nin the future")
+	player.position = player_start_position
+	player.velocity = Vector2.UP * 50
+
+func player_exited_world() -> void:
+	print("exited world")
+	teleport_to_start()

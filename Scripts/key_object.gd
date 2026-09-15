@@ -13,18 +13,27 @@ const KeyObjectTypeDescriptor: Dictionary = {
 	KeyObjectType.PICKAXE: "Pickaxe",
 	KeyObjectType.SHIP_KEY: "Ship's key",
 	KeyObjectType.BAG: "Bag",
+	KeyObjectType.JETPACK: "Jetpack",
 }
 
 @export var object_type: KeyObjectType
 @export var texture: Texture
 @export var player: Player
-
 @export var font: Font
+@export var hover_amplitude: float = 3
 
 @onready var current_sprite: Sprite2D = $Sprite2D
 
+@onready var base_position:Vector2 = position
+
 func _ready() -> void:
 	current_sprite.texture = texture
+
+	for key_object_type in KeyObjectType.values():
+		assert(
+				KeyObjectTypeDescriptor.has(key_object_type),
+				"no descriptor for key object type %s" % KeyObjectType.find_key(key_object_type)
+		)
 	pass
 
 func _draw() -> void:
@@ -36,4 +45,11 @@ func _on_area_2d_body_entered(body: Node2D):
 	if body is Player:
 		body.obtain(object_type)
 		queue_free()
+	pass
+
+func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	#hover
+	position.y = base_position.y + sin(Time.get_unix_time_from_system()) * hover_amplitude
 	pass

@@ -7,11 +7,13 @@ const KeyObjectTypeDescriptor := KeyObject.KeyObjectTypeDescriptor
 enum MessageKey {
 	ARBITRARY_TEXT,
 	RECEIVED_KEY_OBJECT,
+	CYCLE_POWER_REMINDER,
 }
 
-@export var message_duration: float = 2.0
+@export var message_duration: float = 4.0
 @export var messages: Dictionary[MessageKey, String] = {
 	MessageKey.RECEIVED_KEY_OBJECT: "Retrieved your\n%s !",
+	MessageKey.CYCLE_POWER_REMINDER: "Use SELECT to\ncycle powers",
 }
 
 @onready var dialog: Control = $Dialog
@@ -35,6 +37,8 @@ func _process(_delta: float) -> void:
 
 func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	queue_message(MessageKey.RECEIVED_KEY_OBJECT, [KeyObjectTypeDescriptor[object_type]])
+	if GameController.player.power_core.core_for_key_object(object_type) != null:
+		queue_message(MessageKey.CYCLE_POWER_REMINDER, [])
 
 func queue_string(message: String):
 	message_queue.push_back(message)

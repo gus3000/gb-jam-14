@@ -206,6 +206,7 @@ script = ExtResource("6_fhl08")
 
 [node name="JetpackCore" type="Node2D" parent="PowerCore" unique_id=143064491]
 script = ExtResource("12_5htga")
+power_level = 0
 
 [node name="Flames" type="AnimatedSprite2D" parent="PowerCore/JetpackCore" unique_id=402932181]
 position = Vector2(1, 7)

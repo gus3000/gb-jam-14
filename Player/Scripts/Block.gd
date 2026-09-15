@@ -1,7 +1,7 @@
 class_name Block
 extends RefCounted
 
-const TerrainType := MineableTimeMap.TerrainType
+const TerrainType := DiggableTileMap.TerrainType
 
 enum Type {
 	NORMAL,

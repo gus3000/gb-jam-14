@@ -16,7 +16,7 @@ static func vector2_from_direction(direction: Direction) -> Vector2:
 	return Vector2(0, 0)
 
 # use Direction.keys()[direction] instead
-static func string_from_direction(direction: Direction)->String:
+static func string_from_direction(direction: Direction) -> String:
 	match direction:
 		Direction.UP:
 			return "UP"

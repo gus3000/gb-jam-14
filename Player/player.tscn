@@ -154,7 +154,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=963057457]
+[node name="Player" type="CharacterBody2D" unique_id=963057457 groups=["player"]]
 script = ExtResource("1_btcbx")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=110110312]

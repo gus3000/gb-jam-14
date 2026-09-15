@@ -1,3 +1,4 @@
+class_name Ui
 extends CanvasLayer
 
 const KeyObjectType := KeyObject.KeyObjectType
@@ -34,8 +35,6 @@ func _process(delta: float) -> void:
 
 func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	queue_message(MessageKey.RECEIVED_KEY_OBJECT, [KeyObjectTypeDescriptor[object_type]])
-	queue_string("Congratulations !")
-	queue_string("You have\nseveral dialogs\nin a row")
 
 func queue_string(message: String):
 	message_queue.push_back(message)

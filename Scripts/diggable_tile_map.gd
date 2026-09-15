@@ -1,4 +1,4 @@
-class_name MineableTimeMap
+class_name DiggableTileMap
 extends TileMapLayer
 
 enum TerrainType {

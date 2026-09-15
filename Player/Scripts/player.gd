@@ -54,12 +54,12 @@ var looked_at_point: Vector2:
 			return Vector2.ZERO
 		return looked_at_raycast.get_collision_point() - looked_at_raycast.get_collision_normal()
 
-var looked_at_tilemap: MineableTimeMap:
+var looked_at_tilemap: DiggableTileMap:
 	get:
 		if looked_at_point == Vector2.ZERO:
 			return null
 		var col := looked_at_raycast.get_collider()
-		if col is not MineableTimeMap:
+		if col is not DiggableTileMap:
 			return null
 		return col
 

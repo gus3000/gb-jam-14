@@ -20,6 +20,10 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=60
 boot_splash/show_image=false
 
+[autoload]
+
+GameController="*uid://xj0nvpg23it0"
+
 [display]
 
 window/size/viewport_width=160
@@ -31,6 +35,12 @@ window/size/window_width_override=1080
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+
+[global_group]
+
+player=""
+terrain=""
+ui=""
 
 [input]
 

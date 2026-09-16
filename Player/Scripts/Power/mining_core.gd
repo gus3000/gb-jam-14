@@ -85,7 +85,7 @@ func process(_delta: float, powering: bool) -> void:
 	handle_mining(powering)
 
 func boot() -> void:
-	print("boot MINING")
+	# print("boot MINING")
 	mining_indicator.show()
 	pass
 

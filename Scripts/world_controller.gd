@@ -8,7 +8,7 @@ signal player_left_world
 @export var world_max_y: float = 10000
 
 func _ready() -> void:
-	print("readying world border")
+	# print("readying world border")
 	player_left_world.connect(GameController.player_exited_world)
 
 

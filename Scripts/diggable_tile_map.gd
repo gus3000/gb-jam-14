@@ -13,6 +13,8 @@ var whole_map_pattern: TileMapPattern
 var terrains: Dictionary[int, TerrainType] = {}
 
 func _ready():
+	GameController.world_shuffle.connect(earthquake)
+
 	whole_map_pattern = TileMapPattern.new()
 	for x in range(ground_boundaries.size.x):
 		for y in range(ground_boundaries.size.y):
@@ -22,7 +24,7 @@ func _ready():
 	for terrain in tile_set.get_terrains_count(0):
 		var terrain_name := tile_set.get_terrain_name(0, terrain)
 
-		print("terrain ", terrain_name)
+		# print("terrain ", terrain_name)
 		var type := TerrainType.FANCY_STONE
 		match (terrain_name):
 			"Fancy Stone":
@@ -61,5 +63,29 @@ func get_block_at_point(collision_position: Vector2) -> Block:
 
 # /!\ Resets the ground !
 func earthquake() -> void:
-	
+	# print("tilemap earthquake")
+	var before: int = Time.get_ticks_msec()
+
+	var stone_variations_coords: Array[Vector2i] = [Vector2i(7, 5), Vector2i(5, 6), Vector2i(6, 6), Vector2i(7, 6)]
+	var stone_variations_probabilities: Array[float] = []
+
+	var tileset: TileSet = get_tile_set()
+	# print("tileset :", tileset)
+	var source: TileSetAtlasSource = tileset.get_source(1)
+
+	for stone_variation in stone_variations_coords:
+		var data: TileData = source.get_tile_data(stone_variation, 0)
+		stone_variations_probabilities.push_back(data.probability)
+
+	for y in range(ground_boundaries.position.y, ground_boundaries.end.y):
+		for x in range(ground_boundaries.position.x, ground_boundaries.end.x):
+			if y == ground_boundaries.position.y:
+				set_cell(Vector2i(x,y), 1, Vector2i(3,4))
+				continue
+			var chosen_cell = Utils.random_with_weights(stone_variations_coords, stone_variations_probabilities)
+			set_cell(Vector2i(x, y), 1, chosen_cell)
+	# set_cell(Vector2i(x, y), 1, Vector2i(7, 5))
+	# set_cells_terrain_connect(to_replace_with_stone, 0, 1)
+	var after: int = Time.get_ticks_msec()
+	print("earthquake done in %s ms" % (after - before))
 	pass

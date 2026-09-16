@@ -28,3 +28,14 @@ static func string_from_direction(direction: Direction) -> String:
 			return "RIGHT"
 		_:
 			return "UNKOWN"
+
+static func random_with_weights(elements: Array, weights: Array[float]):
+	var sum = weights.reduce(func(accum, number): return accum + number)
+	var float_index: float = randf_range(0, sum)
+	var w: float = 0
+	for i in range(len(weights)):
+		w += weights[i]
+		if float_index <= w:
+			# print(elements, " -> rand= ", float_index, " -> index ", i)
+			return elements[i]
+	assert(false)

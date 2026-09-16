@@ -71,7 +71,7 @@ func _process(_delta: float) -> void:
 
 	# current_shake_strength = lerp(current_shake_strength,0., shake_decay * _delta)
 	current_shake_strength = shake_curve.sample_baked(current_shake_position).y * shake_intensity
-	print("shake sample at ", current_shake_position, " -> ", shake_curve.sample_baked(current_shake_position))
+	# print("shake sample at ", current_shake_position, " -> ", shake_curve.sample_baked(current_shake_position))
 	current_shake_position += _delta
 	offset = Vector2(
 			randf_range(-current_shake_strength, current_shake_strength),
@@ -89,7 +89,7 @@ func _on_game_controller_leave_fixed_scene() -> void:
 	pass
 
 func _on_world_shuffle() -> void:
-	print("camera world shuffle")
+	# print("camera world shuffle")
 	current_shake_strength = shake_intensity
 	current_shake_position = 0
 	pass

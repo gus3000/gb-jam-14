@@ -21,7 +21,7 @@ func process(delta: float, powering: bool) -> void:
 	pass
 
 func boot() -> void:
-	print("boot JETPACK")
+	# print("boot JETPACK")
 	pass
 
 func shutdown() -> void:

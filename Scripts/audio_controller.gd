@@ -2,7 +2,8 @@ extends Node
 
 const TerrainType := DiggableTileMap.TerrainType
 
-const penta_scale: Array[int] = [0, 3, 5, 7, 10, 12, 15, 17, 19, 22]
+# const penta_scale: Array[int] = [0, 3, 5, 7, 10, 12, 15, 17, 19, 22]
+const penta_scale: Array[int] = [0, 3, 5]
 
 @onready var generated: AudioStreamPlayer = $Generated
 @onready var mining: AudioStreamPlayer = $Mining
@@ -19,7 +20,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if  OS.is_debug_build() and Input.is_physical_key_pressed(KEY_KP_0) and not is_debugging:
+	if OS.is_debug_build() and Input.is_physical_key_pressed(KEY_KP_0) and not is_debugging:
 		await debug_audio()
 
 func setup_signals():
@@ -28,7 +29,7 @@ func setup_signals():
 	GameController.world_shuffle.connect(_on_world_shuffle)
 
 func random_penta_scale_pitch() -> float:
-	return 0.5 * pow(2, penta_scale.pick_random() / 12.)
+	return pow(2, (penta_scale.pick_random() - 3) / 12.)
 
 func debug_audio() -> void:
 	print("debug audio")

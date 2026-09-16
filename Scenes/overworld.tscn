@@ -12,13 +12,17 @@
 [ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key_object.tscn" id="8_tpmwi"]
 [ext_resource type="PackedScene" uid="uid://bxkw8l8x6rx0g" path="res://Scenes/ui.tscn" id="10_h3u42"]
 [ext_resource type="PackedScene" uid="uid://cpqh15265a1iq" path="res://Scenes/tree.tscn" id="11_k5deu"]
-[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="12_v8nvt"]
 
 [node name="Scene" type="Node2D" unique_id=33198676 groups=["main_scene"]]
 
 [node name="Player" parent="." unique_id=1227295312 instance=ExtResource("2_ihd0w")]
 z_index = 1
 position = Vector2(77, 27)
+SPEED = 100
+GRAVITY = 1000
+RANGE = 32
+JUMP_FORCE = 200
+HOLDING_JUMP_FORCE = 400
 
 [node name="Camera" parent="." unique_id=895522267 node_paths=PackedStringArray("target") groups=["camera"] instance=ExtResource("6_0jggw")]
 position = Vector2(77, 22)
@@ -57,13 +61,11 @@ position = Vector2(265, 54)
 [node name="Key" parent="World/Key objects" unique_id=801604029 instance=ExtResource("8_tpmwi")]
 position = Vector2(125, 84)
 object_type = 1
-font = ExtResource("12_v8nvt")
 
 [node name="Bag" parent="World/Key objects" unique_id=2039909721 instance=ExtResource("8_tpmwi")]
 position = Vector2(249, 7)
 object_type = 2
 texture = ExtResource("8_if18x")
-font = ExtResource("12_v8nvt")
 
 [connection signal="changed_equipped_core" from="Player" to="Ui" method="_on_player_changed_equipped_core"]
 [connection signal="observation" from="Player" to="Ui" method="queue_string"]

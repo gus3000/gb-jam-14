@@ -22,3 +22,6 @@ func boot() -> void:
 
 func shutdown() -> void:
 	pass
+
+func get_power() -> PowerCore.Power:
+	return PowerCore.Power.JETPACK

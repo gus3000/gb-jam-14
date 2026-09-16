@@ -18,6 +18,9 @@ signal changed_equipped_core(ability_core: AbilityCore)
 var equipped_core: AbilityCore:
 	get: return cores.front()
 
+var equipped_power: Power:
+	get: return equipped_core.get_power()
+
 var powering: bool = false
 
 func _ready() -> void:

@@ -4,6 +4,7 @@ extends CharacterBody2D
 const Direction := Utils.Direction
 const PlayerAnimation := PlayerSprite.PlayerAnimation
 const KeyObjectType := KeyObject.KeyObjectType
+const Power := PowerCore.Power
 
 signal current_animation(player_animation: PlayerAnimation, direction: Direction)
 signal obtain_key_object(object_type: KeyObjectType)
@@ -117,7 +118,7 @@ func handle_vertical_movement() -> void:
 		facing_direction = last_left_right_direction
 
 func handle_animation_state() -> void:
-	if mining_core.is_mining:
+	if power_core.equipped_power == Power.MINING and power_core.powering:
 		current_animation.emit(PlayerAnimation.MINE, facing_direction)
 		return
 	if jumping:

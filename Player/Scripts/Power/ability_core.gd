@@ -9,3 +9,4 @@ extends Node2D
 @abstract func process(delta:float, powering: bool) -> void
 @abstract func boot()->void
 @abstract func shutdown()->void
+@abstract func get_power()->PowerCore.Power

@@ -91,3 +91,6 @@ func boot() -> void:
 
 func shutdown() -> void:
 	mining_indicator.hide()
+
+func get_power() -> PowerCore.Power:
+	return PowerCore.Power.MINING

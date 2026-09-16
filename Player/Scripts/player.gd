@@ -69,7 +69,7 @@ var looked_at_tilemap: DiggableTileMap:
 			return null
 		return col
 
-var was_on_floor_last_frame:bool:
+var was_on_floor_last_frame: bool:
 	get: return is_on_floor_history.front()
 
 # Called when the node enters the scene tree for the first time.
@@ -106,7 +106,13 @@ func _process(_delta: float) -> void:
 	pass
 
 func handle_horizontal_movement() -> void:
-	velocity.x = round(Input.get_axis("left", "right")) * SPEED
+	var speed: int = SPEED
+	var jetpack_speed: float = power_core.jetpack_core.jetpack_speed
+	if power_core.equipped_power == Power.JETPACK and power_core.powering:
+		speed = jetpack_speed as int
+	if not is_on_floor():
+		speed = max(abs(velocity.x), speed)
+	velocity.x = round(Input.get_axis("left", "right")) * speed
 	if velocity.x != 0:
 		facing_direction = Direction.LEFT if velocity.x < 0 else Direction.RIGHT
 		last_left_right_direction = facing_direction

@@ -5,12 +5,16 @@ extends AbilityCore
 
 @onready var flames: AnimatedSprite2D = $Flames
 
+var jetpack_speed: float:
+	get: return power_level * base_power
+
 func _ready() -> void:
 	flames.hide()
 
 func process(delta: float, powering: bool) -> void:
+
 	if powering:
-		player.velocity.y = - player.get_gravity().y * delta - power_level * base_power
+		player.velocity.y = - player.get_gravity().y * delta - jetpack_speed
 		flames.show()
 	else:
 		flames.hide()

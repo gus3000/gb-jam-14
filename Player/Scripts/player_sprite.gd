@@ -7,7 +7,7 @@ enum PlayerAnimation {
 	IDLE,
 	WALK,
 	JUMP,
-	FALL,  #TODO
+	FALL,
 	LAND,
 	MINE,
 }

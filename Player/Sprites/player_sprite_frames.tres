@@ -15,10 +15,6 @@ region = Rect2(91, 0, 13, 15)
 atlas = ExtResource("1_ojbom")
 region = Rect2(104, 0, 13, 15)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q74gg"]
-atlas = ExtResource("1_ojbom")
-region = Rect2(117, 0, 13, 15)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_7wvap"]
 atlas = ExtResource("1_ojbom")
 region = Rect2(0, 0, 13, 15)
@@ -43,11 +39,11 @@ region = Rect2(52, 0, 13, 15)
 atlas = ExtResource("1_ojbom")
 region = Rect2(65, 0, 13, 15)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_abubd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q74gg"]
 atlas = ExtResource("1_ojbom")
-region = Rect2(78, 0, 13, 15)
+region = Rect2(117, 0, 13, 15)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hqxbf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_abubd"]
 atlas = ExtResource("1_ojbom")
 region = Rect2(130, 0, 13, 15)
 
@@ -90,9 +86,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b7a63")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q74gg")
 }],
 "loop": 0,
 "name": &"Fall",
@@ -121,9 +114,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tkrx3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_abubd")
 }],
 "loop": 0,
 "name": &"Jump",
@@ -131,11 +121,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hqxbf")
+"texture": SubResource("AtlasTexture_q74gg")
+}, {
+"duration": 100.0,
+"texture": SubResource("AtlasTexture_abubd")
 }],
 "loop": 0,
 "name": &"Land",
-"speed": 4.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,

@@ -16,6 +16,7 @@ signal changed_equipped_core(ability_core: AbilityCore)
 @export var RANGE: int = 32
 @export var JUMP_FORCE: int = 200
 @export var HOLDING_JUMP_FORCE: int = 400
+@export var LAND_ANIMATION_TIME: int = 500  #ms
 
 var facing_direction: Direction = Direction.RIGHT
 var last_left_right_direction: Direction = Direction.RIGHT
@@ -35,6 +36,9 @@ var holding_jump: bool = false
 @onready var raycast_right_top: RayCast2D = $Rays/RightTop
 
 var raycasts: Dictionary = {}
+
+var last_landing_time: = 0
+var is_on_floor_history: Array[bool] = [true, true]
 
 var looked_at_raycasts: Array[RayCast2D]:
 	get:
@@ -65,9 +69,11 @@ var looked_at_tilemap: DiggableTileMap:
 			return null
 		return col
 
+var was_on_floor_last_frame:bool:
+	get: return is_on_floor_history.front()
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:	
+func _ready() -> void:
 	raycasts = {
 		Direction.UP: [raycast_up],
 		Direction.DOWN: [raycast_down],
@@ -84,6 +90,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		unlock_cheat()
 
 func _physics_process(delta: float) -> void:
+	is_on_floor_history.pop_front()
+	is_on_floor_history.push_back(is_on_floor())
 	if jumping or holding_jump:
 		handle_jumping(delta)
 	velocity.y = min(velocity.y + GRAVITY * delta, GRAVITY)
@@ -107,6 +115,10 @@ func handle_horizontal_movement() -> void:
 		walking = false
 
 func handle_vertical_movement() -> void:
+	if (not was_on_floor_last_frame) and is_on_floor_history.back():
+		#we just landed
+		last_landing_time = Time.get_ticks_msec()
+
 	jumping = is_on_floor() and Input.is_action_just_pressed("gb_a")
 	holding_jump = Input.is_action_pressed("gb_a")
 	var looking: float = Input.get_axis("up", "down")
@@ -129,6 +141,9 @@ func handle_animation_state() -> void:
 		return
 	if walking:
 		current_animation.emit(PlayerAnimation.WALK, facing_direction)
+		return
+	if is_on_floor_history.back() and (Time.get_ticks_msec() - last_landing_time <= LAND_ANIMATION_TIME):
+		current_animation.emit(PlayerAnimation.LAND, facing_direction)
 		return
 	current_animation.emit(PlayerAnimation.IDLE, facing_direction)
 	pass

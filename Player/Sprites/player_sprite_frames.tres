@@ -1,6 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://dxsvforscrt2s"]
 
 [ext_resource type="Texture2D" uid="uid://drcu1qs3tw42x" path="res://Player/Sprites/player-Sheet.png" id="1_ojbom"]
+[ext_resource type="Texture2D" uid="uid://cx18np31ahei2" path="res://Player/Sprites/player-digSheet.png" id="2_7wvap"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cosg7"]
 atlas = ExtResource("1_ojbom")
@@ -49,6 +50,18 @@ region = Rect2(78, 0, 13, 15)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqxbf"]
 atlas = ExtResource("1_ojbom")
 region = Rect2(130, 0, 13, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omy8g"]
+atlas = ExtResource("2_7wvap")
+region = Rect2(0, 0, 13, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy6rw"]
+atlas = ExtResource("2_7wvap")
+region = Rect2(13, 0, 13, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mc0pc"]
+atlas = ExtResource("2_7wvap")
+region = Rect2(26, 0, 13, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ojbom"]
 atlas = ExtResource("1_ojbom")
@@ -123,6 +136,20 @@ animations = [{
 "loop": 0,
 "name": &"Land",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omy8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy6rw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mc0pc")
+}],
+"loop": 1,
+"name": &"Mine",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,

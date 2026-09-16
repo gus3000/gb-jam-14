@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://dcfyvxas2033x" path="res://Scenes/shopkeeper.tscn" id="7_5qq38"]
 [ext_resource type="Texture2D" uid="uid://nfbrmnxwtmmt" path="res://Assets/Sprites/Placeholder/Placeholder-bag-simple.png" id="8_if18x"]
 [ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key_object.tscn" id="8_tpmwi"]
-[ext_resource type="FontFile" uid="uid://c42yg4fiusemu" path="res://Assets/Fonts/Everest/Web/Everest Condensed.woff" id="9_ycjfa"]
 [ext_resource type="PackedScene" uid="uid://bxkw8l8x6rx0g" path="res://Scenes/ui.tscn" id="10_h3u42"]
 [ext_resource type="PackedScene" uid="uid://cpqh15265a1iq" path="res://Scenes/tree.tscn" id="11_k5deu"]
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="12_v8nvt"]
 
 [node name="Scene" type="Node2D" unique_id=33198676 groups=["main_scene"]]
 
@@ -57,14 +57,13 @@ position = Vector2(265, 54)
 [node name="Key" parent="World/Key objects" unique_id=801604029 instance=ExtResource("8_tpmwi")]
 position = Vector2(125, 84)
 object_type = 1
-font = ExtResource("9_ycjfa")
+font = ExtResource("12_v8nvt")
 
-[node name="Bag" parent="World/Key objects" unique_id=2039909721 node_paths=PackedStringArray("player") instance=ExtResource("8_tpmwi")]
+[node name="Bag" parent="World/Key objects" unique_id=2039909721 instance=ExtResource("8_tpmwi")]
 position = Vector2(249, 7)
 object_type = 2
 texture = ExtResource("8_if18x")
-player = NodePath("../../../Player")
-font = ExtResource("9_ycjfa")
+font = ExtResource("12_v8nvt")
 
 [connection signal="changed_equipped_core" from="Player" to="Ui" method="_on_player_changed_equipped_core"]
 [connection signal="observation" from="Player" to="Ui" method="queue_string"]

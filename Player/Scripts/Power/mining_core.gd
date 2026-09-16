@@ -27,9 +27,9 @@ func handle_mining(powering: bool) -> void:
 		stop_mining()
 
 	elif powering and (not is_mining or not new_mined_block.equals(mined_block)):
-		if not new_mined_block.equals(mined_block):
-			print("mined block ", mined_block)
-			print("new mined block", new_mined_block)
+		# if not new_mined_block.equals(mined_block):
+			# print("mined block ", mined_block)
+			# print("new mined block", new_mined_block)
 		start_mining()
 	elif powering:
 		continue_mining()
@@ -37,7 +37,7 @@ func handle_mining(powering: bool) -> void:
 func start_mining() -> void:
 	started_mining_timestamp = Time.get_ticks_msec()
 	mined_block = block_to_mine()
-	print("started mining block ", mined_block)
+	# print("started mining block ", mined_block)
 	started_mining.emit(mined_block)
 
 func continue_mining() -> void:

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dcqcxiqylxo10"]
 
 [ext_resource type="Script" uid="uid://b7aueuabq65qd" path="res://Scripts/key_object.gd" id="1_80ano"]
-[ext_resource type="Texture2D" uid="uid://vytpa4586p7t" path="res://Assets/Sprites/key.png" id="1_ut0wq"]
+[ext_resource type="Texture2D" uid="uid://vytpa4586p7t" path="res://Assets/Sprites/Key Objects/key.png" id="1_ut0wq"]
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="3_fwror"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dayrp"]
 size = Vector2(7, 7)
@@ -9,6 +10,7 @@ size = Vector2(7, 7)
 [node name="KeyObject" type="Node2D" unique_id=801604029]
 script = ExtResource("1_80ano")
 texture = ExtResource("1_ut0wq")
+font = ExtResource("3_fwror")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=843867102]
 texture = ExtResource("1_ut0wq")

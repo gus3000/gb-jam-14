@@ -33,7 +33,7 @@ func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 func add_dirt(amount: float):
 	dirt += amount
 	dirt = clamp(dirt, 0, max_dirt)
-	print("dirt in bag : %s/%s" % [dirt, max_dirt])
+	# print("dirt in bag : %s/%s" % [dirt, max_dirt])
 	dirt_amount_changed.emit()
 
 func _on_mining_core_block_mined(block: Block) -> void:

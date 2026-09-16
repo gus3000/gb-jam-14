@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cx18np31ahei2"
-path="res://.godot/imported/player-digSheet.png-a94732403cec22060fb3f9e43905657a.ctex"
+path="res://.godot/imported/player-digSheet.png-3ed621e6b07cd4edcd9950ff3f461c06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/stuff/player-digSheet.png"
-dest_files=["res://.godot/imported/player-digSheet.png-a94732403cec22060fb3f9e43905657a.ctex"]
+source_file="res://Player/Sprites/player-digSheet.png"
+dest_files=["res://.godot/imported/player-digSheet.png-3ed621e6b07cd4edcd9950ff3f461c06.ctex"]
 
 [params]
 

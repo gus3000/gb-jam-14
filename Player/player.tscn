@@ -154,14 +154,20 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" unique_id=963057457 groups=["player"]]
 script = ExtResource("1_btcbx")
+SPEED = null
+GRAVITY = null
+RANGE = null
+JUMP_FORCE = null
+HOLDING_JUMP_FORCE = null
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=110110312]
 z_index = 1
 position = Vector2(0, -8)
 sprite_frames = ExtResource("2_btcbx")
-animation = &"Walk"
+animation = &"Jump"
 autoplay = "Idle"
-frame_progress = 0.19286154
+frame = 3
+frame_progress = 1.0
 script = ExtResource("3_gwnis")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809159382]

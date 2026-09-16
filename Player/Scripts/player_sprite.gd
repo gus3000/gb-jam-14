@@ -9,6 +9,7 @@ enum PlayerAnimation {
 	JUMP,
 	FALL,  #TODO
 	LAND,
+	MINE,
 }
 
 @onready var bag:Node2D = $"../PowerCore/Bag"
@@ -19,6 +20,7 @@ enum PlayerAnimation {
 	PlayerAnimation.JUMP: "Jump",
 	PlayerAnimation.FALL: "Fall",
 	PlayerAnimation.LAND: "Land",
+	PlayerAnimation.MINE: "Mine",
 }
 
 # only left or right here

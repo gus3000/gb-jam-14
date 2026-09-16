@@ -117,6 +117,9 @@ func handle_vertical_movement() -> void:
 		facing_direction = last_left_right_direction
 
 func handle_animation_state() -> void:
+	if mining_core.is_mining:
+		current_animation.emit(PlayerAnimation.MINE, facing_direction)
+		return
 	if jumping:
 		current_animation.emit(PlayerAnimation.JUMP, facing_direction)
 		return

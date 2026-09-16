@@ -18,7 +18,6 @@ const KeyObjectTypeDescriptor: Dictionary = {
 
 @export var object_type: KeyObjectType
 @export var texture: Texture
-@export var player: Player
 @export var font: Font
 @export var hover_amplitude: float = 3
 
@@ -39,7 +38,7 @@ func _ready() -> void:
 func _draw() -> void:
 	if not Engine.is_editor_hint():
 		return
-	draw_string(font, Vector2.ZERO, KeyObjectType.keys()[object_type], HORIZONTAL_ALIGNMENT_CENTER, 0, 8)
+	draw_string(font, Vector2.RIGHT*5, KeyObjectType.keys()[object_type], HORIZONTAL_ALIGNMENT_CENTER, 0, 8)
 
 func _on_area_2d_body_entered(body: Node2D):
 	if body is Player:
@@ -47,7 +46,7 @@ func _on_area_2d_body_entered(body: Node2D):
 		queue_free()
 	pass
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	#hover

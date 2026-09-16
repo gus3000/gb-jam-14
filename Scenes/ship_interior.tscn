@@ -6,6 +6,7 @@
 [ext_resource type="LabelSettings" uid="uid://b76tuudykixus" path="res://Assets/Fonts/default_label_settings.tres" id="4_56rx3"]
 [ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key_object.tscn" id="5_0hewa"]
 [ext_resource type="Texture2D" uid="uid://dc3fnopc2wydc" path="res://Assets/Sprites/Placeholder/Placeholder-jetpack.png" id="6_5m08m"]
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="7_lx0rt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dayrp"]
 
@@ -46,5 +47,6 @@ position = Vector2(-27, -30)
 scale = Vector2(2, 2)
 object_type = 3
 texture = ExtResource("6_5m08m")
+font = ExtResource("7_lx0rt")
 
 [connection signal="body_entered" from="Exits" to="." method="_on_exit_body_entered"]

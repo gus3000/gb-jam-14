@@ -86,7 +86,7 @@ func _ready() -> void:
 #	pass
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("cheat"):
+	if OS.is_debug_build() and event.is_action_pressed("cheat"):
 		unlock_cheat()
 
 func _physics_process(delta: float) -> void:

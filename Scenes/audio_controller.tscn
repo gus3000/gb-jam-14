@@ -12,6 +12,10 @@ script = ExtResource("1_sa2nx")
 stream = ExtResource("2_btkaq")
 max_polyphony = 3
 
+[node name="Earthquake" type="AudioStreamPlayer" parent="." unique_id=941538815]
+stream = ExtResource("2_btkaq")
+max_polyphony = 20
+
 [node name="MiningFail" type="AudioStreamPlayer" parent="." unique_id=1906771092]
 stream = ExtResource("2_btkaq")
 volume_db = -8.0

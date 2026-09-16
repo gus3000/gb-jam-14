@@ -8,3 +8,7 @@ func _on_exit_body_entered(body: Node2D) -> void:
 		return
 	print("leave ship")
 	GameController.leave_ship()
+
+
+func _on_key_object_pickup() -> void:
+	GameController.earthquake()

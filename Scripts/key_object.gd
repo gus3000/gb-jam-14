@@ -16,6 +16,8 @@ const KeyObjectTypeDescriptor: Dictionary = {
 	KeyObjectType.JETPACK: "Jetpack",
 }
 
+signal pickup
+
 @export var object_type: KeyObjectType
 @export var texture: Texture
 @export var font: Font
@@ -43,6 +45,7 @@ func _draw() -> void:
 func _on_area_2d_body_entered(body: Node2D):
 	if body is Player:
 		body.obtain(object_type)
+		pickup.emit()
 		queue_free()
 	pass
 

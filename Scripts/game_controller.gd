@@ -19,6 +19,7 @@ class LoadableScene:
 
 signal enter_fixed_scene
 signal leave_fixed_scene
+signal world_shuffle
 
 @onready var root: Node = $".."
 
@@ -36,6 +37,8 @@ var ui: Ui
 var world: Node2D
 
 var player_start_position: Vector2
+
+var is_debugging: bool = false
 
 func _ready() -> void:
 	camera = get_tree().get_first_node_in_group("camera")
@@ -58,6 +61,15 @@ func _ready() -> void:
 	}
 	player_start_position = player.position
 
+func _process(_delta: float) -> void:
+	if  OS.is_debug_build() and Input.is_physical_key_pressed(KEY_KP_1) and not is_debugging:
+		await debug()
+
+func debug() -> void:
+	is_debugging = true
+	earthquake()
+	await get_tree().create_timer(1).timeout
+	is_debugging = false
 
 func enter_ship() -> void:
 	load_scene_additive(LoadableSceneEnum.SHIP_INTERIOR)
@@ -103,6 +115,7 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 
 
 func earthquake() -> void:
+	world_shuffle.emit()
 	# ui.queue_string("boom !")
 	pass
 

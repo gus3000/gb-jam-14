@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://j73f31g27qgw" path="res://Scripts/camera_rig.gd" id="1_375tr"]
 
+[sub_resource type="Curve2D" id="Curve2D_375tr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.7, 0.5, 0, 0, 0, 0, 0.8, 1, 0, 0, 0, 0, 1, 0)
+}
+point_count = 4
+
 [node name="Camera" type="Camera2D" unique_id=895522267]
 script = ExtResource("1_375tr")
 still_shape = Rect2i(-30, -40, 60, 50)
+shake_curve = SubResource("Curve2D_375tr")
+shake_intensity = 5.0

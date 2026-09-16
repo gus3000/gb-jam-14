@@ -3,13 +3,19 @@ extends Camera2D
 
 @export var target: Node2D
 @export var still_shape: Rect2i
+@export var shake_curve: Curve2D
+@export var shake_intensity: float = 30.
+@export var shake_decay: float = 5.
 
 var update_vertical: bool = true
+var current_shake_strength: float = 0.0
+var current_shake_position: float = -100000.0
 
 var target_local_coords: Vector2:
 	get: return to_local(target.global_position)
 
 func _ready() -> void:
+	GameController.world_shuffle.connect(_on_world_shuffle)
 	pass  # Replace with function body.
 
 func _draw() -> void:
@@ -62,6 +68,15 @@ func _process(_delta: float) -> void:
 	var travel_vector := get_travel_vector()
 	# print("travel_vector : ", travel_vector)
 	position += travel_vector
+
+	# current_shake_strength = lerp(current_shake_strength,0., shake_decay * _delta)
+	current_shake_strength = shake_curve.sample_baked(current_shake_position).y * shake_intensity
+	print("shake sample at ", current_shake_position, " -> ", shake_curve.sample_baked(current_shake_position))
+	current_shake_position += _delta
+	offset = Vector2(
+			randf_range(-current_shake_strength, current_shake_strength),
+			randf_range(-current_shake_strength, current_shake_strength),
+	)
 	pass
 
 func _on_game_controller_enter_fixed_scene() -> void:
@@ -71,4 +86,10 @@ func _on_game_controller_enter_fixed_scene() -> void:
 
 func _on_game_controller_leave_fixed_scene() -> void:
 	update_vertical = true
+	pass
+
+func _on_world_shuffle() -> void:
+	print("camera world shuffle")
+	current_shake_strength = shake_intensity
+	current_shake_position = 0
 	pass

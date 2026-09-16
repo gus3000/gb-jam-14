@@ -61,4 +61,5 @@ func get_block_at_point(collision_position: Vector2) -> Block:
 
 # /!\ Resets the ground !
 func earthquake() -> void:
+	
 	pass

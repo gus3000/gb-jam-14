@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key_object.tscn" id="8_tpmwi"]
 [ext_resource type="PackedScene" uid="uid://bxkw8l8x6rx0g" path="res://Scenes/ui.tscn" id="10_h3u42"]
 [ext_resource type="PackedScene" uid="uid://cpqh15265a1iq" path="res://Scenes/tree.tscn" id="11_k5deu"]
+[ext_resource type="PackedScene" uid="uid://ciojwqlve1l2n" path="res://Scenes/menus/hud.tscn" id="13_uvbdg"]
 
 [node name="Scene" type="Node2D" unique_id=33198676 groups=["main_scene"]]
 
@@ -62,6 +63,8 @@ object_type = 1
 position = Vector2(249, 7)
 object_type = 2
 texture = ExtResource("8_if18x")
+
+[node name="HUD" parent="." unique_id=211123488 instance=ExtResource("13_uvbdg")]
 
 [connection signal="changed_equipped_core" from="Player" to="Ui" method="_on_player_changed_equipped_core"]
 [connection signal="observation" from="Player" to="Ui" method="queue_string"]

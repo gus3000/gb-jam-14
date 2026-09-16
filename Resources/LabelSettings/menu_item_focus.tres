@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://botkran5idf8p"]
+
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="1_cve32"]
+
+[resource]
+font = ExtResource("1_cve32")
+font_size = 10
+font_color = Color(0.96862745, 0.70980394, 0.54901963, 1)
+shadow_size = 0
+shadow_color = Color(0.5411765, 0.4392157, 0.7058824, 1)
+shadow_offset = Vector2(0.5, 0.5)

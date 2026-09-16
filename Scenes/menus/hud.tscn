@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://ciojwqlve1l2n"]
+
+[ext_resource type="Script" uid="uid://isedkj21ow3r" path="res://Scripts/hud.gd" id="1_hcyla"]
+[ext_resource type="Texture2D" uid="uid://c67rm6k0f4vl3" path="res://Assets/Sprites/textbox.png" id="2_ts0qo"]
+[ext_resource type="LabelSettings" uid="uid://ufeauaihvrd" path="res://Resources/LabelSettings/menu_item.tres" id="3_47p6n"]
+[ext_resource type="LabelSettings" uid="uid://botkran5idf8p" path="res://Resources/LabelSettings/menu_item_focus.tres" id="4_thjj3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_onpc1"]
+texture = ExtResource("2_ts0qo")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[node name="HUD" type="CanvasLayer" unique_id=211123488]
+process_mode = 3
+script = ExtResource("1_hcyla")
+
+[node name="PauseMenu" type="Control" parent="." unique_id=827683406]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu" unique_id=1714691158]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_onpc1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer" unique_id=1029292992]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Paused" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer" unique_id=1157583010]
+layout_mode = 2
+text = "PAUSE"
+label_settings = ExtResource("3_47p6n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="PauseMenu/PanelContainer/VBoxContainer" unique_id=1014474873]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Bag" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=1418870183]
+layout_mode = 2
+text = "BAG"
+label_settings = ExtResource("4_thjj3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=1934688995]
+layout_mode = 2
+text = "CTRL"
+label_settings = ExtResource("3_47p6n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hide" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=737100573]
+layout_mode = 2
+size_flags_vertical = 10
+text = "HIDE"
+label_settings = ExtResource("3_47p6n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Quit" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=1092376580]
+layout_mode = 2
+size_flags_vertical = 8
+text = "QUIT"
+label_settings = ExtResource("3_47p6n")
+horizontal_alignment = 1
+vertical_alignment = 1

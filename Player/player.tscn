@@ -203,7 +203,6 @@ collision_mask = 2
 [node name="PowerCore" type="Node2D" parent="." unique_id=1060804954]
 position = Vector2(0, -4)
 script = ExtResource("6_fhl08")
-current_power = null
 
 [node name="JetpackCore" type="Node2D" parent="PowerCore" unique_id=143064491]
 script = ExtResource("12_5htga")
@@ -240,6 +239,7 @@ autoplay = "empty"
 script = ExtResource("13_gu6f8")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
+[connection signal="obtain_key_object" from="." to="PowerCore" method="_on_player_obtain_key_object"]
 [connection signal="obtain_key_object" from="." to="PowerCore/Bag" method="_on_player_obtain_key_object"]
 [connection signal="changed_equipped_core" from="PowerCore" to="." method="_on_power_core_changed_equipped_core"]
 [connection signal="block_mined" from="PowerCore/MiningCore" to="PowerCore/Bag" method="_on_mining_core_block_mined"]

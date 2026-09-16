@@ -157,7 +157,6 @@ func handle_jumping(delta: float) -> void:
 	pass
 
 func obtain(object_type: KeyObjectType):
-	# print("YOU GOT THE ", KeyObjectType.keys()[object_type])
 	obtain_key_object.emit(object_type)
 	pass
 

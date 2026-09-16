@@ -27,6 +27,8 @@ func _ready() -> void:
 func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	print("bag received key object")
 	objects[object_type] = 1
+	if object_type == KeyObjectType.BAG and power_level == 0:
+		power_level = 1
 	pass
 
 

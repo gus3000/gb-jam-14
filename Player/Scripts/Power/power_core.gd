@@ -52,3 +52,9 @@ func core_for_key_object(key_object_type: KeyObjectType) -> AbilityCore:
 		KeyObjectType.JETPACK:
 			return jetpack_core
 		_: return null
+
+func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
+	var core := core_for_key_object(object_type)
+	if core == null or core.power_level > 0:
+		return
+	core.power_level = 1

@@ -7,12 +7,14 @@ enum LoadableSceneEnum {SHIP_INTERIOR}
 class LoadableScene:
 	var packed_scene: PackedScene
 	var camera_position: Vector2
+	var player_scale: float
 	var return_point: Vector2
 	var instance: Node
 
-	func _init(_packed_scene: PackedScene, _camera_position: Vector2):
+	func _init(_packed_scene: PackedScene, _camera_position: Vector2, _player_scale=1.):
 		packed_scene = _packed_scene
 		camera_position = _camera_position
+		player_scale = _player_scale
 
 
 signal enter_fixed_scene
@@ -50,7 +52,8 @@ func _ready() -> void:
 	loadable_scenes = {
 		LoadableSceneEnum.SHIP_INTERIOR: LoadableScene.new(
 				preload("res://Scenes/ship_interior.tscn"),
-				Vector2(0, -50)
+				Vector2(0, -50),
+				2,
 		)
 	}
 	player_start_position = player.position
@@ -77,6 +80,7 @@ func load_scene_additive(scene: LoadableSceneEnum) -> void:
 	main_scene.remove_child.call_deferred(world)
 	main_scene.add_child.call_deferred(instance)
 	player.position = Vector2.ZERO
+	player.scale = Vector2.ONE * loadable_scene.player_scale
 	camera.position = loadable_scene.camera_position
 	enter_fixed_scene.emit()
 	pass
@@ -93,6 +97,7 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 	main_scene.remove_child.call_deferred(scene_node)
 	main_scene.add_child.call_deferred(world)
 	player.position = return_point
+	player.scale = Vector2.ONE
 	camera.position = return_point
 	leave_fixed_scene.emit()
 

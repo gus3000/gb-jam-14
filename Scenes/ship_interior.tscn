@@ -43,6 +43,7 @@ label_settings = ExtResource("4_56rx3")
 
 [node name="KeyObject" parent="." unique_id=801604029 instance=ExtResource("5_0hewa")]
 position = Vector2(-27, -30)
+scale = Vector2(2, 2)
 object_type = 3
 texture = ExtResource("6_5m08m")
 

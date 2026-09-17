@@ -25,7 +25,7 @@ signal pickup
 
 @onready var current_sprite: Sprite2D = $Sprite2D
 
-@onready var base_position:Vector2 = position
+@onready var base_position: Vector2 = position
 
 func _ready() -> void:
 	current_sprite.texture = texture
@@ -40,7 +40,7 @@ func _ready() -> void:
 func _draw() -> void:
 	if not Engine.is_editor_hint():
 		return
-	draw_string(font, Vector2.RIGHT*5, KeyObjectType.keys()[object_type], HORIZONTAL_ALIGNMENT_CENTER, 0, 8)
+	draw_string(font, Vector2.RIGHT * 5, KeyObjectType.keys()[object_type], HORIZONTAL_ALIGNMENT_CENTER, 0, 8)
 
 func _on_area_2d_body_entered(body: Node2D):
 	if body is Player:
@@ -52,6 +52,10 @@ func _on_area_2d_body_entered(body: Node2D):
 func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
+
+	if GameController.player.bag.has_key_object(object_type):
+		queue_free()
+	
 	#hover
 	position.y = base_position.y + sin(Time.get_unix_time_from_system()) * hover_amplitude
 	pass

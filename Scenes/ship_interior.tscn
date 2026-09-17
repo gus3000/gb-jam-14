@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://dndfimyiad4jb" path="res://Assets/Tilesets/terrain_tileset.tres" id="2_jakyc"]
 [ext_resource type="LabelSettings" uid="uid://b76tuudykixus" path="res://Assets/Fonts/default_label_settings.tres" id="4_56rx3"]
 [ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key_object.tscn" id="5_0hewa"]
-[ext_resource type="Texture2D" uid="uid://dc3fnopc2wydc" path="res://Assets/Sprites/Placeholder/Placeholder-jetpack.png" id="6_5m08m"]
+[ext_resource type="Texture2D" uid="uid://d1xoymj3o3nkv" path="res://Assets/Sprites/jetpack.png" id="6_5m08m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dayrp"]
 
@@ -43,7 +43,6 @@ label_settings = ExtResource("4_56rx3")
 
 [node name="KeyObject" parent="." unique_id=801604029 instance=ExtResource("5_0hewa")]
 position = Vector2(-27, -30)
-scale = Vector2(2, 2)
 object_type = 3
 texture = ExtResource("6_5m08m")
 

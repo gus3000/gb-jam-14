@@ -3,14 +3,14 @@ class_name KeyObject
 extends Node2D
 
 enum KeyObjectType {
-	PICKAXE,
+	SHOVEL,
 	SHIP_KEY,
 	BAG,
 	JETPACK
 }
 
 const KeyObjectTypeDescriptor: Dictionary = {
-	KeyObjectType.PICKAXE: "Pickaxe",
+	KeyObjectType.SHOVEL: "Shovel",
 	KeyObjectType.SHIP_KEY: "Ship's key",
 	KeyObjectType.BAG: "Bag",
 	KeyObjectType.JETPACK: "Jetpack",

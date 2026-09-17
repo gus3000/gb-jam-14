@@ -3,11 +3,11 @@ extends Node2D
 
 const KeyObjectType := KeyObject.KeyObjectType
 
-enum Power {MINING, JETPACK}
+enum Power {NONE, SHOVEL, JETPACK}
 
-signal changed_equipped_core(ability_core: AbilityCore)
+signal changed_equipped_power(power:Power)
 
-@export var current_power: Power = Power.MINING
+@export var current_power: Power = Power.SHOVEL
 
 @onready var player: Player = $".."
 @onready var mining_core: MiningCore = $MiningCore
@@ -16,10 +16,16 @@ signal changed_equipped_core(ability_core: AbilityCore)
 @onready var cores: Array[AbilityCore] = [mining_core, jetpack_core]
 
 var equipped_core: AbilityCore:
-	get: return cores.front()
+	get:
+		if cores.front().power_level == 0:
+			return null
+		return cores.front()
 
 var equipped_power: Power:
-	get: return equipped_core.get_power()
+	get:
+		if equipped_core == null:
+			return Power.NONE
+		return equipped_core.get_power()
 
 var powering: bool = false
 
@@ -31,23 +37,29 @@ func _unhandled_input(event: InputEvent) -> void:
 		cycle_power()
 
 func _physics_process(delta: float) -> void:
-	powering = Input.is_action_pressed("gb_b")
-	equipped_core.process(delta, powering)
+	powering = Input.is_action_pressed("gb_b") and equipped_core.power_level > 0
+	if equipped_core != null:
+		equipped_core.process(delta, powering)
 	pass
 
-func cycle_power() -> void:
+func cycle_power(attempts: int = 0) -> void:
+	if attempts > cores.size():
+		# we have no usable power, not even the quipped one
+		return
 	var core = cores.pop_front()
 	core.shutdown()
 	cores.push_back(core)
-	if equipped_core.power_level == 0:
-		cycle_power()
+
+	if equipped_core == null:
+		cycle_power(attempts + 1)
 		return
+
 	equipped_core.boot()
-	changed_equipped_core.emit(equipped_core)
+	changed_equipped_power.emit(equipped_power)
 
 func core_for_key_object(key_object_type: KeyObjectType) -> AbilityCore:
 	match (key_object_type):
-		KeyObjectType.PICKAXE:
+		KeyObjectType.SHOVEL:
 			return mining_core
 		KeyObjectType.JETPACK:
 			return jetpack_core
@@ -58,3 +70,4 @@ func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	if core == null or core.power_level > 0:
 		return
 	core.power_level = 1
+	cycle_power()

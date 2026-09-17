@@ -71,21 +71,16 @@ func move_toward_target(delta: float) -> void:
 	if not has_focused_interact_points:
 		var travel_vector := get_travel_vector()
 		# print("travel_vector : ", travel_vector)
-		print("targeting player")
 		target_position = global_position + travel_vector
 	else:
-		print("targeting inteact point ", focused_interact_point)
 		target_position = focused_interact_point.global_position
 	var target_lerped_position: Vector2 = lerp(position, target_position, snap_force * delta)
 	var actual_travel_vector := target_lerped_position - global_position
-	print("target movement :", global_position, " -> ", target_position)
-	print("travel vector :", actual_travel_vector)
 	if (target_position - global_position).length() <= minimal_movement_per_frame:
 		global_position = target_position
 		return
 	if actual_travel_vector.length() < minimal_movement_per_frame:
 		actual_travel_vector *= minimal_movement_per_frame / actual_travel_vector.length()
-	print("actual travel vector :", actual_travel_vector)
 	global_position += actual_travel_vector
 
 func get_travel_vector() -> Vector2:

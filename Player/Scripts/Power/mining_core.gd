@@ -28,8 +28,8 @@ func handle_mining(powering: bool) -> void:
 
 	elif powering and (not is_mining or not new_mined_block.equals(mined_block)):
 		# if not new_mined_block.equals(mined_block):
-			# print("mined block ", mined_block)
-			# print("new mined block", new_mined_block)
+		# print("mined block ", mined_block)
+		# print("new mined block", new_mined_block)
 		start_mining()
 	elif powering:
 		continue_mining()
@@ -81,6 +81,8 @@ func highlight_minable_block() -> void:
 	debug_point.global_position = player.looked_at_tilemap.get_block_position(l)
 
 func process(_delta: float, powering: bool) -> void:
+	if power_level == 0:
+		return
 	highlight_minable_block()
 	handle_mining(powering)
 
@@ -93,4 +95,4 @@ func shutdown() -> void:
 	mining_indicator.hide()
 
 func get_power() -> PowerCore.Power:
-	return PowerCore.Power.MINING
+	return PowerCore.Power.SHOVEL

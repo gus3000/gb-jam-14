@@ -12,7 +12,6 @@ func _ready() -> void:
 	flames.hide()
 
 func process(delta: float, powering: bool) -> void:
-
 	if powering:
 		player.velocity.y = - player.get_gravity().y * delta - jetpack_speed
 		flames.show()

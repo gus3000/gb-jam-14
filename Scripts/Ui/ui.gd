@@ -19,7 +19,7 @@ enum MessageKey {
 @onready var hud: CanvasLayer = $HUD
 @onready var dialog: Control = $Dialog
 @onready var label: Label = $Dialog/PanelContainer/MarginContainer/Label
-@onready var power_icon: UiPowerIcon = $PowerIcon
+@onready var equipped_power_indicator: UiPowerIcon = $HUD/EquippedPowerIndicator
 
 var message_queue: Array[String] = []
 
@@ -60,8 +60,8 @@ func show_message(message: String) -> void:
 	dialog.hide()
 
 
-func _on_player_changed_equipped_core(_ability_core: AbilityCore) -> void:
-	pass
+func _on_player_changed_equipped_power(power:PowerCore.Power) -> void:
+	equipped_power_indicator.update_power(power)
 
 func ui_hide() -> void:
 	hide()

@@ -9,7 +9,7 @@ const Power := PowerCore.Power
 signal current_animation(player_animation: PlayerAnimation, direction: Direction)
 signal obtain_key_object(object_type: KeyObjectType)
 signal observation(message: String)
-signal changed_equipped_core(ability_core: AbilityCore)
+signal changed_equipped_power(power: Power)
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -136,7 +136,7 @@ func handle_vertical_movement() -> void:
 		facing_direction = last_left_right_direction
 
 func handle_animation_state() -> void:
-	if power_core.equipped_power == Power.MINING and power_core.powering:
+	if power_core.equipped_power == Power.SHOVEL and power_core.powering:
 		current_animation.emit(PlayerAnimation.MINE, facing_direction)
 		return
 	if jumping:
@@ -178,5 +178,5 @@ func unlock_cheat() -> void:
 	observation.emit("Unlocked\neverything !")
 
 
-func _on_power_core_changed_equipped_core(ability_core: AbilityCore) -> void:
-	changed_equipped_core.emit(ability_core)
+func _on_power_core_changed_equipped_power(power: Power) -> void:
+	changed_equipped_power.emit(power)

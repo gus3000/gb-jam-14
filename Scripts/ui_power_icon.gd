@@ -1,2 +1,0 @@
-class_name UiPowerIcon
-extends Sprite2D

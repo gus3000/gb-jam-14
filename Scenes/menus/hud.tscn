@@ -4,9 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://c67rm6k0f4vl3" path="res://Assets/Sprites/textbox.png" id="2_ts0qo"]
 [ext_resource type="LabelSettings" uid="uid://ufeauaihvrd" path="res://Resources/LabelSettings/menu_item.tres" id="3_47p6n"]
 [ext_resource type="LabelSettings" uid="uid://botkran5idf8p" path="res://Resources/LabelSettings/menu_item_focus.tres" id="4_thjj3"]
+[ext_resource type="Script" uid="uid://b4vpindpbsycp" path="res://Scripts/Ui/ui_power_icon.gd" id="5_3gvoi"]
 [ext_resource type="StyleBox" uid="uid://160ims4btigs" path="res://Resources/StyleBoxTextures/pause_menu.tres" id="5_ts0qo"]
 [ext_resource type="Texture2D" uid="uid://bxkmufskp24e" path="res://Assets/Sprites/ashovel.png" id="6_26w2x"]
 [ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="7_thjj3"]
+[ext_resource type="Texture2D" uid="uid://d1xoymj3o3nkv" path="res://Assets/Sprites/jetpack.png" id="8_hf614"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_onpc1"]
 texture = ExtResource("2_ts0qo")
@@ -94,25 +96,32 @@ label_settings = ExtResource("3_47p6n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="." unique_id=360030489]
+[node name="EquippedPowerIndicator" type="Control" parent="." unique_id=360030489]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
+script = ExtResource("5_3gvoi")
 
-[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1236141858]
+[node name="PanelContainer" type="PanelContainer" parent="EquippedPowerIndicator" unique_id=1236141858]
 layout_mode = 0
 offset_top = -32.0
 offset_right = 32.0
 offset_transform_enabled = true
 theme_override_styles/panel = ExtResource("5_ts0qo")
 
-[node name="KeyItem" type="TextureRect" parent="Control/PanelContainer" unique_id=196464473]
+[node name="Pickaxe" type="TextureRect" parent="EquippedPowerIndicator/PanelContainer" unique_id=196464473]
+visible = false
 layout_mode = 2
 texture = ExtResource("6_26w2x")
 
-[node name="Label" type="Label" parent="Control" unique_id=712289645]
+[node name="Jetpack" type="TextureRect" parent="EquippedPowerIndicator/PanelContainer" unique_id=312664697]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_hf614")
+
+[node name="Label" type="Label" parent="EquippedPowerIndicator" unique_id=712289645]
 layout_mode = 0
 offset_top = -40.0
 offset_right = 32.0

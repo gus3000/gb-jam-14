@@ -1,20 +1,42 @@
 [gd_scene format=4 uid="uid://bs7xdcycrvqy0"]
 
 [ext_resource type="Script" uid="uid://bs6ofxmdw07et" path="res://Scripts/ship_interior.gd" id="1_ba36l"]
-[ext_resource type="Texture2D" uid="uid://b0l7ys1r3uhee" path="res://Assets/Sprites/space_interior/gbjam14_spaceInterior (128x112).png" id="1_c07he"]
+[ext_resource type="Texture2D" uid="uid://b0l7ys1r3uhee" path="res://Assets/Sprites/space_interior/spaceInterior.png" id="1_c07he"]
 [ext_resource type="TileSet" uid="uid://dndfimyiad4jb" path="res://Assets/Tilesets/terrain_tileset.tres" id="2_jakyc"]
+[ext_resource type="Texture2D" uid="uid://u3a3gqbja7vj" path="res://Assets/Sprites/space_interior/spaceInterior_black.png" id="2_lx0rt"]
 [ext_resource type="LabelSettings" uid="uid://b76tuudykixus" path="res://Assets/Fonts/default_label_settings.tres" id="4_56rx3"]
 [ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key_object.tscn" id="5_0hewa"]
 [ext_resource type="Texture2D" uid="uid://d1xoymj3o3nkv" path="res://Assets/Sprites/jetpack.png" id="6_5m08m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0hewa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lx0rt")
+}],
+"loop": 1,
+"name": &"Dark",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_c07he")
+}],
+"loop": 1,
+"name": &"LitUp",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dayrp"]
 
 [node name="ShipInterior" type="Node2D" unique_id=1362618884]
 script = ExtResource("1_ba36l")
 
-[node name="Background" type="Sprite2D" parent="." unique_id=1581039872]
+[node name="Background" type="AnimatedSprite2D" parent="." unique_id=1138457433]
 position = Vector2(0, -48)
-texture = ExtResource("1_c07he")
+sprite_frames = SubResource("SpriteFrames_0hewa")
+animation = &"Dark"
+autoplay = "Dark"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1772030585]
 tile_map_data = PackedByteArray("AAD4/wEAAgASAAYAAAD5/wEAAgASAAYAAAD6/wEAAgASAAYAAAD7/wEAAgASAAYAAAD8/wEAAgASAAYAAAD9/wEAAgASAAYAAAD+/wEAAgASAAYAAAD//wEAAgASAAYAAAAAAAEAAgASAAYAAAABAAEAAgASAAYAAAACAAEAAgASAAYAAAADAAEAAgASAAYAAAAEAAEAAgASAAYAAAAFAAEAAgASAAYAAAAGAAEAAgASAAYAAAAHAAEAAgASAAYAAAD3/wEAAgASAAYAAAAIAAEAAgASAAYAAAAIAAAAAgASAAYAAAAIAP//AgASAAYAAAAIAP7/AgASAAYAAAAIAP3/AgASAAYAAAAIAPz/AgASAAYAAAAIAPv/AgASAAYAAAAIAPr/AgASAAYAAAAIAPn/AgASAAYAAAAIAPj/AgASAAYAAAAIAPf/AgASAAYAAAAIAPb/AgASAAYAAAAIAPX/AgASAAYAAAAIAPT/AgASAAYAAAAIAPP/AgASAAYAAAAIAPL/AgASAAYAAAAHAPL/AgASAAYAAAAGAPL/AgASAAYAAAAFAPL/AgASAAYAAAAEAPL/AgASAAYAAAADAPL/AgASAAYAAAACAPL/AgASAAYAAAABAPL/AgASAAYAAAAAAPL/AgASAAYAAAD///L/AgASAAYAAAD+//L/AgASAAYAAAD9//L/AgASAAYAAAD8//L/AgASAAYAAAD7//L/AgASAAYAAAD6//L/AgASAAYAAAD5//L/AgASAAYAAAD4//L/AgASAAYAAAD3//L/AgASAAYAAAD3//P/AgASAAYAAAD3//T/AgASAAYAAAD3//X/AgASAAYAAAD3//b/AgASAAYAAAD3//f/AgASAAYAAAD3//j/AgASAAYAAAD3//n/AgASAAYAAAD3//r/AgASAAYAAAD3//v/AgASAAYAAAD3//z/AgASAAYAAAD3//3/AgASAAYAAAD3//7/AgASAAYAAAD3////AgASAAYAAAD3/wAAAgASAAYAAAA=")

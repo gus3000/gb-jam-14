@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0l7ys1r3uhee"
-path="res://.godot/imported/gbjam14_spaceInterior (128x112).png-58c248cbd51328715b2f18dcc1176532.ctex"
+path="res://.godot/imported/spaceInterior.png-b4ddf9360c35a7a43b0c106353c99d4d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/space_interior/gbjam14_spaceInterior (128x112).png"
-dest_files=["res://.godot/imported/gbjam14_spaceInterior (128x112).png-58c248cbd51328715b2f18dcc1176532.ctex"]
+source_file="res://Assets/Sprites/space_interior/spaceInterior.png"
+dest_files=["res://.godot/imported/spaceInterior.png-b4ddf9360c35a7a43b0c106353c99d4d.ctex"]
 
 [params]
 

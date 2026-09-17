@@ -1,19 +1,55 @@
 [gd_scene format=3 uid="uid://dcfyvxas2033x"]
 
 [ext_resource type="Script" uid="uid://cxb4526p4ebnk" path="res://Scripts/shopkeeper.gd" id="1_fdy00"]
+[ext_resource type="Texture2D" uid="uid://bg1but63md3mw" path="res://Assets/Sprites/npc_idle_right.png" id="2_7scxg"]
 [ext_resource type="PackedScene" uid="uid://c6oaj8acf0ei7" path="res://Scenes/interact_point.tscn" id="3_7scxg"]
-[ext_resource type="Texture2D" uid="uid://bhud50jx6ntbw" path="res://Assets/Sprites/npc.png" id="4_vce3n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdy00"]
+atlas = ExtResource("2_7scxg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rla2l"]
+atlas = ExtResource("2_7scxg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcyy5"]
+atlas = ExtResource("2_7scxg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vce3n"]
+atlas = ExtResource("2_7scxg")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dayrp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdy00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rla2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcyy5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vce3n")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Shopkeeper" type="Node2D" unique_id=2055223079]
 script = ExtResource("1_fdy00")
 
-[node name="Npc" type="Sprite2D" parent="." unique_id=1352585492]
+[node name="Npc" type="AnimatedSprite2D" parent="." unique_id=856387378]
 position = Vector2(0, -8)
-texture = ExtResource("4_vce3n")
-flip_h = true
+sprite_frames = SubResource("SpriteFrames_dayrp")
+autoplay = "default"
 
 [node name="Sign" parent="." unique_id=1246660634 instance=ExtResource("3_7scxg")]
 position = Vector2(0, -16)
-text = "Talk"
+text = "TALK"
 
 [connection signal="interact" from="Sign" to="." method="_on_sign_interact"]

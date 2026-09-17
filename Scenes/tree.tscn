@@ -1,9 +1,47 @@
 [gd_scene format=3 uid="uid://cpqh15265a1iq"]
 
-[ext_resource type="Texture2D" uid="uid://vjyt6gctaiu8" path="res://Assets/Sprites/Placeholder/Placeholder-tree.png" id="1_0vwjc"]
+[ext_resource type="Texture2D" uid="uid://brps22u8qxf3k" path="res://Assets/Sprites/tree_anim.png" id="1_0vwjc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsuno"]
+atlas = ExtResource("1_0vwjc")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7sa7"]
+atlas = ExtResource("1_0vwjc")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3oha"]
+atlas = ExtResource("1_0vwjc")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m36md"]
+atlas = ExtResource("1_0vwjc")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0jkly"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsuno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7sa7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3oha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m36md")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 1.0
+}]
 
 [node name="Tree" type="Node2D" unique_id=1014196565]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=290231158]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=491278400]
 position = Vector2(0, -24)
-texture = ExtResource("1_0vwjc")
+sprite_frames = SubResource("SpriteFrames_0jkly")
+autoplay = "default"
+frame_progress = 0.6351575

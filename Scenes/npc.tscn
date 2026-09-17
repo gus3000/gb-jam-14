@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dcfyvxas2033x"]
+
+[ext_resource type="Script" uid="uid://bnhhmamw7bs8d" path="res://Scripts/npc.gd" id="1_fdy00"]
+[ext_resource type="Texture2D" uid="uid://cohb6s31u2gfb" path="res://Assets/Sprites/emote.png" id="3_7scxg"]
+[ext_resource type="Texture2D" uid="uid://bhud50jx6ntbw" path="res://Assets/Sprites/npc.png" id="4_vce3n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8vd5c"]
+radius = 24.0
+
+[node name="NPC" type="Area2D" unique_id=1264099386]
+script = ExtResource("1_fdy00")
+
+[node name="Npc" type="Sprite2D" parent="." unique_id=1352585492]
+position = Vector2(0, -8)
+texture = ExtResource("4_vce3n")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1193910953]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_8vd5c")
+debug_color = Color(0.12941177, 0.019607844, 0.16078432, 0.17254902)
+
+[node name="Prompt" type="Sprite2D" parent="." unique_id=1332418339]
+visible = false
+position = Vector2(-3, -24)
+texture = ExtResource("3_7scxg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

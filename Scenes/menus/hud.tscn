@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://c67rm6k0f4vl3" path="res://Assets/Sprites/textbox.png" id="2_ts0qo"]
 [ext_resource type="LabelSettings" uid="uid://ufeauaihvrd" path="res://Resources/LabelSettings/menu_item.tres" id="3_47p6n"]
 [ext_resource type="LabelSettings" uid="uid://botkran5idf8p" path="res://Resources/LabelSettings/menu_item_focus.tres" id="4_thjj3"]
+[ext_resource type="StyleBox" uid="uid://160ims4btigs" path="res://Resources/StyleBoxTextures/pause_menu.tres" id="5_ts0qo"]
+[ext_resource type="Texture2D" uid="uid://bxkmufskp24e" path="res://Assets/Sprites/ashovel.png" id="6_26w2x"]
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="7_thjj3"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_onpc1"]
 texture = ExtResource("2_ts0qo")
@@ -11,6 +14,14 @@ texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_3gvoi"]
+font = ExtResource("7_thjj3")
+font_size = 8
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_color = Color(1, 0.9372549, 1, 1)
+shadow_offset = Vector2(0.5, 0.5)
 
 [node name="HUD" type="CanvasLayer" unique_id=211123488]
 process_mode = 3
@@ -81,3 +92,31 @@ text = "QUIT"
 label_settings = ExtResource("3_47p6n")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Control" type="Control" parent="." unique_id=360030489]
+layout_mode = 3
+anchor_right = 0.15
+anchor_bottom = 0.22200002
+offset_right = -24.0
+offset_bottom = -31.968002
+
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1236141858]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+offset_transform_enabled = true
+theme_override_styles/panel = ExtResource("5_ts0qo")
+
+[node name="KeyItem" type="TextureRect" parent="Control/PanelContainer" unique_id=196464473]
+layout_mode = 2
+texture = ExtResource("6_26w2x")
+
+[node name="Label" type="Label" parent="Control" unique_id=712289645]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 28.0
+offset_right = 26.0
+offset_bottom = 38.0
+text = "core"
+label_settings = SubResource("LabelSettings_3gvoi")
+horizontal_alignment = 1

@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://c6oaj8acf0ei7"]
+
+[ext_resource type="Script" uid="uid://dg2csai3htd13" path="res://Scripts/sign.gd" id="1_6c32n"]
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="1_hqvqy"]
+[ext_resource type="Texture2D" uid="uid://dx1h243s03uhq" path="res://Assets/Sprites/gbjam14_sign.png" id="2_6c32n"]
+[ext_resource type="Texture2D" uid="uid://cq8q0qvh6evwe" path="res://Assets/Sprites/up_arrow.png" id="3_v8ien"]
+[ext_resource type="PackedScene" uid="uid://chy8jxognrjvf" path="res://Scenes/interactible.tscn" id="5_v8ien"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfer4"]
+size = Vector2(32, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_onpc1"]
+font = ExtResource("1_hqvqy")
+font_color = Color(1, 0.9372549, 1, 1)
+outline_color = Color(0.2784314, 0.11764706, 0.29803923, 1)
+shadow_size = 0
+shadow_color = Color(0.2784314, 0.11764706, 0.29803923, 1)
+
+[node name="Sign" type="Area2D" unique_id=1246660634]
+script = ExtResource("1_6c32n")
+
+[node name="Gbjam14Sign" type="Sprite2D" parent="." unique_id=796236569]
+visible = false
+position = Vector2(-40, -16)
+texture = ExtResource("2_6c32n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=488509773]
+shape = SubResource("RectangleShape2D_xfer4")
+debug_color = Color(0.8331486, 0.3205262, 0.580624, 0.41960785)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1126597637]
+offset_left = -67.0
+offset_top = -36.0
+offset_right = 67.0
+offset_bottom = 4.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1694145424]
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("3_v8ien")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1082826347]
+layout_mode = 2
+size_flags_vertical = 0
+text = "abcd"
+label_settings = SubResource("LabelSettings_onpc1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Interactible" parent="." unique_id=10731151 instance=ExtResource("5_v8ien")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="interact" from="Interactible" to="." method="_on_interactible_interact"]

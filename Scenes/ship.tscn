@@ -1,14 +1,8 @@
 [gd_scene format=3 uid="uid://cptsvl4gafntt"]
 
 [ext_resource type="Script" uid="uid://1pkx1g2jv3hg" path="res://Scripts/ship.gd" id="1_fdj0q"]
-[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="2_2shtd"]
 [ext_resource type="Texture2D" uid="uid://dm0h03j2epko7" path="res://Assets/Sprites/Ship/ship_crash_anim.png" id="2_6ejuo"]
-[ext_resource type="Texture2D" uid="uid://dx1h243s03uhq" path="res://Assets/Sprites/gbjam14_sign.png" id="2_io27d"]
-[ext_resource type="PackedScene" uid="uid://chy8jxognrjvf" path="res://Scenes/interactible.tscn" id="5_8aq7e"]
-[ext_resource type="Texture2D" uid="uid://cq8q0qvh6evwe" path="res://Assets/Sprites/up_arrow.png" id="5_cmder"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_onpc1"]
-size = Vector2(80, 32)
+[ext_resource type="PackedScene" uid="uid://c6oaj8acf0ei7" path="res://Scenes/sign.tscn" id="3_6ejuo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8aq7e"]
 atlas = ExtResource("2_6ejuo")
@@ -46,62 +40,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_onpc1"]
-font = ExtResource("2_2shtd")
-font_color = Color(1, 0.9372549, 1, 1)
-outline_color = Color(0.2784314, 0.11764706, 0.29803923, 1)
-shadow_size = 0
-shadow_color = Color(0.2784314, 0.11764706, 0.29803923, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfer4"]
-size = Vector2(32, 32)
-
-[node name="Ship" type="Area2D" unique_id=1957846300]
+[node name="Ship" type="Node2D" unique_id=1273346522]
 script = ExtResource("1_fdj0q")
-
-[node name="Vision" type="CollisionShape2D" parent="." unique_id=1598746954]
-position = Vector2(0, -16)
-shape = SubResource("RectangleShape2D_onpc1")
 
 [node name="ShipSprite" type="AnimatedSprite2D" parent="." unique_id=2077997446]
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_xxxu3")
 autoplay = "default"
 
-[node name="Sign" type="Area2D" parent="." unique_id=295379704]
-position = Vector2(38, 0)
-
-[node name="Label" type="Label" parent="Sign" unique_id=1973391863]
-offset_left = -64.0
-offset_top = -56.0
-offset_right = -9.0
-offset_bottom = -33.0
-text = " ENTER"
-label_settings = SubResource("LabelSettings_onpc1")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Gbjam14Sign" type="Sprite2D" parent="Sign" unique_id=1904553171]
-visible = false
-position = Vector2(-40, -16)
-texture = ExtResource("2_io27d")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sign" unique_id=737543981]
-position = Vector2(-40, -16)
-shape = SubResource("RectangleShape2D_xfer4")
-debug_color = Color(0.8331486, 0.3205262, 0.580624, 0.41960785)
-
-[node name="Arrow" type="Sprite2D" parent="Sign" unique_id=554932111]
-position = Vector2(-69, -49)
-texture = ExtResource("5_cmder")
-
-[node name="Animations" type="Node2D" parent="." unique_id=1697023610]
-
-[node name="Interactible" parent="." unique_id=10731151 instance=ExtResource("5_8aq7e")]
+[node name="Sign" parent="." unique_id=1246660634 instance=ExtResource("3_6ejuo")]
 position = Vector2(-2, -16)
+text = "ENTER"
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
-[connection signal="body_entered" from="Sign" to="." method="_on_sign_body_entered"]
-[connection signal="body_exited" from="Sign" to="." method="_on_sign_body_exited"]
-[connection signal="interact" from="Interactible" to="." method="enter"]
+[connection signal="interact" from="Sign" to="." method="enter"]

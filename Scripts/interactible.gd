@@ -1,3 +1,4 @@
+class_name Interactible
 extends Area2D
 
 signal interact

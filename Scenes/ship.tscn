@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://1pkx1g2jv3hg" path="res://Scripts/ship.gd" id="1_fdj0q"]
 [ext_resource type="Texture2D" uid="uid://dm0h03j2epko7" path="res://Assets/Sprites/Ship/ship_crash_anim.png" id="2_6ejuo"]
-[ext_resource type="PackedScene" uid="uid://c6oaj8acf0ei7" path="res://Scenes/sign.tscn" id="3_6ejuo"]
+[ext_resource type="PackedScene" uid="uid://c6oaj8acf0ei7" path="res://Scenes/interact_point.tscn" id="3_6ejuo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8aq7e"]
 atlas = ExtResource("2_6ejuo")
@@ -48,8 +48,8 @@ position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_xxxu3")
 autoplay = "default"
 
-[node name="Sign" parent="." unique_id=1246660634 instance=ExtResource("3_6ejuo")]
+[node name="InteractPoint" parent="." unique_id=1246660634 instance=ExtResource("3_6ejuo")]
 position = Vector2(-2, -16)
 text = "ENTER"
 
-[connection signal="interact" from="Sign" to="." method="enter"]
+[connection signal="interact" from="InteractPoint" to="." method="enter"]

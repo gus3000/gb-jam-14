@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dcfyvxas2033x"]
 
-[ext_resource type="Script" uid="uid://bnhhmamw7bs8d" path="res://Scripts/shopkeeper.gd" id="1_fdy00"]
-[ext_resource type="PackedScene" uid="uid://c6oaj8acf0ei7" path="res://Scenes/sign.tscn" id="3_7scxg"]
+[ext_resource type="Script" uid="uid://cxb4526p4ebnk" path="res://Scripts/shopkeeper.gd" id="1_fdy00"]
+[ext_resource type="PackedScene" uid="uid://c6oaj8acf0ei7" path="res://Scenes/interact_point.tscn" id="3_7scxg"]
 [ext_resource type="Texture2D" uid="uid://bhud50jx6ntbw" path="res://Assets/Sprites/npc.png" id="4_vce3n"]
 
 [node name="Shopkeeper" type="Node2D" unique_id=2055223079]

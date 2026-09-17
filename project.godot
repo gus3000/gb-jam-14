@@ -24,6 +24,7 @@ boot_splash/show_image=false
 
 GameController="*uid://xj0nvpg23it0"
 AudioController="*uid://cp8jb37xta0p8"
+CutsceneController="*uid://bt8dtpv5nwrln"
 
 [display]
 

@@ -62,7 +62,7 @@ func _ready() -> void:
 	player_start_position = player.position
 
 func _process(_delta: float) -> void:
-	if  OS.is_debug_build() and Input.is_physical_key_pressed(KEY_KP_1) and not is_debugging:
+	if OS.is_debug_build() and Input.is_physical_key_pressed(KEY_KP_1) and not is_debugging:
 		await debug()
 
 func debug() -> void:
@@ -129,3 +129,22 @@ func teleport_to_start() -> void:
 func player_exited_world() -> void:
 	print("exited world")
 	teleport_to_start()
+
+func toggle_pause(should_pause:bool)->void:
+	player.get_tree().paused = should_pause
+	# camera.get_tree().paused = should_pause
+
+func pause() -> void:
+	toggle_pause(true)
+
+func unpause()->void:
+	toggle_pause(false)
+
+func hide_game()->void:
+	main_scene.hide()
+	pass
+
+func show_game()->void:
+	main_scene.show()
+	camera.make_current()
+	pass

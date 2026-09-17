@@ -36,11 +36,11 @@ func _invoke_option() -> void:
 func open_menu() -> void:
 	_update_index(-menu_index)
 	pause_menu.show()
-	get_tree().paused = true
+	GameController.pause()
 	
 func close_menu() -> void:
 	pause_menu.hide()
-	get_tree().paused = false
+	GameController.unpause()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if not pause_menu.visible and event.is_action_pressed("gb_start"):

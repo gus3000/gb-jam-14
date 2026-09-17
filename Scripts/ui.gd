@@ -16,6 +16,7 @@ enum MessageKey {
 	MessageKey.CYCLE_POWER_REMINDER: "Use SELECT to\ncycle powers",
 }
 
+@onready var hud: CanvasLayer = $HUD
 @onready var dialog: Control = $Dialog
 @onready var label: Label = $Dialog/PanelContainer/MarginContainer/Label
 @onready var power_icon: UiPowerIcon = $PowerIcon
@@ -61,3 +62,11 @@ func show_message(message: String) -> void:
 
 func _on_player_changed_equipped_core(_ability_core: AbilityCore) -> void:
 	pass
+
+func ui_hide() -> void:
+	hide()
+	hud.hide()
+
+func ui_show() -> void:
+	show()
+	hud.show()

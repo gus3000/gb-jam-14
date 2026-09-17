@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://cuo02oet7himq" path="res://Resources/ui_theme.tres" id="1_nf4gj"]
 [ext_resource type="Texture2D" uid="uid://c67rm6k0f4vl3" path="res://Assets/Sprites/textbox.png" id="1_qdvrb"]
 [ext_resource type="Script" uid="uid://b4vpindpbsycp" path="res://Scripts/ui_power_icon.gd" id="5_q7pk6"]
+[ext_resource type="PackedScene" uid="uid://ciojwqlve1l2n" path="res://Scenes/menus/hud.tscn" id="6_m78vo"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nf4gj"]
 texture = ExtResource("1_qdvrb")
@@ -43,3 +44,5 @@ vertical_alignment = 1
 
 [node name="PowerIcon" type="Sprite2D" parent="." unique_id=645546913]
 script = ExtResource("5_q7pk6")
+
+[node name="HUD" parent="." unique_id=211123488 instance=ExtResource("6_m78vo")]

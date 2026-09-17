@@ -130,21 +130,25 @@ func player_exited_world() -> void:
 	print("exited world")
 	teleport_to_start()
 
-func toggle_pause(should_pause:bool)->void:
-	player.get_tree().paused = should_pause
-	# camera.get_tree().paused = should_pause
+func toggle_pause(should_pause: bool) -> void:
+	get_tree().paused = should_pause
 
 func pause() -> void:
 	toggle_pause(true)
 
-func unpause()->void:
+func unpause() -> void:
 	toggle_pause(false)
 
-func hide_game()->void:
+func is_paused() -> bool:
+	return get_tree().paused
+
+func hide_game() -> void:
 	main_scene.hide()
+	ui.ui_hide()
 	pass
 
-func show_game()->void:
+func show_game() -> void:
 	main_scene.show()
+	ui.ui_show()
 	camera.make_current()
 	pass

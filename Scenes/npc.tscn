@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dcfyvxas2033x"]
+[gd_scene format=3 uid="uid://ckroby3lduo0p"]
 
 [ext_resource type="Script" uid="uid://bnhhmamw7bs8d" path="res://Scripts/npc.gd" id="1_fdy00"]
 [ext_resource type="Texture2D" uid="uid://cohb6s31u2gfb" path="res://Assets/Sprites/emote.png" id="3_7scxg"]

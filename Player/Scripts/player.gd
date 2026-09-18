@@ -198,6 +198,16 @@ func unlock_cheat() -> void:
 		bag._on_player_obtain_key_object(object_type)
 	observation.emit("Unlocked\neverything !")
 
+func unlock_baby_cheat() -> void:
+	for core in power_core.cores:
+		core.power_level = 1
+	bag.power_level = 1
+	for object_type in KeyObjectType.values():
+		bag._on_player_obtain_key_object(object_type)
+	observation.emit("Unlocked\nbasic stuff !")
+
+func add_gold(to_add:int):
+	gold += to_add
 
 func _on_power_core_changed_equipped_power(power: Power) -> void:
 	changed_equipped_power.emit(power)

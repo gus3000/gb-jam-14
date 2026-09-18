@@ -28,7 +28,6 @@ func stop():
 	animationPlayer.stop()
 	animationPlayer.play_backwards("StartHover")
 	await animationPlayer.animation_finished
-	print("animation player speed is %s" % [animationPlayer.speed_scale])
 
 
 func _process(_delta: float) -> void:
@@ -38,4 +37,7 @@ func _process(_delta: float) -> void:
 	if not filtering:
 		return
 	filtering_speed += ceili(bag.max_dirt * dirt_filter_bag_percent_acceleration * _delta)
-	GameController.player.gold += bag.extract_dirt(ceili(filtering_speed * _delta))
+
+	# GameController.player.gold += bag.extract_dirt(ceili(filtering_speed * _delta))
+	var to_add: int = bag.extract_dirt(ceili(filtering_speed * _delta))
+	get_tree().create_timer(4).timeout.connect(func(): GameController.player.add_gold(to_add))

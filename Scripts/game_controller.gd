@@ -74,7 +74,8 @@ func _process(_delta: float) -> void:
 		player.bag.add_dirt(ceili(player.bag.max_dirt * 0.1))
 	if Input.is_action_just_pressed("cheat"):
 		player.unlock_cheat()
-
+	if Input.is_action_just_pressed("baby_cheat"):
+		player.unlock_baby_cheat()
 func debug() -> void:
 	is_debugging = true
 	earthquake()

@@ -19,7 +19,8 @@ func _process(delta: float) -> void:
 func _on_bag_dirt_amount_changed(dirt_amount: int):
 	if dirt_amount >= 0:
 		return
-	for i in range(log(-dirt_amount)):
+	var particles_to_generate: int = max(1, log(-dirt_amount))
+	for i in range(particles_to_generate):
 		emit_particle(
 				Transform2D(0, get_particle_start_position()),
 				Vector2.UP,

@@ -61,7 +61,7 @@ script = ExtResource("1_ba36l")
 [node name="Background" type="AnimatedSprite2D" parent="." unique_id=1138457433]
 position = Vector2(0, -48)
 sprite_frames = SubResource("SpriteFrames_0hewa")
-animation = &"LitUp"
+animation = &"SwtichOn"
 autoplay = "Dark"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1772030585]
@@ -99,4 +99,3 @@ script = ExtResource("10_b202h")
 
 [connection signal="body_entered" from="Exits" to="." method="_on_exit_body_entered"]
 [connection signal="pickup" from="KeyObject" to="." method="_on_key_object_pickup"]
-[connection signal="finished" from="DirtParticleFlow" to="GoldPan" method="_on_dirt_particle_flow_finished"]

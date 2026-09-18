@@ -38,7 +38,8 @@ func _process(_delta: float) -> void:
 
 func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	queue_message(MessageKey.RECEIVED_KEY_OBJECT, [KeyObjectTypeDescriptor[object_type]])
-	if GameController.player.power_core.core_for_key_object(object_type) != null:
+	if GameController.player.power_core.core_for_key_object(object_type) != null \
+			and GameController.player.power_core.number_of_active_cores > 1:
 		queue_message(MessageKey.CYCLE_POWER_REMINDER, [])
 
 func queue_string(message: String):
@@ -60,7 +61,7 @@ func show_message(message: String) -> void:
 	dialog.hide()
 
 
-func _on_player_changed_equipped_power(power:PowerCore.Power) -> void:
+func _on_player_changed_equipped_power(power: PowerCore.Power) -> void:
 	equipped_power_indicator.update_power(power)
 
 func ui_hide() -> void:

@@ -31,7 +31,7 @@ func _ready() -> void:
 	# print("sprite frames : ", sprite_frames)
 
 
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void:		
 	pass
 
 func handle_direction_change(new_direction: Direction) -> void:
@@ -51,3 +51,11 @@ func slot_animation(player_animation: PlayerAnimation, direction: Direction) -> 
 	play(anim)
 	handle_direction_change(direction)
 	pass
+
+
+func _on_player_movement_just_paused(paused: bool) -> void:
+	print("sprite got that movement just paused ! ", paused)
+	if paused:
+		pause()
+	else:
+		play()

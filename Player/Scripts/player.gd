@@ -10,6 +10,7 @@ signal current_animation(player_animation: PlayerAnimation, direction: Direction
 signal obtain_key_object(object_type: KeyObjectType)
 signal observation(message: String)
 signal changed_equipped_power(power: Power)
+signal movement_just_paused(paused: bool)
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -39,6 +40,11 @@ var raycasts: Dictionary = {}
 
 var last_landing_time: = 0
 var is_on_floor_history: Array[bool] = [true, true]
+var movement_paused: bool = false:
+	get: return movement_paused
+	set(value):
+		movement_just_paused.emit(value)
+		movement_paused = value
 
 var looked_at_raycasts: Array[RayCast2D]:
 	get:
@@ -90,6 +96,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		unlock_cheat()
 
 func _physics_process(delta: float) -> void:
+	if movement_paused:
+		return
+	handle_horizontal_movement()
+	handle_vertical_movement()
+
 	is_on_floor_history.pop_front()
 	is_on_floor_history.push_back(is_on_floor())
 	if jumping or holding_jump:
@@ -99,9 +110,6 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	handle_horizontal_movement()
-	handle_vertical_movement()
-
 	handle_animation_state()
 	pass
 
@@ -136,6 +144,8 @@ func handle_vertical_movement() -> void:
 		facing_direction = last_left_right_direction
 
 func handle_animation_state() -> void:
+	if movement_paused:
+		return
 	if power_core.equipped_power == Power.SHOVEL and power_core.powering:
 		current_animation.emit(PlayerAnimation.MINE, facing_direction)
 		return

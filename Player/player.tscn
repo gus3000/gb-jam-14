@@ -153,6 +153,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=963057457 groups=["player"]]
+position = Vector2(1, 0)
 script = ExtResource("1_btcbx")
 LAND_ANIMATION_TIME = 300
 
@@ -238,6 +239,7 @@ autoplay = "empty"
 script = ExtResource("13_gu6f8")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
+[connection signal="movement_just_paused" from="." to="Sprite" method="_on_player_movement_just_paused"]
 [connection signal="obtain_key_object" from="." to="PowerCore" method="_on_player_obtain_key_object"]
 [connection signal="obtain_key_object" from="." to="PowerCore/Bag" method="_on_player_obtain_key_object"]
 [connection signal="changed_equipped_power" from="PowerCore" to="." method="_on_power_core_changed_equipped_power"]

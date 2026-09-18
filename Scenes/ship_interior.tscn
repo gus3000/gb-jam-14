@@ -25,6 +25,29 @@ animations = [{
 "loop": 1,
 "name": &"LitUp",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lx0rt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_c07he")
+}, {
+"duration": 3.0,
+"texture": ExtResource("2_lx0rt")
+}, {
+"duration": 2.0,
+"texture": ExtResource("1_c07he")
+}, {
+"duration": 3.0,
+"texture": ExtResource("2_lx0rt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_c07he")
+}],
+"loop": 0,
+"name": &"SwtichOn",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dayrp"]
@@ -35,8 +58,10 @@ script = ExtResource("1_ba36l")
 [node name="Background" type="AnimatedSprite2D" parent="." unique_id=1138457433]
 position = Vector2(0, -48)
 sprite_frames = SubResource("SpriteFrames_0hewa")
-animation = &"Dark"
+animation = &"SwtichOn"
 autoplay = "Dark"
+frame = 5
+frame_progress = 1.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1772030585]
 tile_map_data = PackedByteArray("AAD4/wEAAgASAAYAAAD5/wEAAgASAAYAAAD6/wEAAgASAAYAAAD7/wEAAgASAAYAAAD8/wEAAgASAAYAAAD9/wEAAgASAAYAAAD+/wEAAgASAAYAAAD//wEAAgASAAYAAAAAAAEAAgASAAYAAAABAAEAAgASAAYAAAACAAEAAgASAAYAAAADAAEAAgASAAYAAAAEAAEAAgASAAYAAAAFAAEAAgASAAYAAAAGAAEAAgASAAYAAAAHAAEAAgASAAYAAAD3/wEAAgASAAYAAAAIAAEAAgASAAYAAAAIAAAAAgASAAYAAAAIAP//AgASAAYAAAAIAP7/AgASAAYAAAAIAP3/AgASAAYAAAAIAPz/AgASAAYAAAAIAPv/AgASAAYAAAAIAPr/AgASAAYAAAAIAPn/AgASAAYAAAAIAPj/AgASAAYAAAAIAPf/AgASAAYAAAAIAPb/AgASAAYAAAAIAPX/AgASAAYAAAAIAPT/AgASAAYAAAAIAPP/AgASAAYAAAAIAPL/AgASAAYAAAAHAPL/AgASAAYAAAAGAPL/AgASAAYAAAAFAPL/AgASAAYAAAAEAPL/AgASAAYAAAADAPL/AgASAAYAAAACAPL/AgASAAYAAAABAPL/AgASAAYAAAAAAPL/AgASAAYAAAD///L/AgASAAYAAAD+//L/AgASAAYAAAD9//L/AgASAAYAAAD8//L/AgASAAYAAAD7//L/AgASAAYAAAD6//L/AgASAAYAAAD5//L/AgASAAYAAAD4//L/AgASAAYAAAD3//L/AgASAAYAAAD3//P/AgASAAYAAAD3//T/AgASAAYAAAD3//X/AgASAAYAAAD3//b/AgASAAYAAAD3//f/AgASAAYAAAD3//j/AgASAAYAAAD3//n/AgASAAYAAAD3//r/AgASAAYAAAD3//v/AgASAAYAAAD3//z/AgASAAYAAAD3//3/AgASAAYAAAD3//7/AgASAAYAAAD3////AgASAAYAAAD3/wAAAgASAAYAAAA=")

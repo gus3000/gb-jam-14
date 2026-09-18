@@ -45,8 +45,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		cycle_power()
 
 func _physics_process(delta: float) -> void:
-	powering = Input.is_action_pressed("gb_b") and equipped_core.power_level > 0
 	if equipped_core != null:
+		powering = Input.is_action_pressed("gb_b") and equipped_core.power_level > 0
 		equipped_core.process(delta, powering)
 	pass
 

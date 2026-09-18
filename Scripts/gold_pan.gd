@@ -6,7 +6,6 @@ extends Node2D
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var bag: Bag = GameController.player.bag
 
-var gold: int = 0
 var filtering: bool = false
 var filtering_speed: int = 0
 
@@ -14,6 +13,7 @@ func start():
 	filtering = false
 	animationPlayer.play("StartHover")
 	await animationPlayer.animation_finished
+	GameController.earthquake()
 	filtering = true
 	animationPlayer.play("Hover")
 
@@ -24,7 +24,7 @@ func stop():
 	animationPlayer.play_backwards("StartHover")
 	await animationPlayer.animation_finished
 	print("animation player speed is %s" % [animationPlayer.speed_scale])
-	
+
 
 func _process(_delta: float) -> void:
 	if bag.dirt == 0 and filtering:
@@ -32,6 +32,6 @@ func _process(_delta: float) -> void:
 		return
 	if not filtering:
 		return
-	filtering_speed += bag.max_dirt * dirt_filter_bag_percent_acceleration * _delta as int
-	bag.extract_dirt(filtering_speed * _delta as int)
+	filtering_speed += ceili(bag.max_dirt * dirt_filter_bag_percent_acceleration * _delta)
+	GameController.player.gold += bag.extract_dirt(ceili(filtering_speed * _delta))
 	

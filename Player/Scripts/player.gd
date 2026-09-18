@@ -85,6 +85,11 @@ var looked_at_tilemap: DiggableTileMap:
 var was_on_floor_last_frame: bool:
 	get: return is_on_floor_history.front()
 
+var gold: int = 0:
+	set(value):
+		GameController.gold_changed.emit(value)
+		gold = value
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	raycasts = {
@@ -97,10 +102,6 @@ func _ready() -> void:
 
 #func _input(event: InputEvent) -> void:
 #	pass
-
-func _unhandled_input(event: InputEvent) -> void:
-	if OS.is_debug_build() and event.is_action_pressed("cheat"):
-		unlock_cheat()
 
 func _physics_process(delta: float) -> void:
 	if movement_paused:

@@ -20,6 +20,7 @@ class LoadableScene:
 signal enter_fixed_scene
 signal leave_fixed_scene
 signal world_shuffle(intensity: float)
+signal gold_changed(new_amount: int)
 
 @onready var root: Node = $".."
 
@@ -62,8 +63,17 @@ func _ready() -> void:
 	player_start_position = player.position
 
 func _process(_delta: float) -> void:
-	if OS.is_debug_build() and Input.is_physical_key_pressed(KEY_KP_1) and not is_debugging:
+	if not OS.is_debug_build():
+		return
+	if Input.is_physical_key_pressed(KEY_KP_1) and not is_debugging:
 		await debug()
+	if Input.is_action_just_pressed("debug_increase_mining"):
+		player.mining_core.power_level += 1
+		GameController.ui.queue_string("Mining increased\nto %s" % player.mining_core.power_level, 1)
+	if Input.is_action_just_pressed("debug_increase_bag"):
+		player.bag.add_dirt(ceili(player.bag.max_dirt * 0.1))
+	if Input.is_action_just_pressed("cheat"):
+		player.unlock_cheat()
 
 func debug() -> void:
 	is_debugging = true
@@ -91,7 +101,7 @@ func load_scene_additive(scene: LoadableSceneEnum) -> void:
 	loadable_scene.return_point = player.position
 	main_scene.remove_child.call_deferred(world)
 	main_scene.add_child.call_deferred(instance)
-	
+
 	player.position = Vector2.ZERO
 	player.scale = Vector2.ONE * loadable_scene.player_scale
 	camera.position = loadable_scene.camera_position
@@ -106,7 +116,7 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 
 	assert(scene_node != null)
 	assert(return_point != null)
-	
+
 	scene_node.on_unload()
 	main_scene.remove_child.call_deferred(scene_node)
 	main_scene.add_child.call_deferred(world)
@@ -114,7 +124,6 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 	player.scale = Vector2.ONE
 	camera.position = return_point
 	leave_fixed_scene.emit()
-	
 
 
 func earthquake(intensity: float=-1) -> void:

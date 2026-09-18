@@ -49,9 +49,5 @@ func extract_dirt(amount: int) -> int:
 func _on_mining_core_block_mined(block: Block) -> void:
 	add_dirt(block.toughness)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_increase_bag"):
-		add_dirt(max_dirt * 0.1)
-
 func has_key_object(object_type: KeyObjectType) -> bool:
 	return object_type in objects.keys() and objects[object_type] > 0

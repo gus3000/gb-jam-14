@@ -22,12 +22,15 @@ func stop():
 	filtering_speed = 0
 	animationPlayer.stop()
 	animationPlayer.play_backwards("StartHover")
+	await animationPlayer.animation_finished
+	print("animation player speed is %s" % [animationPlayer.speed_scale])
+	
 
 func _process(_delta: float) -> void:
-	if bag.dirt == 0 and filtering_speed > 0:
+	if bag.dirt == 0 and filtering:
 		stop()
 		return
-	if bag.dirt == 0 and filtering_speed == 0:
+	if not filtering:
 		return
 	filtering_speed += bag.max_dirt * dirt_filter_bag_percent_acceleration * _delta as int
 	bag.extract_dirt(filtering_speed * _delta as int)

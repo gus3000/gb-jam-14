@@ -28,7 +28,8 @@ func blink() -> void:
 	pass
 
 func on_load():
-	gold_pan.start()
+	if GameController.player.bag.dirt > 0:
+		gold_pan.start()
 	pass
 func on_unload():
 	pass

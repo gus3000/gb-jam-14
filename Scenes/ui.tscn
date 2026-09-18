@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://cuo02oet7himq" path="res://Resources/ui_theme.tres" id="1_nf4gj"]
 [ext_resource type="Texture2D" uid="uid://c67rm6k0f4vl3" path="res://Assets/Sprites/textbox.png" id="1_qdvrb"]
 [ext_resource type="PackedScene" uid="uid://ciojwqlve1l2n" path="res://Scenes/menus/hud.tscn" id="6_m78vo"]
+[ext_resource type="LabelSettings" uid="uid://du1t4foy6nd1d" path="res://Assets/Fonts/default_label_settings_dark_mode.tres" id="6_smcll"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nf4gj"]
 texture = ExtResource("1_qdvrb")
@@ -44,3 +45,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HUD" parent="." unique_id=211123488 instance=ExtResource("6_m78vo")]
+
+[node name="Gold" type="Label" parent="." unique_id=1118802529]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "0$"
+label_settings = ExtResource("6_smcll")
+horizontal_alignment = 2
+vertical_alignment = 2

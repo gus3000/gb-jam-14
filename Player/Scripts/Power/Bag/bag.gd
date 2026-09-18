@@ -3,13 +3,15 @@ extends Node2D
 
 const KeyObjectType := KeyObject.KeyObjectType
 
-signal dirt_amount_changed
+signal dirt_amount_changed(amount:int)
 
 @export var power_level: int = 0
-var dirt: float = 0
+@onready var opening: Node2D = $Opening
+
+var dirt: int = 0
 var objects: Dictionary[KeyObjectType, int]
 
-var max_dirt: float:
+var max_dirt: int:
 	get: match (power_level):
 		0: return 0
 		1: return 1500
@@ -32,18 +34,22 @@ func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	pass
 
 
-func add_dirt(amount: float):
+func add_dirt(amount: int):
+	amount = clamp(amount, 0, max_dirt - dirt)
 	dirt += amount
-	dirt = clamp(dirt, 0, max_dirt)
 	# print("dirt in bag : %s/%s" % [dirt, max_dirt])
-	dirt_amount_changed.emit()
+	dirt_amount_changed.emit(amount)
+
+func extract_dirt(amount: int) -> int:
+	if amount > dirt:
+		amount = dirt
+	dirt -= amount
+	dirt_amount_changed.emit(-amount)
+	print("%s dirt extracted, %d remaining" % [amount, dirt])
+	return amount
 
 func _on_mining_core_block_mined(block: Block) -> void:
 	add_dirt(block.toughness)
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_increase_bag"):
-		add_dirt(100)
 
 func has_key_object(object_type: KeyObjectType) -> bool:
 	return object_type in objects.keys() and objects[object_type] > 0

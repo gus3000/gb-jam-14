@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://brk31kfmseb80"]
+
+[ext_resource type="Shader" uid="uid://83dl8htof48j" path="res://Resources/Shaders/dirt_particle_shader.gdshader" id="1_5yeh6"]
+
+[resource]
+shader = ExtResource("1_5yeh6")
+shader_parameter/target_position = Vector2(37, -15)

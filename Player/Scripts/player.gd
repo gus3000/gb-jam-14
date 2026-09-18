@@ -10,6 +10,7 @@ signal current_animation(player_animation: PlayerAnimation, direction: Direction
 signal obtain_key_object(object_type: KeyObjectType)
 signal observation(message: String)
 signal changed_equipped_power(power: Power)
+signal movement_just_paused(paused: bool)
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -39,6 +40,18 @@ var raycasts: Dictionary = {}
 
 var last_landing_time: = 0
 var is_on_floor_history: Array[bool] = [true, true]
+var number_of_pauses: int = 0
+var movement_paused: bool = false:
+	get: return number_of_pauses > 0
+	set(value):
+		if value:
+			if number_of_pauses == 0:
+				movement_just_paused.emit(value)
+			number_of_pauses += 1
+		else:
+			if number_of_pauses == 1:
+				movement_just_paused.emit(value)
+			number_of_pauses -= 1
 
 var looked_at_raycasts: Array[RayCast2D]:
 	get:
@@ -72,6 +85,11 @@ var looked_at_tilemap: DiggableTileMap:
 var was_on_floor_last_frame: bool:
 	get: return is_on_floor_history.front()
 
+var gold: int = 0:
+	set(value):
+		GameController.gold_changed.emit(value)
+		gold = value
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	raycasts = {
@@ -85,11 +103,12 @@ func _ready() -> void:
 #func _input(event: InputEvent) -> void:
 #	pass
 
-func _unhandled_input(event: InputEvent) -> void:
-	if OS.is_debug_build() and event.is_action_pressed("cheat"):
-		unlock_cheat()
-
 func _physics_process(delta: float) -> void:
+	if movement_paused:
+		return
+	handle_horizontal_movement()
+	handle_vertical_movement()
+
 	is_on_floor_history.pop_front()
 	is_on_floor_history.push_back(is_on_floor())
 	if jumping or holding_jump:
@@ -99,9 +118,6 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	handle_horizontal_movement()
-	handle_vertical_movement()
-
 	handle_animation_state()
 	pass
 
@@ -136,6 +152,8 @@ func handle_vertical_movement() -> void:
 		facing_direction = last_left_right_direction
 
 func handle_animation_state() -> void:
+	if movement_paused:
+		return
 	if power_core.equipped_power == Power.SHOVEL and power_core.powering:
 		current_animation.emit(PlayerAnimation.MINE, facing_direction)
 		return
@@ -157,13 +175,16 @@ func handle_animation_state() -> void:
 func handle_jumping(delta: float) -> void:
 	if jumping:
 		velocity.y = -JUMP_FORCE
-		print("jumping !")
+		# print("jumping !")
 	elif holding_jump:
 		velocity.y -= (HOLDING_JUMP_FORCE * delta)
 	pass
 
 func obtain(object_type: KeyObjectType):
 	obtain_key_object.emit(object_type)
+	movement_paused = true
+	await get_tree().create_timer(2).timeout
+	movement_paused = false
 	pass
 
 func has_key_object(object_type: KeyObjectType) -> bool:
@@ -177,6 +198,16 @@ func unlock_cheat() -> void:
 		bag._on_player_obtain_key_object(object_type)
 	observation.emit("Unlocked\neverything !")
 
+func unlock_baby_cheat() -> void:
+	for core in power_core.cores:
+		core.power_level = 1
+	bag.power_level = 1
+	for object_type in KeyObjectType.values():
+		bag._on_player_obtain_key_object(object_type)
+	observation.emit("Unlocked\nbasic stuff !")
+
+func add_gold(to_add:int):
+	gold += to_add
 
 func _on_power_core_changed_equipped_power(power: Power) -> void:
 	changed_equipped_power.emit(power)

@@ -18,14 +18,14 @@ func _process(_delta: float) -> void:
 	pass
 
 
-func _on_bag_dirt_amount_changed() -> void:
+func _on_bag_dirt_amount_changed(_amount:int) -> void:
 	if bag.power_level == 0:
 		return
-	var ratio: float = bag.dirt / bag.max_dirt
-	print("ratio : ", ratio)
+	var ratio: float = (1.0)*bag.dirt / bag.max_dirt
+	# print("ratio : ", ratio)
 	for threshold in animations.keys():
 		if ratio >= threshold:
-			print("bag in state : ", threshold, " -> ", animations[threshold])
+			# print("bag in state : ", threshold, " -> ", animations[threshold])
 			play(animations[threshold])
 			return
 		

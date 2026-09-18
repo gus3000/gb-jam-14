@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://c0fxxheyx0mdg"]
+
+[ext_resource type="Texture2D" uid="uid://dylg10ewglwmw" path="res://Assets/Sprites/space_interior/goldpanning.png" id="1_0441b"]
+[ext_resource type="Script" uid="uid://b1c0jsdquboju" path="res://Scripts/gold_pan.gd" id="1_kia0a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0441b"]
+atlas = ExtResource("1_0441b")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kia0a"]
+atlas = ExtResource("1_0441b")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xkfo"]
+atlas = ExtResource("1_0441b")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfpoo"]
+atlas = ExtResource("1_0441b")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxfkd"]
+atlas = ExtResource("1_0441b")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dayrp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0441b")
+}],
+"loop": 1,
+"name": &"Inert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kia0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xkfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfpoo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxfkd")
+}],
+"loop": 1,
+"name": &"Working",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_0441b"]
+resource_name = "Hover"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Working"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -10.0, 0.0, 10.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 0]
+}
+
+[sub_resource type="Animation" id="Animation_0xkfo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Inert"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kia0a"]
+resource_name = "StartHover"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Inert"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xkfo"]
+_data = {
+&"Hover": SubResource("Animation_0441b"),
+&"RESET": SubResource("Animation_0xkfo"),
+&"StartHover": SubResource("Animation_kia0a")
+}
+
+[node name="GoldPan" type="Node2D" unique_id=1340109548]
+script = ExtResource("1_kia0a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1570657587]
+sprite_frames = SubResource("SpriteFrames_dayrp")
+animation = &"Inert"
+autoplay = "Inert"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=178925923]
+libraries/ = SubResource("AnimationLibrary_0xkfo")

@@ -17,7 +17,6 @@ var is_mining: int:
 var current_mining_time: int:
 	get: return Time.get_ticks_msec() - started_mining_timestamp
 
-
 func handle_mining(powering: bool) -> void:
 	var new_mined_block := block_to_mine()
 	if new_mined_block == null:
@@ -41,7 +40,7 @@ func start_mining() -> void:
 	started_mining.emit(mined_block)
 
 func continue_mining() -> void:
-	if current_mining_time > mining_time(mined_block, power_level):
+	if current_mining_time > mining_time(mined_block):
 		player.looked_at_tilemap.mine_block(mined_block)
 		block_mined.emit(mined_block)
 		stop_mining()
@@ -52,9 +51,18 @@ func stop_mining() -> void:
 	stopped_mining.emit(mined_block)
 	mined_block = null
 
+func mining_power() -> float:
+	match (power_level):
+		0: return 0
+		1: return 1.5
+		2: return 5
+		3: return 10
+		4: return 20
+		5: return 100
+		_: return 100000
 
-func mining_time(block: Block, _mining_power: int) -> float:
-	return block.toughness / _mining_power
+func mining_time(block: Block) -> float:
+	return block.toughness / mining_power()
 
 func block_to_mine() -> Block:
 	# print("trying to mine", Utils.string_from_direction(player.facing_direction))

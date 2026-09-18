@@ -5,7 +5,7 @@ const KeyObjectType := KeyObject.KeyObjectType
 
 enum Power {NONE, SHOVEL, JETPACK}
 
-signal changed_equipped_power(power:Power)
+signal changed_equipped_power(power: Power)
 
 @export var current_power: Power = Power.SHOVEL
 
@@ -27,6 +27,14 @@ var equipped_power: Power:
 			return Power.NONE
 		return equipped_core.get_power()
 
+var number_of_active_cores: int:
+	get:
+		var n: int = 0
+		for core in cores:
+			if core.power_level > 0:
+				n += 1
+		return n
+
 var powering: bool = false
 
 func _ready() -> void:
@@ -37,12 +45,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		cycle_power()
 
 func _physics_process(delta: float) -> void:
-	powering = Input.is_action_pressed("gb_b") and equipped_core.power_level > 0
 	if equipped_core != null:
+		powering = Input.is_action_pressed("gb_b") and equipped_core.power_level > 0
 		equipped_core.process(delta, powering)
 	pass
 
-func cycle_power(attempts: int = 0) -> void:
+func cycle_power(attempts: int=0) -> void:
 	if attempts > cores.size():
 		# we have no usable power, not even the quipped one
 		return
@@ -64,6 +72,12 @@ func core_for_key_object(key_object_type: KeyObjectType) -> AbilityCore:
 		KeyObjectType.JETPACK:
 			return jetpack_core
 		_: return null
+
+func has_power(power: Power) -> bool:
+	for core in cores:
+		if core.get_power() == power:
+			return core.power_level > 0
+	return false
 
 func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	var core := core_for_key_object(object_type)

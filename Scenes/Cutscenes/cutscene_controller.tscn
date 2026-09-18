@@ -62,9 +62,9 @@ _data = {
 
 [sub_resource type="Curve2D" id="Curve2D_6resr"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.01, 1, 0, 0, 0, 0, 1, 1)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.01, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1.01, 0)
 }
-point_count = 3
+point_count = 4
 
 [node name="Cutscene" type="Node2D" unique_id=1179422748]
 process_mode = 3
@@ -82,6 +82,7 @@ z_index = 1
 script = ExtResource("2_gubyq")
 
 [node name="1" type="Sprite2D" parent="Cutscenes/Intro" unique_id=2064432906]
+visible = false
 texture = ExtResource("2_o4qpm")
 
 [node name="Label" type="Label" parent="Cutscenes/Intro/1" unique_id=706257165]
@@ -131,9 +132,15 @@ libraries/ = SubResource("AnimationLibrary_gubyq")
 visible = false
 texture = ExtResource("6_54d8w")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/5" unique_id=704858822]
+libraries/ = SubResource("AnimationLibrary_gubyq")
+
 [node name="6" type="Sprite2D" parent="Cutscenes/Intro" unique_id=1356300940]
 visible = false
 texture = ExtResource("7_6resr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/6" unique_id=1673272909]
+libraries/ = SubResource("AnimationLibrary_gubyq")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1981412846 node_paths=PackedStringArray("target")]
 enabled = false

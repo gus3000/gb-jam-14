@@ -3,9 +3,11 @@ extends Node2D
 
 const KeyObjectType := KeyObject.KeyObjectType
 
-signal dirt_amount_changed
+signal dirt_amount_changed(amount:int)
 
 @export var power_level: int = 0
+@onready var opening: Node2D = $Opening
+
 var dirt: int = 0
 var objects: Dictionary[KeyObjectType, int]
 
@@ -33,17 +35,17 @@ func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 
 
 func add_dirt(amount: int):
+	amount = clamp(amount, 0, max_dirt - dirt)
 	dirt += amount
-	dirt = clamp(dirt, 0, max_dirt)
 	# print("dirt in bag : %s/%s" % [dirt, max_dirt])
-	dirt_amount_changed.emit()
+	dirt_amount_changed.emit(amount)
 
 func extract_dirt(amount: int) -> int:
 	if amount > dirt:
 		amount = dirt
 	dirt -= amount
-	dirt_amount_changed.emit()
-	print("%s dirt extracted, %d remaining" % [amount,dirt])
+	dirt_amount_changed.emit(-amount)
+	print("%s dirt extracted, %d remaining" % [amount, dirt])
 	return amount
 
 func _on_mining_core_block_mined(block: Block) -> void:

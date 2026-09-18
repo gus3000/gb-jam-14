@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dcqcxiqylxo10" path="res://Scenes/key_object.tscn" id="5_0hewa"]
 [ext_resource type="Texture2D" uid="uid://d1xoymj3o3nkv" path="res://Assets/Sprites/jetpack.png" id="6_5m08m"]
 [ext_resource type="PackedScene" uid="uid://c0fxxheyx0mdg" path="res://Scenes/gold_pan.tscn" id="8_024vy"]
+[ext_resource type="PackedScene" uid="uid://b2v22lo7dtvgi" path="res://Scenes/dirt_particle_flow.tscn" id="9_se1dn"]
+[ext_resource type="Script" uid="uid://v5xtkrmr2lq7" path="res://Scripts/dirt_particle_flow.gd" id="10_b202h"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0hewa"]
 animations = [{
@@ -91,5 +93,10 @@ texture = ExtResource("6_5m08m")
 [node name="GoldPan" parent="." unique_id=1340109548 instance=ExtResource("8_024vy")]
 position = Vector2(37, 0)
 
+[node name="DirtParticleFlow" parent="." unique_id=1201337640 instance=ExtResource("9_se1dn")]
+amount = 1000
+script = ExtResource("10_b202h")
+
 [connection signal="body_entered" from="Exits" to="." method="_on_exit_body_entered"]
 [connection signal="pickup" from="KeyObject" to="." method="_on_key_object_pickup"]
+[connection signal="finished" from="DirtParticleFlow" to="GoldPan" method="_on_dirt_particle_flow_finished"]

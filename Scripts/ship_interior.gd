@@ -28,13 +28,16 @@ func blink() -> void:
 	pass
 
 func on_load():
-	if GameController.player.bag.dirt > 0:
-		gold_pan.start()
 	GameController.ui.gold.show()
 	if GameController.player.power_core.has_power(PowerCore.Power.JETPACK):
-		background.play("LitUp")
-		
+		background.play("SwtichOn")
+		await background.animation_finished
+		GameController.earthquake()
+		await get_tree().create_timer(3).timeout
+		if GameController.player.bag.dirt > 0:
+			gold_pan.start()
 	pass
+
 func on_unload():
 	GameController.ui.gold.hide()
 	pass

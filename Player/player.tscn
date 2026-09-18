@@ -231,12 +231,14 @@ position = Vector2(0, 3)
 script = ExtResource("2_x3vf3")
 
 [node name="BagSprite" type="AnimatedSprite2D" parent="PowerCore/Bag" unique_id=225718913]
-visible = false
 position = Vector2(-5, -5)
 sprite_frames = SubResource("SpriteFrames_4eilc")
 animation = &"empty"
 autoplay = "empty"
 script = ExtResource("13_gu6f8")
+
+[node name="Opening" type="Node2D" parent="PowerCore/Bag" unique_id=774960964]
+position = Vector2(-7, -6)
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
 [connection signal="movement_just_paused" from="." to="Sprite" method="_on_player_movement_just_paused"]

@@ -40,11 +40,18 @@ var raycasts: Dictionary = {}
 
 var last_landing_time: = 0
 var is_on_floor_history: Array[bool] = [true, true]
+var number_of_pauses: int = 0
 var movement_paused: bool = false:
-	get: return movement_paused
+	get: return number_of_pauses > 0
 	set(value):
-		movement_just_paused.emit(value)
-		movement_paused = value
+		if value:
+			if number_of_pauses == 0:
+				movement_just_paused.emit(value)
+			number_of_pauses += 1
+		else:
+			if number_of_pauses == 1:
+				movement_just_paused.emit(value)
+			number_of_pauses -= 1
 
 var looked_at_raycasts: Array[RayCast2D]:
 	get:
@@ -167,13 +174,16 @@ func handle_animation_state() -> void:
 func handle_jumping(delta: float) -> void:
 	if jumping:
 		velocity.y = -JUMP_FORCE
-		print("jumping !")
+		# print("jumping !")
 	elif holding_jump:
 		velocity.y -= (HOLDING_JUMP_FORCE * delta)
 	pass
 
 func obtain(object_type: KeyObjectType):
 	obtain_key_object.emit(object_type)
+	movement_paused = true
+	await get_tree().create_timer(2).timeout
+	movement_paused = false
 	pass
 
 func has_key_object(object_type: KeyObjectType) -> bool:

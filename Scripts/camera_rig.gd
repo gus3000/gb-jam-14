@@ -103,7 +103,7 @@ func get_travel_vector() -> Vector2:
 	return Vector2(x, y)
 
 func _on_game_controller_enter_fixed_scene() -> void:
-	print("enter fixed scene")
+	# print("enter fixed scene")
 	update_vertical = false
 	pass
 

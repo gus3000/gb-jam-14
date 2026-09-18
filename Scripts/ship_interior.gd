@@ -1,15 +1,16 @@
 class_name ShipInterior
-extends Node2D
+extends AbstractLoadableScene
 
 @onready var background: AnimatedSprite2D = $Background
+@onready var gold_pan: GoldPan = $GoldPan
 
 func _on_exit_body_entered(body: Node2D) -> void:
 	if not GameController.player.power_core.has_power(PowerCore.Power.JETPACK):
 		return
-	print("exit collides with ", body)
+	# print("exit collides with ", body)
 	if not is_instance_of(body, Player):
 		return
-	print("leave ship")
+	# print("leave ship")
 	GameController.leave_ship()
 
 
@@ -24,4 +25,10 @@ func _on_key_object_pickup() -> void:
 func blink() -> void:
 	background.play("SwtichOn")
 	await background.animation_finished
+	pass
+
+func on_load():
+	gold_pan.start()
+	pass
+func on_unload():
 	pass

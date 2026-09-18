@@ -9,7 +9,7 @@ class LoadableScene:
 	var camera_position: Vector2
 	var player_scale: float
 	var return_point: Vector2
-	var instance: Node
+	var instance: AbstractLoadableScene
 
 	func _init(_packed_scene: PackedScene, _camera_position: Vector2, _player_scale=1.):
 		packed_scene = _packed_scene
@@ -91,10 +91,12 @@ func load_scene_additive(scene: LoadableSceneEnum) -> void:
 	loadable_scene.return_point = player.position
 	main_scene.remove_child.call_deferred(world)
 	main_scene.add_child.call_deferred(instance)
+	
 	player.position = Vector2.ZERO
 	player.scale = Vector2.ONE * loadable_scene.player_scale
 	camera.position = loadable_scene.camera_position
 	enter_fixed_scene.emit()
+	instance.on_load.call_deferred()
 	pass
 
 func unload_scene_additive(scene: LoadableSceneEnum):
@@ -104,14 +106,15 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 
 	assert(scene_node != null)
 	assert(return_point != null)
-	# TODO use call_deferred() to remove
-
+	
+	scene_node.on_unload()
 	main_scene.remove_child.call_deferred(scene_node)
 	main_scene.add_child.call_deferred(world)
 	player.position = return_point
 	player.scale = Vector2.ONE
 	camera.position = return_point
 	leave_fixed_scene.emit()
+	
 
 
 func earthquake(intensity: float=-1) -> void:

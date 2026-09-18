@@ -3,13 +3,13 @@ extends RefCounted
 
 const TerrainType := DiggableTileMap.TerrainType
 
-const TOUGHNESS_PER_DEPTH_UNIT: float = 100
+const TOUGHNESS_PER_DEPTH_UNIT: int = 100
 const STARTING_LAYER: int = 8
 
 var x: int
 var y: int
 var type: TerrainType
-var toughness: float
+var toughness: int
 
 var position: Vector2i:
 	get: return Vector2i(x, y)
@@ -23,7 +23,7 @@ func _init(_x: int, _y: int, terrain_type: TerrainType):
 			toughness = (y - STARTING_LAYER + 1) * TOUGHNESS_PER_DEPTH_UNIT
 		_:
 			toughness = 1000000
-	toughness = max(toughness, 0.1)
+	toughness = max(toughness, 1)
 
 func _to_string() -> String:
 	return "Block(%s,%s,%s)" % [x, y, toughness]
@@ -31,7 +31,7 @@ func _to_string() -> String:
 func equals(block: Block) -> bool:
 	if block == null:
 		return false
-	return x == block.x and y == block.y and is_equal_approx(toughness, block.toughness)
+	return x == block.x and y == block.y and toughness == block.toughness
 
 func operator():
 	pass

@@ -4,7 +4,7 @@ extends Camera2D
 @export var target: Node2D
 @export var still_shape: Rect2i
 @export var shake_curve: Curve2D
-@export var shake_intensity: float = 30.
+@export var shake_intensity: float = 5.
 @export var shake_decay: float = 5.
 @export var snap_force: float = 5.
 @export var minimal_movement_per_frame: float = 3.
@@ -111,9 +111,11 @@ func _on_game_controller_leave_fixed_scene() -> void:
 	update_vertical = true
 	pass
 
-func _on_world_shuffle() -> void:
+func _on_world_shuffle(intensity: float=-1) -> void:
 	# print("camera world shuffle")
-	current_shake_strength = shake_intensity
+	if intensity > 0:
+		intensity = shake_intensity
+	current_shake_strength = intensity
 	current_shake_position = 0
 	pass
 

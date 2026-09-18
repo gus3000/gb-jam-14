@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://co8qfpls51gm2"
+path="res://.godot/imported/CONCHARS_inverted.png-4b7f2b9a191df1ad089362503e29b7d9.fontdata"
+
+[deps]
+
+source_file="res://Assets/Fonts/CONCHARS/CONCHARS_inverted.png"
+dest_files=["res://.godot/imported/CONCHARS_inverted.png-4b7f2b9a191df1ad089362503e29b7d9.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("0-127")
+kerning_pairs=PackedStringArray()
+columns=16
+rows=16
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=1

@@ -12,4 +12,3 @@ point_count = 4
 script = ExtResource("1_375tr")
 still_shape = Rect2i(-30, -40, 60, 50)
 shake_curve = SubResource("Curve2D_375tr")
-shake_intensity = 5.0

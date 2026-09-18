@@ -14,10 +14,12 @@ texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
 [node name="Ui" type="CanvasLayer" unique_id=556782816]
+process_mode = 3
 script = ExtResource("1_2246s")
 
 [node name="Dialog" type="VBoxContainer" parent="." unique_id=174421350]
 visible = false
+z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

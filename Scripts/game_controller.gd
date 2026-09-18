@@ -19,7 +19,7 @@ class LoadableScene:
 
 signal enter_fixed_scene
 signal leave_fixed_scene
-signal world_shuffle
+signal world_shuffle(intensity: float)
 
 @onready var root: Node = $".."
 
@@ -114,9 +114,8 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 	leave_fixed_scene.emit()
 
 
-func earthquake() -> void:
-	world_shuffle.emit()
-	# ui.queue_string("boom !")
+func earthquake(intensity: float=-1) -> void:
+	world_shuffle.emit(intensity)
 	pass
 
 func teleport_to_start() -> void:

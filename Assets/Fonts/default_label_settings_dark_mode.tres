@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://du1t4foy6nd1d"]
+
+[ext_resource type="FontFile" uid="uid://co8qfpls51gm2" path="res://Assets/Fonts/CONCHARS/CONCHARS_inverted.png" id="1_6pob5"]
+
+[resource]
+line_spacing = 1.0
+font = ExtResource("1_6pob5")
+font_size = 8
+shadow_size = 0

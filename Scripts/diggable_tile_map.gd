@@ -22,7 +22,7 @@ func _ready():
 	for x in range(ground_boundaries.size.x):
 		crust_line.push_back(Vector2i(ground_boundaries.position.x + x, ground_boundaries.position.y))
 	crust_pattern = get_pattern(crust_line)
-	
+
 	# whole_map_pattern = TileMapPattern.new()
 	# for x in range(ground_boundaries.size.x):
 	# 	for y in range(ground_boundaries.size.y):
@@ -70,7 +70,7 @@ func get_block_at_point(collision_position: Vector2) -> Block:
 	return Block.new(pos.x, pos.y, terrains[data.terrain])
 
 # /!\ Resets the ground !
-func earthquake() -> void:
+func earthquake(_intensity: float=-1) -> void:
 	# print("tilemap earthquake")
 	var before: int = Time.get_ticks_msec()
 
@@ -93,7 +93,7 @@ func earthquake() -> void:
 			set_cell(Vector2i(x, y), 1, chosen_cell)
 
 	set_pattern(ground_boundaries.position, crust_pattern)
-	
+
 	# set_cell(Vector2i(x, y), 1, Vector2i(7, 5))
 	# set_cells_terrain_connect(to_replace_with_stone, 0, 1)
 	var after: int = Time.get_ticks_msec()

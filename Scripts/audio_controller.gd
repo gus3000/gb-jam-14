@@ -51,7 +51,7 @@ func _on_player_block_mined(_block: Block) -> void:
 	mining.pitch_scale = random_penta_scale_pitch()
 	mining.play()
 
-func _on_world_shuffle() -> void:
+func _on_world_shuffle(_intensity:float=-1) -> void:
 	# print("audio controller received earthquake")
 	earthquake.play()
 	for i in range(5):

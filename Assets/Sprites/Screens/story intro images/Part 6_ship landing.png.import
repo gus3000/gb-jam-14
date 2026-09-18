@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5v7vj4ymbjko"
-path="res://.godot/imported/intro-1.png-d9b08fa37973bbb43b9443a88e4ecd2a.ctex"
+uid="uid://cfb1kee3islvj"
+path="res://.godot/imported/Part 6_ship landing.png-c3fd14ea6263f0d09e12684751bbd0a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Screens/intro-1.png"
-dest_files=["res://.godot/imported/intro-1.png-d9b08fa37973bbb43b9443a88e4ecd2a.ctex"]
+source_file="res://Assets/Sprites/Screens/story intro images/Part 6_ship landing.png"
+dest_files=["res://.godot/imported/Part 6_ship landing.png-c3fd14ea6263f0d09e12684751bbd0a1.ctex"]
 
 [params]
 

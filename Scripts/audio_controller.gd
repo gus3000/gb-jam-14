@@ -12,6 +12,7 @@ const penta_scale: Array[int] = [0, 3, 5]
 @onready var earthquake: AudioStreamPlayer = $Earthquake
 @onready var gold_gain: AudioStreamPlayer = $GoldGain
 @onready var key_item_gain: AudioStreamPlayer = $KeyItemGain
+@onready var fail: AudioStreamPlayer = $Fail
 
 @onready var jetpack_begin: AudioStreamPlayer = $Jetpack/Begin
 @onready var jetpack_extend: AudioStreamPlayer = $Jetpack/Extend
@@ -51,6 +52,7 @@ func setup_signals():
 	GameController.player.mining_core.block_mined.connect(_on_player_block_mined)
 	GameController.player.gained_gold.connect(_on_player_gained_gold)
 	GameController.player.obtain_key_object.connect(_on_player_gained_key_object)
+	GameController.player.failed.connect(_on_player_failed)
 	GameController.player.started_jetpack.connect(_on_player_started_jetpack)
 	GameController.player.stopped_jetpack.connect(_on_player_stopped_jetpack)
 	GameController.world_shuffle.connect(_on_world_shuffle)
@@ -72,7 +74,7 @@ func debug_audio() -> void:
 ## volume from 0 to 9
 func set_volume(volume: int, music_only: bool):
 	var db := (volume - 5) * 4 if volume > 0 else -80
-	if music_only: 
+	if music_only:
 		music.volume_db = db
 	else:
 		for player in sfx:
@@ -101,6 +103,8 @@ func _on_player_gained_key_object(_object_type: KeyObject.KeyObjectType) -> void
 	# music.stream_paused = false
 	music.volume_db += 8
 
+func _on_player_failed() -> void:
+	fail.play()
 
 func _on_player_started_jetpack() -> void:
 	print("start jetpack")

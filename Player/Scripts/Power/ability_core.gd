@@ -3,6 +3,7 @@ class_name AbilityCore
 extends Node2D
 
 @export var power_level: int = 0
+@export var max_power_level: int = 6
 
 @onready var player: Player = $"../.."
 

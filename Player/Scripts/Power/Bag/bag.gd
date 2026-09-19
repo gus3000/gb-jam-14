@@ -8,6 +8,8 @@ signal dirt_amount_changed(amount: int)
 @export var power_level: int = 0
 @onready var opening: Node2D = $Opening
 
+var max_power_level: int = 6
+
 var dirt: int = 0:
 	set(value):
 		var diff = value - dirt
@@ -23,7 +25,7 @@ var max_dirt: int:
 		3: return 10000
 		4: return 20000
 		5: return 100000
-		_: return 1000000000
+		_: return 10000000
 
 func _ready() -> void:
 	for object_type in KeyObjectType.values():

@@ -4,8 +4,8 @@ extends Node2D
 const KeyObjectType := KeyObject.KeyObjectType
 
 enum Power {NONE, SHOVEL, JETPACK}
-	
-const power_names:Dictionary[Power, String] = {
+
+const power_names: Dictionary[Power, String] = {
 	Power.NONE: "None",
 	Power.SHOVEL: "Shovel",
 	Power.JETPACK: "Jetpack",
@@ -78,6 +78,12 @@ func core_for_key_object(key_object_type: KeyObjectType) -> AbilityCore:
 		KeyObjectType.JETPACK:
 			return jetpack_core
 		_: return null
+
+func core_for_power(power: Power) -> AbilityCore:
+	for core in cores:
+		if core.get_power() == power:
+			return core
+	return null
 
 func has_power(power: Power) -> bool:
 	for core in cores:

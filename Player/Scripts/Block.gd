@@ -3,7 +3,7 @@ extends RefCounted
 
 const TerrainType := DiggableTileMap.TerrainType
 
-const TOUGHNESS_PER_DEPTH_UNIT: int = 100
+const TOUGHNESS_PER_DEPTH_UNIT: int = 500
 const STARTING_LAYER: int = 8
 
 var x: int
@@ -21,8 +21,9 @@ func _init(_x: int, _y: int, terrain_type: TerrainType):
 	match terrain_type:
 		TerrainType.FANCY_STONE, TerrainType.STONE:
 			toughness = (y - STARTING_LAYER + 1) * TOUGHNESS_PER_DEPTH_UNIT
+			# toughness = log(y - STARTING_LAYER + 1) * TOUGHNESS_PER_DEPTH_UNIT
 		_:
-			toughness = 1000000
+			toughness = 10000000
 	toughness = max(toughness, 1)
 
 func _to_string() -> String:

@@ -12,6 +12,7 @@ signal observation(message: String)
 signal changed_equipped_power(power: Power)
 signal movement_just_paused(paused: bool)
 signal gained_gold
+signal failed
 signal started_jetpack
 signal stopped_jetpack
 
@@ -197,11 +198,12 @@ func has_key_object(object_type: KeyObjectType) -> bool:
 
 func unlock_cheat() -> void:
 	for core in power_core.cores:
-		core.power_level = 10
-	bag.power_level = 10
+		core.power_level = core.max_power_level
+	bag.power_level = bag.max_power_level
 	for object_type in KeyObjectType.values():
 		bag._on_player_obtain_key_object(object_type)
 	observation.emit("Unlocked\neverything !")
+	GameController.earthquake()
 
 func unlock_baby_cheat() -> void:
 	for core in power_core.cores:

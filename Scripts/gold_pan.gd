@@ -30,8 +30,8 @@ func stop():
 	filtering = false
 	animationPlayer.stop()
 	animationPlayer.play_backwards("StartHover")
-	await animationPlayer.animation_finished
 	finished.emit()
+	await animationPlayer.animation_finished
 
 
 func _process(_delta: float) -> void:

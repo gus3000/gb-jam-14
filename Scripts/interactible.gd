@@ -4,7 +4,7 @@ extends Area2D
 signal interact
 
 func _physics_process(_delta: float) -> void:
-	var player: Player = GameController.player
+	var player = get_tree().get_first_node_in_group("player")
 	if not overlaps_body(player):
 		return
 	

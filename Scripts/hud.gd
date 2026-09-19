@@ -7,10 +7,12 @@ const FOCUS_LABEL_SETTINGS: LabelSettings = preload("res://Resources/LabelSettin
 @onready var pause_menu: Control = $PauseMenu
 @onready var menu_options: VBoxContainer = $PauseMenu/PanelContainer/VBoxContainer/Options
 
+var overworld: Node2D
 var selected_option: Label
 var menu_index := 0
 
 func _ready() -> void:
+	overworld = get_tree().get_first_node_in_group("main_scene")
 	_update_index(0)
 
 func _update_index(change: int) -> void:
@@ -36,11 +38,11 @@ func _invoke_option() -> void:
 func open_menu() -> void:
 	_update_index(-menu_index)
 	pause_menu.show()
-	GameController.pause()
+	overworld.pause()
 
 func close_menu() -> void:
 	pause_menu.hide()
-	GameController.unpause()
+	overworld.unpause()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not pause_menu.visible and event.is_action_pressed("gb_start"):

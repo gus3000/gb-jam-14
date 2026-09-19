@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://dhbaoetvyowm2"]
+
+[ext_resource type="Script" uid="uid://cr8etsay0gen4" path="res://Scripts/home_menu.gd" id="1_xwvs7"]
+[ext_resource type="Texture2D" uid="uid://wnxcifk35tje" path="res://Assets/Sprites/inner_border.png" id="2_q0p7g"]
+[ext_resource type="FontFile" uid="uid://dx73sdghq4d41" path="res://Assets/Fonts/game-boy-startup-font.otf" id="3_p3ope"]
+[ext_resource type="LabelSettings" uid="uid://du1t4foy6nd1d" path="res://Assets/Fonts/default_label_settings_dark_mode.tres" id="4_u77pj"]
+[ext_resource type="PackedScene" uid="uid://snr34p2tj46r" path="res://Scenes/gameboy_shader.tscn" id="5_qskiq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_onpc1"]
+texture = ExtResource("2_q0p7g")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[node name="HomeMenu" type="Control" unique_id=109757435]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xwvs7")
+
+[node name="Background" type="ColorRect" parent="." unique_id=492643147]
+z_index = -1000
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+color = Color(0.96862745, 0.70980394, 0.54901963, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1050366313]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -10.0
+offset_right = 50.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1548200392]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_onpc1")
+
+[node name="Start" type="Label" parent="MarginContainer/PanelContainer" unique_id=1798450012]
+texture_repeat = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_p3ope")
+theme_override_font_sizes/font_size = 24
+text = "Press Start"
+label_settings = ExtResource("4_u77pj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gameboy Shader" parent="." unique_id=39685700 instance=ExtResource("5_qskiq")]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0

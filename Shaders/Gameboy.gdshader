@@ -11,6 +11,9 @@ uniform vec3 colour3 : source_color = vec3(0.059, 0.22, 0.059); // darkest
 //code for snapping the screen to four colour values
 void fragment() {
     vec4 col = texture(SCREEN_TEXTURE, SCREEN_UV);
+		// Allows fade out
+		float fade_alpha = COLOR.a;
+
         // Snap visible pixels to pallete
 
 		// gray is a weighted value, between 0 and 1 0 being darkest and 1 being lightest, used to show how the human eye perceives 'brightness' in colour on modern monitors, this is quite complicated and I dont fully understand it myself, I just use it to get better results. You can use float gray = max(max(col.r, col.g), col.b); for HSV if you want, but the results are less clean and accurate.
@@ -26,5 +29,5 @@ void fragment() {
         } else {
             col.rgb = colour0;
         }
-        COLOR = vec4(col.rgb, col.a);
+		COLOR = vec4(col.rgb, col.a * fade_alpha);
 }

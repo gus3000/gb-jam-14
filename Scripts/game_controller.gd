@@ -1,3 +1,4 @@
+class_name Overworld
 extends Node
 
 const ADDED_SCENE_POSITION: Vector2i = Vector2i(50, 50)
@@ -41,6 +42,7 @@ var player_start_position: Vector2
 
 var is_debugging: bool = false
 
+
 func _ready() -> void:
 	camera = get_tree().get_first_node_in_group("camera")
 	main_scene = get_tree().get_first_node_in_group("main_scene")
@@ -48,7 +50,7 @@ func _ready() -> void:
 	terrain = get_tree().get_first_node_in_group("terrain")
 	ui = get_tree().get_first_node_in_group("ui")
 	world = get_tree().get_first_node_in_group("world")
-	assert(is_instance_of(GameController.player, Player), "player is not of Player type or is unavailable")
+	assert(is_instance_of(player, Player), "player is not of Player type or is unavailable")
 
 	enter_fixed_scene.connect(camera._on_game_controller_enter_fixed_scene)
 	leave_fixed_scene.connect(camera._on_game_controller_leave_fixed_scene)
@@ -69,7 +71,7 @@ func _process(_delta: float) -> void:
 		await debug()
 	if Input.is_action_just_pressed("debug_increase_mining"):
 		player.mining_core.power_level += 1
-		GameController.ui.queue_string("Mining increased\nto %s" % player.mining_core.power_level, 1)
+		ui.queue_string("Mining increased\nto %s" % player.mining_core.power_level, 1)
 	if Input.is_action_just_pressed("debug_increase_bag"):
 		player.bag.add_dirt(ceili(player.bag.max_dirt * 0.1))
 	if Input.is_action_just_pressed("cheat"):
@@ -128,6 +130,7 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 
 
 func earthquake(intensity: float=-1) -> void:
+	AudioController.play_world_shuffle(intensity)
 	world_shuffle.emit(intensity)
 	pass
 

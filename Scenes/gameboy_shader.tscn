@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://snr34p2tj46r"]
+[gd_scene format=3 uid="uid://snr34p2tj46r"]
 
 [ext_resource type="Shader" uid="uid://dxhv8m0bpn0hd" path="res://Shaders/Gameboy.gdshader" id="1_mbqig"]
 
@@ -9,7 +9,7 @@ shader_parameter/colour1 = Color(0.545, 0.675, 0.059, 1)
 shader_parameter/colour2 = Color(0.188, 0.384, 0.188, 1)
 shader_parameter/colour3 = Color(0.059, 0.22, 0.059, 1)
 
-[node name="Gameboy Shader" type="ColorRect"]
+[node name="Gameboy Shader" type="ColorRect" unique_id=309094013]
 top_level = true
 z_index = 4096
 material = SubResource("ShaderMaterial_wa718")

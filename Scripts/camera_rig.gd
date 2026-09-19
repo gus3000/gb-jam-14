@@ -25,7 +25,8 @@ var focused_interact_point: InteractPoint:
 # 	get: return to_local(target.global_position)
 
 func _ready() -> void:
-	GameController.world_shuffle.connect(_on_world_shuffle)
+	if is_instance_of(get_parent(), Overworld):
+		get_tree().get_first_node_in_group("main_scene").world_shuffle.connect(_on_world_shuffle)
 	pass  # Replace with function body.
 
 func _draw() -> void:

@@ -5,7 +5,7 @@ extends Node2D
 
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var pot: AnimatedSprite2D = $AnimatedSprite2D
-@onready var bag: Bag = GameController.player.bag
+@onready var player: Player = get_parent().overworld.player
 
 var filtering: bool = false
 var filtering_speed: int = 0
@@ -31,13 +31,13 @@ func stop():
 
 
 func _process(_delta: float) -> void:
-	if bag.dirt == 0 and filtering:
+	if player.bag.dirt == 0 and filtering:
 		stop()
 		return
 	if not filtering:
 		return
-	filtering_speed += ceili(bag.max_dirt * dirt_filter_bag_percent_acceleration * _delta)
+	filtering_speed += ceili(player.bag.max_dirt * dirt_filter_bag_percent_acceleration * _delta)
 
 	# GameController.player.gold += bag.extract_dirt(ceili(filtering_speed * _delta))
-	var to_add: int = bag.extract_dirt(ceili(filtering_speed * _delta))
-	get_tree().create_timer(4).timeout.connect(func(): GameController.player.add_gold(to_add))
+	var to_add: int = player.bag.extract_dirt(ceili(filtering_speed * _delta))
+	get_tree().create_timer(4).timeout.connect(func(): player.add_gold(to_add))

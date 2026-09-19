@@ -13,8 +13,10 @@ signal interact
 @onready var shape: CollisionShape2D = $CollisionShape2D
 
 func _ready() -> void:
-	focused.connect(GameController.camera.focus)
-	unfocused.connect(GameController.camera.unfocus)
+	var camera = get_tree().get_first_node_in_group("camera")
+	
+	focused.connect(camera.focus)
+	unfocused.connect(camera.unfocus)
 	if Engine.is_editor_hint():
 		message.show()
 	else:

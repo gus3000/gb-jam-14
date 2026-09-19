@@ -9,11 +9,11 @@ signal player_left_world
 
 func _ready() -> void:
 	# print("readying world border")
-	player_left_world.connect(GameController.player_exited_world)
+	player_left_world.connect(get_parent().player_exited_world)
 
 
 func player_in_bounds() -> bool:
-	var player_position := GameController.player.position
+	var player_position = get_parent().player.position
 	return Rect2(
 			world_min_x,
 			world_min_y,

@@ -87,7 +87,7 @@ var was_on_floor_last_frame: bool:
 
 var gold: int = 0:
 	set(value):
-		GameController.gold_changed.emit(value)
+		get_parent().gold_changed.emit(value)
 		gold = value
 
 # Called when the node enters the scene tree for the first time.

@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Gb-jam-14"
-run/main_scene="uid://oykbfv1nnuyu"
+run/main_scene="uid://c712blpx0eaxx"
 config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=60
 boot_splash/show_image=false
@@ -23,7 +23,6 @@ config/icon="uid://dql8eiyoly03y"
 
 [autoload]
 
-GameController="*uid://xj0nvpg23it0"
 AudioController="*uid://cp8jb37xta0p8"
 CutsceneController="*uid://bt8dtpv5nwrln"
 

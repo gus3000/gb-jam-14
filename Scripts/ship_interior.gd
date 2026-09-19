@@ -4,22 +4,27 @@ extends AbstractLoadableScene
 @onready var background: AnimatedSprite2D = $Background
 @onready var gold_pan: GoldPan = $GoldPan
 
+var overworld : Node2D
+
+func _ready() -> void:
+	overworld = get_parent()
+	
 func _on_exit_body_entered(body: Node2D) -> void:
-	if not GameController.player.power_core.has_power(PowerCore.Power.JETPACK):
+	if not overworld.player.power_core.has_power(PowerCore.Power.JETPACK):
 		return
 	# print("exit collides with ", body)
 	if not is_instance_of(body, Player):
 		return
 	# print("leave ship")
-	GameController.leave_ship()
+	overworld.leave_ship()
 
 
 func _on_key_object_pickup() -> void:
-	GameController.player.movement_paused = true
+	overworld.player.movement_paused = true
 	await blink()
-	GameController.earthquake()
+	overworld.earthquake()
 	await get_tree().create_timer(3).timeout
-	GameController.player.movement_paused = false
+	overworld.player.movement_paused = false
 
 
 func blink() -> void:
@@ -28,16 +33,16 @@ func blink() -> void:
 	pass
 
 func on_load():
-	GameController.ui.gold.show()
-	if GameController.player.power_core.has_power(PowerCore.Power.JETPACK):
+	overworld.ui.gold.show()
+	if overworld.player.power_core.has_power(PowerCore.Power.JETPACK):
 		background.play("SwtichOn")
 		await background.animation_finished
-		GameController.earthquake()
+		overworld.earthquake()
 		await get_tree().create_timer(3).timeout
-		if GameController.player.bag.dirt > 0:
+		if overworld.player.bag.dirt > 0:
 			gold_pan.start()
 	pass
 
 func on_unload():
-	GameController.ui.gold.hide()
+	overworld.ui.gold.hide()
 	pass

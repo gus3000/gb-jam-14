@@ -7,6 +7,7 @@ enum TerrainType {
 	BEDROCK,
 }
 
+@export var scene: Node2D
 @export var ground_boundaries: Rect2i = Rect2i(0, 8, 50, 50)
 
 # var whole_map_pattern: TileMapPattern
@@ -14,7 +15,7 @@ var crust_pattern: TileMapPattern
 var terrains: Dictionary[int, TerrainType] = {}
 
 func _ready():
-	GameController.world_shuffle.connect(earthquake)
+	scene.world_shuffle.connect(earthquake)
 
 	crust_pattern = TileMapPattern.new()
 

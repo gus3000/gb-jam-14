@@ -38,11 +38,13 @@ func start_mining() -> void:
 	mined_block = block_to_mine()
 	# print("started mining block ", mined_block)
 	started_mining.emit(mined_block)
+	AudioController.play_player_started_mining(mined_block)
 
 func continue_mining() -> void:
 	if current_mining_time > mining_time(mined_block):
 		player.looked_at_tilemap.mine_block(mined_block)
 		block_mined.emit(mined_block)
+		AudioController.play_player_block_mined(mined_block)
 		stop_mining()
 	pass
 

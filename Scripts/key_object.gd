@@ -53,7 +53,7 @@ func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
-	if GameController.player.bag.has_key_object(object_type):
+	if get_tree().get_first_node_in_group("player").bag.has_key_object(object_type):
 		queue_free()
 	
 	#hover

@@ -28,6 +28,7 @@ const message_duration: float = 4.0
 @onready var label: Label = $Dialog/PanelContainer/MarginContainer/Label
 @onready var equipped_power_indicator: UiPowerIcon = $HUD/EquippedPowerIndicator
 @onready var gold: Label = $Gold
+@onready var player: Player
 
 var message_queue: Array[Message] = []
 
@@ -35,7 +36,8 @@ var is_showing_message: bool = false
 
 func _ready() -> void:
 	dialog.hide()
-	GameController.gold_changed.connect(_on_gold_change)
+	player = get_tree().get_first_node_in_group("player")
+	get_tree().get_first_node_in_group("main_scene").gold_changed.connect(_on_gold_change)
 
 func _process(_delta: float) -> void:
 	if is_showing_message:
@@ -72,8 +74,8 @@ func ui_show() -> void:
 
 func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
 	queue_message(MessageKey.RECEIVED_KEY_OBJECT, [KeyObjectTypeDescriptor[object_type]])
-	if GameController.player.power_core.core_for_key_object(object_type) != null \
-			and GameController.player.power_core.number_of_active_cores > 1:
+	if player.power_core.core_for_key_object(object_type) != null \
+			and player.power_core.number_of_active_cores > 1:
 		queue_message(MessageKey.CYCLE_POWER_REMINDER, [])
 
 

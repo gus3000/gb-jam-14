@@ -7,14 +7,17 @@ const FOCUS_LABEL_SETTINGS: LabelSettings = preload("res://Resources/LabelSettin
 @onready var pause_menu: Control = $PauseMenu
 @onready var menu_options: VBoxContainer = $PauseMenu/PanelContainer/VBoxContainer/Options
 @onready var music_label: Label = $PauseMenu/PanelContainer/VBoxContainer/Options/Music
+@onready var sfx_label: Label = $PauseMenu/PanelContainer/VBoxContainer/Options/SFX
 
 var selected_option: Label
 var menu_index := 0
 var music_volume := 5
+var sfx_volume := 5
 
 func _ready() -> void:
 	_update_index(0)
-	change_music_volume(0)
+	change_volume(0, true)
+	change_volume(0, false)
 
 func _update_index(change: int) -> void:
 	menu_index = (menu_index + change) % menu_options.get_child_count()
@@ -34,11 +37,12 @@ func _invoke_option(value: int=0) -> void:
 			if value == 0:
 				close_menu()
 				await GameController.teleport_to_start()
-		2:
+		2, 3:
 			if value == 0:
 				value = 1
-			change_music_volume(value)
-		3:
+			change_volume(value, menu_index == 2)
+
+		4:
 			get_tree().quit()
 
 func open_menu() -> void:
@@ -50,12 +54,19 @@ func close_menu() -> void:
 	pause_menu.hide()
 	GameController.unpause()
 
-func change_music_volume(value: int):
-	music_volume += value
-	music_volume = clamp(music_volume, 0, 10)
-	print("music volume : ", music_volume)
-	music_label.text = "MUSIC\n%s" % music_volume
-	AudioController.music.volume_db = (music_volume - 5) * 4 if music_volume > 0 else -80
+func change_volume(value: int, music: bool):
+	var volume: int = music_volume if music else sfx_volume
+	volume += value
+	volume = clamp(volume, 0, 9)
+	if music:
+		music_volume = volume
+		music_label.text = "MUSIC %s" % music_volume
+	else:
+		sfx_volume = volume
+		sfx_label.text = "SFX %s" % sfx_volume
+
+	AudioController.set_volume(volume, music)
+
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:

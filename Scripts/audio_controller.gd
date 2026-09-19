@@ -17,6 +17,18 @@ const penta_scale: Array[int] = [0, 3, 5]
 @onready var jetpack_extend: AudioStreamPlayer = $Jetpack/Extend
 @onready var jetpack_end: AudioStreamPlayer = $Jetpack/End
 
+@onready var sfx: Array[AudioStreamPlayer] = [
+	generated,
+	mining,
+	mining_fail,
+	earthquake,
+	gold_gain,
+	key_item_gain,
+	jetpack_begin,
+	jetpack_extend,
+	jetpack_end,
+]
+
 var base_mining_pitch: float = 0.5
 var note_length: float = .3
 var is_debugging: bool = false
@@ -57,6 +69,14 @@ func debug_audio() -> void:
 	is_debugging = false
 	pass
 
+## volume from 0 to 9
+func set_volume(volume: int, music_only: bool):
+	var db := (volume - 5) * 4 if volume > 0 else -80
+	if music_only: 
+		music.volume_db = db
+	else:
+		for player in sfx:
+			player.volume_db = db
 
 func _on_player_started_mining(block: Block) -> void:
 	if block.type == TerrainType.BEDROCK:
@@ -74,7 +94,7 @@ func _on_player_gained_key_object(_object_type: KeyObject.KeyObjectType) -> void
 	# music.stream_paused = true
 	music.volume_db -= 8
 	await get_tree().create_timer(.3).timeout
-	
+
 	key_item_gain.play()
 	await key_item_gain.finished
 	await get_tree().create_timer(.5).timeout

@@ -1,6 +1,7 @@
 shader_type particles;
 render_mode disable_velocity;
 
+uniform vec2 start_position;
 uniform vec2 target_position;
 
 const float SPEED = 2.0;
@@ -10,21 +11,35 @@ float random(vec2 uv) {
         vec2(12.9898, 78.233))) * 43758.5453123);
 }
 
-vec2 velocity_variation(vec2 xy) {
-    return vec2(random(xy) - 0.5, random(vec2(xy.y, xy.x)) - 0.5);
+vec2 velocity_variation(vec2 vec) {
+    //     return vec2(random(xy) - 0.5, random(vec2(xy.y, xy.x)) - 0.5);
+    return vec2(
+        random(vec.xy),
+        random(vec2(vec.y, vec.x))
+    );
 }
 
 
 void start() {
+    vec2 random_source = vec2(
+        TRANSFORM[3].x * float(NUMBER % 100u),
+        TRANSFORM[3].y * float(NUMBER % 100u)
+    );
     // dark would be #471e4c
     float r = float(0xf7);
     float g = float(0xb5);
     float b = float(0x8c);
     COLOR = vec4(r / 255., g / 255., b / 255., 1);
-//     COLOR = vec4(1, 0, 0, 1);
+    //     COLOR = vec4(1, 0, 0, 1);
+    VELOCITY.xy += velocity_variation(random_source) * SPEED;
+    TRANSFORM[3].xy = start_position;
 }
 
 void process() {
+    vec2 random_source = vec2(
+        TRANSFORM[3].x * float(NUMBER % 100u),
+        TRANSFORM[3].y * float(NUMBER % 100u)
+    );
     //         TRANSFORM[3].xy = target_position + velocity_variation(vec2(float(NUMBER), 0));
     if (VELOCITY.y <= 0. && TRANSFORM[3].y > target_position.y) {
         VELOCITY.y -= SPEED * DELTA;
@@ -34,7 +49,7 @@ void process() {
     } else {
         ACTIVE = false;
     }
-    VELOCITY.xy += velocity_variation(TRANSFORM[3].xy) * DELTA;
+    VELOCITY.xy += velocity_variation(random_source) * DELTA * SPEED;
 
     vec4 transform = TRANSFORM[3];
     transform.xy += VELOCITY.xy;

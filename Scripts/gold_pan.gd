@@ -3,9 +3,11 @@ extends Node2D
 
 @export var dirt_filter_bag_percent_acceleration: float = .01
 
+@onready var dirt_particle_flow:DirtParticleFlow = $"../DirtParticleFlow"
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var pot: AnimatedSprite2D = $AnimatedSprite2D
 @onready var bag: Bag = GameController.player.bag
+
 
 var filtering: bool = false
 var filtering_speed: int = 0
@@ -20,6 +22,7 @@ func start():
 	await animationPlayer.animation_finished
 	filtering = true
 	animationPlayer.play("Hover")
+	dirt_particle_flow.burst()
 
 func stop():
 	await get_tree().create_timer(3).timeout

@@ -1,3 +1,4 @@
+class_name WorldController
 extends Node2D
 
 signal player_left_world
@@ -8,8 +9,9 @@ signal player_left_world
 @export var world_max_y: float = 10000
 
 func _ready() -> void:
+	pass
 	# print("readying world border")
-	player_left_world.connect(GameController.player_exited_world)
+	# player_left_world.connect(GameController.player_exited_world)
 
 
 func player_in_bounds() -> bool:

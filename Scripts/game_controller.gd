@@ -35,7 +35,7 @@ var main_scene: Node
 var player: Player
 var terrain: DiggableTileMap
 var ui: Ui
-var world: Node2D
+var world: WorldController
 
 var player_start_position: Vector2
 
@@ -48,10 +48,12 @@ func _ready() -> void:
 	terrain = get_tree().get_first_node_in_group("terrain")
 	ui = get_tree().get_first_node_in_group("ui")
 	world = get_tree().get_first_node_in_group("world")
+
 	assert(is_instance_of(GameController.player, Player), "player is not of Player type or is unavailable")
 
 	enter_fixed_scene.connect(camera._on_game_controller_enter_fixed_scene)
 	leave_fixed_scene.connect(camera._on_game_controller_leave_fixed_scene)
+	world.player_left_world.connect(player_exited_world)
 
 	loadable_scenes = {
 		LoadableSceneEnum.SHIP_INTERIOR: LoadableScene.new(
@@ -134,9 +136,14 @@ func earthquake(intensity: float=-1) -> void:
 func teleport_to_start() -> void:
 	# TODO add transition
 	ui.queue_string("Teleported to start")
-	ui.queue_string("Hopefully there\nwill be a\nnice animation\nin the future")
+	# ui.queue_string("Hopefully there\nwill be a\nnice animation\nin the future")
 	player.position = player_start_position
 	player.velocity = Vector2.UP * 50
+	player.bag.dirt = 0
+	earthquake()
+	player.movement_paused = true
+	await get_tree().create_timer(2).timeout
+	player.movement_paused = false
 
 func player_exited_world() -> void:
 	print("exited world")

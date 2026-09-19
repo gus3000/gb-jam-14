@@ -28,9 +28,8 @@ func _invoke_option() -> void:
 			close_menu()
 		1:
 			close_menu()
+			await GameController.teleport_to_start()
 		2:
-			close_menu()
-		3:
 			get_tree().quit()
 
 func open_menu() -> void:

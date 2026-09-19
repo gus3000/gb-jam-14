@@ -1,13 +1,15 @@
 extends Node
 
 enum CutsceneType {
-	INTRO
+	INTRO,
+	VICTORY,
 }
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var cutscene_camera: CameraRig = $Camera2D
 @onready var cutscene_node: Dictionary[CutsceneType, Cutscene] = {
-	CutsceneType.INTRO: $Cutscenes/Intro
+	CutsceneType.INTRO: $Cutscenes/Intro,
+	CutsceneType.VICTORY: $Cutscenes/Victory
 }
 
 # func _ready() -> void:

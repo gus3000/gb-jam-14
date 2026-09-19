@@ -9,6 +9,7 @@ enum Upgradable {
 	SHOVEL,
 	JETPACK,
 	BAG,
+	ESCAPE_PLANET,
 }
 
 const UpgradeCost: Dictionary[Upgradable, Array] = {
@@ -39,7 +40,7 @@ func update_line() -> void:
 		level_label.text = "M"
 		cost_label.text = "-"
 		return
-	
+
 	level_label.text = "%s" % get_level()
 	cost_label.text = "%s" % get_cost()
 
@@ -55,7 +56,6 @@ func get_level() -> int:
 	if power_node == null:
 		return 0
 	return power_node.power_level
-
 
 func get_cost(level=-1) -> int:
 	if upgrade_type == Upgradable.NONE:

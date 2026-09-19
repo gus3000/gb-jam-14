@@ -21,6 +21,7 @@ signal enter_fixed_scene
 signal leave_fixed_scene
 signal world_shuffle(intensity: float)
 signal gold_changed(new_amount: int)
+signal won
 
 @onready var root: Node = $".."
 
@@ -175,3 +176,7 @@ func show_game() -> void:
 	ui.ui_show()
 	camera.make_current()
 	pass
+
+func win()->void:
+	won.emit()
+	CutsceneController.play(CutsceneController.CutsceneType.VICTORY)

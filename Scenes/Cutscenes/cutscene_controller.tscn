@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bt8dtpv5nwrln"]
 
 [ext_resource type="Script" uid="uid://dgm4t7m8sb671" path="res://Scripts/Cutscenes/cutscene_controller.gd" id="1_y6v41"]
-[ext_resource type="Script" uid="uid://cxiu8xfmhb8va" path="res://Scripts/Cutscenes/cutscene.gd" id="2_gubyq"]
+[ext_resource type="Script" uid="uid://can1nqsr7vf2v" path="res://Scripts/Cutscenes/cutscene_intro.gd" id="2_54d8w"]
 [ext_resource type="Texture2D" uid="uid://c80xr8aoojyto" path="res://Assets/Sprites/Screens/story intro images/Part 1_breifing.png" id="2_o4qpm"]
 [ext_resource type="Texture2D" uid="uid://c47wpdstxhuf3" path="res://Assets/Sprites/Screens/story intro images/Part 2_departure.png" id="3_pv66m"]
 [ext_resource type="LabelSettings" uid="uid://b76tuudykixus" path="res://Assets/Fonts/default_label_settings.tres" id="3_soblh"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://dxph8ltsoa2de" path="res://Assets/Sprites/Screens/story intro images/Part 5_crash.png" id="6_54d8w"]
 [ext_resource type="LabelSettings" uid="uid://du1t4foy6nd1d" path="res://Assets/Fonts/default_label_settings_dark_mode.tres" id="6_soblh"]
 [ext_resource type="Texture2D" uid="uid://cfb1kee3islvj" path="res://Assets/Sprites/Screens/story intro images/Part 6_ship landing.png" id="7_6resr"]
+[ext_resource type="Script" uid="uid://dqb62drci1k64" path="res://Scripts/Cutscenes/cutscene_victory.gd" id="11_6resr"]
 [ext_resource type="Script" uid="uid://j73f31g27qgw" path="res://Scripts/camera_rig.gd" id="11_54d8w"]
+[ext_resource type="Texture2D" uid="uid://dxe3ubqr7p4p5" path="res://Assets/Sprites/Placeholder/Placeholder-victory.png" id="12_qbh0k"]
 
 [sub_resource type="Animation" id="Animation_wllsk"]
 resource_name = "Intro"
@@ -79,7 +81,7 @@ libraries/ = SubResource("AnimationLibrary_jqxjc")
 z_index = 1
 
 [node name="Intro" type="Node2D" parent="Cutscenes" unique_id=637505367]
-script = ExtResource("2_gubyq")
+script = ExtResource("2_54d8w")
 
 [node name="1" type="Sprite2D" parent="Cutscenes/Intro" unique_id=2064432906]
 visible = false
@@ -141,6 +143,13 @@ texture = ExtResource("7_6resr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/6" unique_id=1673272909]
 libraries/ = SubResource("AnimationLibrary_gubyq")
+
+[node name="Victory" type="Node2D" parent="Cutscenes" unique_id=543579286]
+script = ExtResource("11_6resr")
+
+[node name="1" type="Sprite2D" parent="Cutscenes/Victory" unique_id=1420938290]
+visible = false
+texture = ExtResource("12_qbh0k")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1981412846 node_paths=PackedStringArray("target")]
 enabled = false

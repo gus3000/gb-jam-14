@@ -13,6 +13,7 @@ const penta_scale: Array[int] = [0, 3, 5]
 @onready var gold_gain: AudioStreamPlayer = $GoldGain
 @onready var key_item_gain: AudioStreamPlayer = $KeyItemGain
 @onready var fail: AudioStreamPlayer = $Fail
+@onready var win: AudioStreamPlayer = $Win
 
 @onready var jetpack_begin: AudioStreamPlayer = $Jetpack/Begin
 @onready var jetpack_extend: AudioStreamPlayer = $Jetpack/Extend
@@ -56,6 +57,7 @@ func setup_signals():
 	GameController.player.started_jetpack.connect(_on_player_started_jetpack)
 	GameController.player.stopped_jetpack.connect(_on_player_stopped_jetpack)
 	GameController.world_shuffle.connect(_on_world_shuffle)
+	GameController.won.connect(_on_won)
 
 func random_penta_scale_pitch() -> float:
 	return pow(2, (penta_scale.pick_random() - 3) / 12.)
@@ -138,3 +140,7 @@ func _on_world_shuffle(_intensity: float=-1) -> void:
 		await get_tree().create_timer(0.1).timeout
 		earthquake.play()
 	pass
+
+func _on_won() -> void:
+	music.stream_paused = true
+	win.play()

@@ -25,7 +25,7 @@ var max_dirt: int:
 		3: return 10000
 		4: return 20000
 		5: return 100000
-		_: return 10000000
+		_: return 10_000_000
 
 func _ready() -> void:
 	for object_type in KeyObjectType.values():

@@ -1,6 +1,8 @@
 class_name GoldPan
 extends Node2D
 
+signal finished
+
 # @export var dirt_filter_bag_percent_acceleration: float = .01
 @export var seconds_to_empty: float = 4
 
@@ -29,6 +31,7 @@ func stop():
 	animationPlayer.stop()
 	animationPlayer.play_backwards("StartHover")
 	await animationPlayer.animation_finished
+	finished.emit()
 
 
 func _process(_delta: float) -> void:

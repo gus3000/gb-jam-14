@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c0fxxheyx0mdg" path="res://Scenes/gold_pan.tscn" id="8_024vy"]
 [ext_resource type="PackedScene" uid="uid://b2v22lo7dtvgi" path="res://Scenes/dirt_particle_flow.tscn" id="9_se1dn"]
 [ext_resource type="Script" uid="uid://v5xtkrmr2lq7" path="res://Scripts/dirt_particle_flow.gd" id="10_b202h"]
+[ext_resource type="PackedScene" uid="uid://c6oaj8acf0ei7" path="res://Scenes/interact_point.tscn" id="11_evlnp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0hewa"]
 animations = [{
@@ -96,6 +97,11 @@ position = Vector2(37, 0)
 [node name="DirtParticleFlow" parent="." unique_id=1201337640 instance=ExtResource("9_se1dn")]
 amount = 1000
 script = ExtResource("10_b202h")
+
+[node name="UpgradeMenu" parent="." unique_id=1246660634 instance=ExtResource("11_evlnp")]
+position = Vector2(0, -8)
+text = "Upgrade"
+to_focus = false
 
 [connection signal="body_entered" from="Exits" to="." method="_on_exit_body_entered"]
 [connection signal="pickup" from="KeyObject" to="." method="_on_key_object_pickup"]

@@ -4,6 +4,12 @@ extends Node2D
 const KeyObjectType := KeyObject.KeyObjectType
 
 enum Power {NONE, SHOVEL, JETPACK}
+	
+const power_names:Dictionary[Power, String] = {
+	Power.NONE: "None",
+	Power.SHOVEL: "Shovel",
+	Power.JETPACK: "Jetpack",
+}
 
 signal changed_equipped_power(power: Power)
 

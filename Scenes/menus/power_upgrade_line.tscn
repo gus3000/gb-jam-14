@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://ceq62sy66o835"]
+
+[ext_resource type="Script" uid="uid://cok7f5ym74c88" path="res://Scripts/Ui/power_upgrade_line.gd" id="1_mg2y1"]
+[ext_resource type="LabelSettings" uid="uid://botkran5idf8p" path="res://Resources/LabelSettings/menu_item_focus.tres" id="1_yr138"]
+[ext_resource type="LabelSettings" uid="uid://ufeauaihvrd" path="res://Resources/LabelSettings/menu_item.tres" id="2_mg2y1"]
+[ext_resource type="LabelSettings" uid="uid://b76tuudykixus" path="res://Assets/Fonts/default_label_settings.tres" id="4_udqhb"]
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=730368355]
+alignment = 1
+script = ExtResource("1_mg2y1")
+
+[node name="Level" type="Label" parent="." unique_id=743187015]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "0"
+label_settings = ExtResource("2_mg2y1")
+
+[node name="PowerLabel" type="Label" parent="." unique_id=992228704]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SHOVEL"
+label_settings = ExtResource("1_yr138")
+
+[node name="Cost" type="Label" parent="." unique_id=1005456765]
+layout_mode = 2
+text = "150000"
+label_settings = ExtResource("2_mg2y1")
+
+[node name="Dollar" type="Label" parent="." unique_id=473663548]
+layout_mode = 2
+text = "$"
+label_settings = ExtResource("4_udqhb")
+horizontal_alignment = 2

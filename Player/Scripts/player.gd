@@ -12,6 +12,8 @@ signal observation(message: String)
 signal changed_equipped_power(power: Power)
 signal movement_just_paused(paused: bool)
 signal gained_gold
+signal started_jetpack
+signal stopped_jetpack
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -213,3 +215,11 @@ func add_gold(to_add:int):
 
 func _on_power_core_changed_equipped_power(power: Power) -> void:
 	changed_equipped_power.emit(power)
+
+
+func _on_jetpack_core_started() -> void:
+	started_jetpack.emit()
+
+
+func _on_jetpack_core_stopped() -> void:
+	stopped_jetpack.emit()

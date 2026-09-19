@@ -4,24 +4,20 @@
 [ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_btkaq"]
 [ext_resource type="AudioStream" uid="uid://o1tldlqdlspj" path="res://Assets/Audio/SFX/Gold.wav" id="3_nqcbu"]
 [ext_resource type="AudioStream" uid="uid://4awh6vu5xbgk" path="res://Assets/Audio/Music/KeepDigging.ogg" id="3_t0xn5"]
+[ext_resource type="AudioStream" uid="uid://cgu66o6te1fhk" path="res://Assets/Audio/SFX/ItemPickup.wav" id="4_ncnt2"]
+[ext_resource type="AudioStream" uid="uid://b2ig4u2tft7b6" path="res://Assets/Audio/SFX/Jetpack/ThrustBegin_fixed.wav" id="5_y4nv4"]
+[ext_resource type="AudioStream" uid="uid://17x7hm2kiv8b" path="res://Assets/Audio/SFX/Jetpack/ThrustExtend_fixed.wav" id="6_ncnt2"]
+[ext_resource type="AudioStream" uid="uid://lglsphb0p5fa" path="res://Assets/Audio/SFX/Jetpack/ThrustEnd.wav" id="7_7md5g"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_dayrp"]
 
 [node name="AudioController" type="Node" unique_id=660215452]
 script = ExtResource("1_sa2nx")
 
-[node name="Mining" type="AudioStreamPlayer" parent="." unique_id=89195976]
-stream = ExtResource("2_btkaq")
-max_polyphony = 3
-
-[node name="Earthquake" type="AudioStreamPlayer" parent="." unique_id=941538815]
-stream = ExtResource("2_btkaq")
-max_polyphony = 20
-
-[node name="MiningFail" type="AudioStreamPlayer" parent="." unique_id=1906771092]
-stream = ExtResource("2_btkaq")
-volume_db = -8.0
-pitch_scale = 4.0
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2062687234]
+stream = ExtResource("3_t0xn5")
+autoplay = true
+parameters/looping = true
 
 [node name="Generated" type="AudioStreamPlayer" parent="." unique_id=570216921]
 stream = SubResource("AudioStreamGenerator_dayrp")
@@ -30,6 +26,31 @@ stream = SubResource("AudioStreamGenerator_dayrp")
 stream = ExtResource("3_nqcbu")
 max_polyphony = 10
 
-[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2062687234]
-stream = ExtResource("3_t0xn5")
-parameters/looping = true
+[node name="KeyItemGain" type="AudioStreamPlayer" parent="." unique_id=89266544]
+stream = ExtResource("4_ncnt2")
+
+[node name="Mining" type="Node" parent="." unique_id=1966840756]
+
+[node name="Mining" type="AudioStreamPlayer" parent="Mining" unique_id=89195976]
+stream = ExtResource("2_btkaq")
+max_polyphony = 3
+
+[node name="MiningFail" type="AudioStreamPlayer" parent="Mining" unique_id=1906771092]
+stream = ExtResource("2_btkaq")
+volume_db = -8.0
+pitch_scale = 4.0
+
+[node name="Earthquake" type="AudioStreamPlayer" parent="." unique_id=941538815]
+stream = ExtResource("2_btkaq")
+max_polyphony = 20
+
+[node name="Jetpack" type="Node" parent="." unique_id=838588435]
+
+[node name="Begin" type="AudioStreamPlayer" parent="Jetpack" unique_id=1460787651]
+stream = ExtResource("5_y4nv4")
+
+[node name="Extend" type="AudioStreamPlayer" parent="Jetpack" unique_id=1260447275]
+stream = ExtResource("6_ncnt2")
+
+[node name="End" type="AudioStreamPlayer" parent="Jetpack" unique_id=577313073]
+stream = ExtResource("7_7md5g")

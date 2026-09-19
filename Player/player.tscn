@@ -153,7 +153,6 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=963057457 groups=["player"]]
-position = Vector2(1, 0)
 script = ExtResource("1_btcbx")
 LAND_ANIMATION_TIME = 300
 
@@ -245,6 +244,8 @@ position = Vector2(-7, -6)
 [connection signal="obtain_key_object" from="." to="PowerCore" method="_on_player_obtain_key_object"]
 [connection signal="obtain_key_object" from="." to="PowerCore/Bag" method="_on_player_obtain_key_object"]
 [connection signal="changed_equipped_power" from="PowerCore" to="." method="_on_power_core_changed_equipped_power"]
+[connection signal="started" from="PowerCore/JetpackCore" to="." method="_on_jetpack_core_started"]
+[connection signal="stopped" from="PowerCore/JetpackCore" to="." method="_on_jetpack_core_stopped"]
 [connection signal="block_mined" from="PowerCore/MiningCore" to="PowerCore/Bag" method="_on_mining_core_block_mined"]
 [connection signal="started_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="start_mining"]
 [connection signal="stopped_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="stop_mining"]

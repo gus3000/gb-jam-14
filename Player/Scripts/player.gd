@@ -11,6 +11,7 @@ signal obtain_key_object(object_type: KeyObjectType)
 signal observation(message: String)
 signal changed_equipped_power(power: Power)
 signal movement_just_paused(paused: bool)
+signal gained_gold
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -208,6 +209,7 @@ func unlock_baby_cheat() -> void:
 
 func add_gold(to_add:int):
 	gold += to_add
+	gained_gold.emit()
 
 func _on_power_core_changed_equipped_power(power: Power) -> void:
 	changed_equipped_power.emit(power)

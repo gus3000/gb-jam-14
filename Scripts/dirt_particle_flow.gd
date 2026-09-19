@@ -18,9 +18,10 @@ func _process(delta: float) -> void:
 	
 # set_instance_shader_parameter("shader_parameter/target_position", gold_pan.global_position)
 
-func burst():
+func burst(duration:float):
 	var particles_to_generate: int = max(1, log(GameController.player.bag.dirt))
 	amount = floori(sqrt(GameController.player.bag.dirt))
+	lifetime = duration
 	print("generating %s particles" % amount)
 	restart()
 	# for i in range(particles_to_generate):

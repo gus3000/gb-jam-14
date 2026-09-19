@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drhayyj4p6d0x" path="res://Scripts/audio_controller.gd" id="1_sa2nx"]
 [ext_resource type="AudioStream" uid="uid://pbihnpatnlyw" path="res://Assets/Audio/SFX/dig sfx.mp3" id="2_btkaq"]
+[ext_resource type="AudioStream" uid="uid://o1tldlqdlspj" path="res://Assets/Audio/SFX/Gold.wav" id="3_nqcbu"]
 [ext_resource type="AudioStream" uid="uid://4awh6vu5xbgk" path="res://Assets/Audio/Music/KeepDigging.ogg" id="3_t0xn5"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_dayrp"]
@@ -24,6 +25,10 @@ pitch_scale = 4.0
 
 [node name="Generated" type="AudioStreamPlayer" parent="." unique_id=570216921]
 stream = SubResource("AudioStreamGenerator_dayrp")
+
+[node name="GoldGain" type="AudioStreamPlayer" parent="." unique_id=31841310]
+stream = ExtResource("3_nqcbu")
+max_polyphony = 10
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=2062687234]
 stream = ExtResource("3_t0xn5")

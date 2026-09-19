@@ -9,6 +9,7 @@ const penta_scale: Array[int] = [0, 3, 5]
 @onready var mining: AudioStreamPlayer = $Mining
 @onready var mining_fail: AudioStreamPlayer = $MiningFail
 @onready var earthquake: AudioStreamPlayer = $Earthquake
+@onready var gold_gain: AudioStreamPlayer = $GoldGain
 
 var base_mining_pitch: float = 0.5
 var note_length: float = .3
@@ -26,6 +27,7 @@ func _process(_delta: float) -> void:
 func setup_signals():
 	GameController.player.mining_core.started_mining.connect(_on_player_started_mining)
 	GameController.player.mining_core.block_mined.connect(_on_player_block_mined)
+	GameController.player.gained_gold.connect(_on_player_gained_gold)
 	GameController.world_shuffle.connect(_on_world_shuffle)
 
 func random_penta_scale_pitch() -> float:
@@ -50,6 +52,10 @@ func _on_player_started_mining(block: Block) -> void:
 func _on_player_block_mined(_block: Block) -> void:
 	mining.pitch_scale = random_penta_scale_pitch()
 	mining.play()
+
+func _on_player_gained_gold()->void:
+	gold_gain.pitch_scale = random_penta_scale_pitch()
+	gold_gain.play()
 
 func _on_world_shuffle(_intensity:float=-1) -> void:
 	# print("audio controller received earthquake")

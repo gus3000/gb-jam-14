@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://cmvo27csnjeyt"]
 
+[ext_resource type="Script" uid="uid://d2wq02hxpb0ts" path="res://Scripts/Ui/upgrade_menu.gd" id="1_lrwef"]
 [ext_resource type="Texture2D" uid="uid://c67rm6k0f4vl3" path="res://Assets/Sprites/textbox.png" id="1_rl4if"]
 [ext_resource type="LabelSettings" uid="uid://ufeauaihvrd" path="res://Resources/LabelSettings/menu_item.tres" id="2_lrwef"]
 [ext_resource type="PackedScene" uid="uid://ceq62sy66o835" path="res://Scenes/menus/power_upgrade_line.tscn" id="3_rl4if"]
+[ext_resource type="Script" uid="uid://b2beaf0vge2s7" path="res://Scripts/Ui/quit_line.gd" id="5_04key"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nyfi7"]
 texture = ExtResource("1_rl4if")
@@ -18,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lrwef")
 
 [node name="PauseMenu" type="Control" parent="." unique_id=948631251]
 process_mode = 3
@@ -54,16 +57,17 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=730368355 instance=ExtResource("3_rl4if")]
-layout_mode = 2
-
-[node name="HBoxContainer2" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=1596576488 instance=ExtResource("3_rl4if")]
+[node name="Shovel" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=730368355 instance=ExtResource("3_rl4if")]
 layout_mode = 2
 upgrade_type = 1
 
-[node name="HBoxContainer3" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=1949261701 instance=ExtResource("3_rl4if")]
+[node name="Jetpack" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=1596576488 instance=ExtResource("3_rl4if")]
 layout_mode = 2
 upgrade_type = 2
+
+[node name="Bag" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=1949261701 instance=ExtResource("3_rl4if")]
+layout_mode = 2
+upgrade_type = 3
 
 [node name="Quit" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=386683464]
 layout_mode = 2
@@ -72,3 +76,6 @@ text = "QUIT"
 label_settings = ExtResource("2_lrwef")
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("5_04key")
+
+[connection signal="quit" from="PauseMenu/PanelContainer/VBoxContainer/Options/Quit" to="." method="close_menu"]

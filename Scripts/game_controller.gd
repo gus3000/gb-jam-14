@@ -150,7 +150,11 @@ func player_exited_world() -> void:
 	teleport_to_start()
 
 func toggle_pause(should_pause: bool) -> void:
-	get_tree().paused = should_pause
+	print("pausing ", should_pause)
+	player.movement_paused = should_pause
+	player.set_process_input(should_pause)
+	player.power_core.set_process_input(should_pause)
+	# get_tree().paused = should_pause
 
 func pause() -> void:
 	toggle_pause(true)

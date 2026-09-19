@@ -44,7 +44,7 @@ func close_menu() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not pause_menu.visible and event.is_action_pressed("gb_start"):
 		open_menu() ;
-	else:
+	elif pause_menu.visible:
 		if event.is_action_pressed("gb_a"):
 			_invoke_option()
 		elif event.is_action_pressed("up"):

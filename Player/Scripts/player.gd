@@ -47,6 +47,7 @@ var number_of_pauses: int = 0
 var movement_paused: bool = false:
 	get: return number_of_pauses > 0
 	set(value):
+		print("(%s) pre-pause n=%s" % [value, number_of_pauses])
 		if value:
 			if number_of_pauses == 0:
 				movement_just_paused.emit(value)
@@ -55,6 +56,7 @@ var movement_paused: bool = false:
 			if number_of_pauses == 1:
 				movement_just_paused.emit(value)
 			number_of_pauses -= 1
+		print("post-pause n=", number_of_pauses)
 
 var looked_at_raycasts: Array[RayCast2D]:
 	get:
@@ -178,7 +180,7 @@ func handle_animation_state() -> void:
 func handle_jumping(delta: float) -> void:
 	if jumping:
 		velocity.y = -JUMP_FORCE
-		# print("jumping !")
+	# print("jumping !")
 	elif holding_jump:
 		velocity.y -= (HOLDING_JUMP_FORCE * delta)
 	pass
@@ -209,7 +211,7 @@ func unlock_baby_cheat() -> void:
 		bag._on_player_obtain_key_object(object_type)
 	observation.emit("Unlocked\nbasic stuff !")
 
-func add_gold(to_add:int):
+func add_gold(to_add: int):
 	gold += to_add
 	gained_gold.emit()
 

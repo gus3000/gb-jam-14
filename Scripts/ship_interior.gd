@@ -3,7 +3,8 @@ extends AbstractLoadableScene
 
 @onready var background: AnimatedSprite2D = $Background
 @onready var gold_pan: GoldPan = $GoldPan
-@onready var interact_point: InteractPoint = $UpgradeMenu
+@onready var upgrade_menu_interact: InteractPoint = $UpgradeMenuInteract
+@onready var upgrade_menu: UpgradeMenu = $UpgradeMenu
 
 func _on_exit_body_entered(body: Node2D) -> void:
 	if not GameController.player.power_core.has_power(PowerCore.Power.JETPACK):
@@ -30,7 +31,7 @@ func blink() -> void:
 
 func on_load():
 	GameController.ui.gold.show()
-	interact_point.hide()
+	upgrade_menu_interact.hide()
 	if GameController.player.power_core.has_power(PowerCore.Power.JETPACK):
 		background.play("SwtichOn")
 		GameController.earthquake()
@@ -39,10 +40,13 @@ func on_load():
 		if GameController.player.bag.dirt > 0:
 			gold_pan.start()
 			await gold_pan.finished
-		interact_point.show()
-		
+		upgrade_menu_interact.show()
 	pass
 
 func on_unload():
 	GameController.ui.gold.hide()
 	pass
+
+func _on_upgrade_menu_interact() -> void:
+	upgrade_menu.open_menu()
+	

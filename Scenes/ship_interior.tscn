@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b2v22lo7dtvgi" path="res://Scenes/dirt_particle_flow.tscn" id="9_se1dn"]
 [ext_resource type="Script" uid="uid://v5xtkrmr2lq7" path="res://Scripts/dirt_particle_flow.gd" id="10_b202h"]
 [ext_resource type="PackedScene" uid="uid://c6oaj8acf0ei7" path="res://Scenes/interact_point.tscn" id="11_evlnp"]
+[ext_resource type="PackedScene" uid="uid://cmvo27csnjeyt" path="res://Scenes/menus/upgrade_menu.tscn" id="12_31vnk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0hewa"]
 animations = [{
@@ -75,7 +76,7 @@ tile_set = ExtResource("2_jakyc")
 position = Vector2(-72, -2)
 shape = SubResource("RectangleShape2D_dayrp")
 
-[node name="Label" type="Label" parent="." unique_id=258774257]
+[node name="ExitLabel" type="Label" parent="." unique_id=258774257]
 offset_left = -72.0
 offset_top = -29.0
 offset_right = -32.0
@@ -98,10 +99,19 @@ position = Vector2(37, 0)
 amount = 1000
 script = ExtResource("10_b202h")
 
-[node name="UpgradeMenu" parent="." unique_id=1246660634 instance=ExtResource("11_evlnp")]
+[node name="UpgradeMenuInteract" parent="." unique_id=1246660634 instance=ExtResource("11_evlnp")]
 position = Vector2(0, -8)
 text = "Upgrade"
 to_focus = false
 
+[node name="UpgradeMenu" parent="." unique_id=985072601 instance=ExtResource("12_31vnk")]
+visible = false
+z_index = 4
+offset_left = 67.0
+offset_top = -54.0
+offset_right = 67.0
+offset_bottom = -54.0
+
 [connection signal="body_entered" from="Exits" to="." method="_on_exit_body_entered"]
 [connection signal="pickup" from="KeyObject" to="." method="_on_key_object_pickup"]
+[connection signal="interact" from="UpgradeMenuInteract" to="." method="_on_upgrade_menu_interact"]

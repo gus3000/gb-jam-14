@@ -51,7 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		cycle_power()
 
 func _physics_process(delta: float) -> void:
-	if equipped_core != null:
+	if equipped_core != null and not player.movement_paused:
 		powering = Input.is_action_pressed("gb_b") and equipped_core.power_level > 0
 		equipped_core.process(delta, powering)
 	pass

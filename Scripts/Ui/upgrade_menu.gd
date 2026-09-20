@@ -3,8 +3,6 @@ extends Control
 
 const Upgradable := PowerUpgradeLine.Upgradable
 
-signal bought_escape
-
 @onready var shovel: PowerUpgradeLine = $PauseMenu/PanelContainer/VBoxContainer/Options/Shovel
 @onready var jetpack: PowerUpgradeLine = $PauseMenu/PanelContainer/VBoxContainer/Options/Jetpack
 @onready var bag: PowerUpgradeLine = $PauseMenu/PanelContainer/VBoxContainer/Options/Bag
@@ -36,8 +34,7 @@ func _input(event: InputEvent) -> void:
 		select_previous_upgrade()
 	elif event.is_action_pressed("gb_a"):
 		current_upgrade_line.activate()
-		escape_planet.visible = can_buy_escape()
-		
+		escape_planet.visible = GameController.player.can_buy_escape()
 
 
 func open_menu() -> void:
@@ -46,8 +43,8 @@ func open_menu() -> void:
 	_update_index(current_upgrade)
 	GameController.pause()
 	show()
-	escape_planet.visible = can_buy_escape()
-		
+	escape_planet.visible = GameController.player.can_buy_escape()
+
 
 func close_menu() -> void:
 	if not visible:
@@ -66,16 +63,11 @@ func _update_index(selected_upgrade: Upgradable) -> void:
 	current_index = upgrade_lines.keys().find(current_upgrade)
 	return
 
-func can_buy_escape() -> bool:
-	return GameController.player.mining_core.power_level == GameController.player.mining_core.max_power_level \
-			and GameController.player.power_core.jetpack_core.power_level == GameController.player.power_core.jetpack_core.max_power_level \
-			and GameController.player.bag.power_level == GameController.player.bag.max_power_level
-
 func select_previous_upgrade() -> void:
 	var selected_index: int = (current_index + upgrade_lines.size() - 1) % upgrade_lines.size()
 	var index_upgrade: Upgradable = upgrade_lines.keys()[selected_index]
 	_update_index(index_upgrade)
-	if not can_buy_escape() and index_upgrade == Upgradable.ESCAPE_PLANET:
+	if not GameController.player.can_buy_escape() and index_upgrade == Upgradable.ESCAPE_PLANET:
 		select_previous_upgrade()
 
 
@@ -84,9 +76,9 @@ func select_next_upgrade() -> void:
 	var index_upgrade: Upgradable = upgrade_lines.keys()[selected_index]
 	_update_index(index_upgrade)
 
-	if not can_buy_escape() and index_upgrade == Upgradable.ESCAPE_PLANET:
+	if not GameController.player.can_buy_escape() and index_upgrade == Upgradable.ESCAPE_PLANET:
 		select_next_upgrade()
-	
+
 
 func _on_escape_planet_buy() -> void:
 	close_menu()

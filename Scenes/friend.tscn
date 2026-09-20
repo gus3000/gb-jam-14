@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c6lda1somckav"]
 
-[ext_resource type="Script" uid="uid://cxb4526p4ebnk" path="res://Scripts/shopkeeper.gd" id="1_fdy00"]
+[ext_resource type="Script" uid="uid://bl25go0nx28p8" path="res://Scripts/friend.gd" id="1_7scxg"]
 [ext_resource type="Texture2D" uid="uid://bg1but63md3mw" path="res://Assets/Sprites/npc_idle_right.png" id="2_7scxg"]
 [ext_resource type="PackedScene" uid="uid://c6oaj8acf0ei7" path="res://Scenes/interact_point.tscn" id="3_7scxg"]
 
@@ -41,7 +41,7 @@ animations = [{
 }]
 
 [node name="Shopkeeper" type="Node2D" unique_id=2055223079]
-script = ExtResource("1_fdy00")
+script = ExtResource("1_7scxg")
 
 [node name="Npc" type="AnimatedSprite2D" parent="." unique_id=856387378]
 position = Vector2(0, -8)

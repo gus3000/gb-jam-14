@@ -4,6 +4,8 @@ extends CanvasLayer
 const KeyObjectType := KeyObject.KeyObjectType
 const KeyObjectTypeDescriptor := KeyObject.KeyObjectTypeDescriptor
 
+const MAX_LINE_LENGTH: int = 17
+
 enum MessageKey {
 	ARBITRARY_TEXT,
 	RECEIVED_KEY_OBJECT,
@@ -14,6 +16,16 @@ class Message:
 	var text: String
 	var duration: float
 	func _init(_text: String, _duration: float) -> void:
+		# if _text.length() > MAX_LINE_LENGTH and not _text.contains("\n"):
+		# 	var lines: Array[String] = []
+		# 	print("calculs :")
+		# 	print("%d / %d = %d" % [_text.length(), MAX_LINE_LENGTH, (_text.length()/MAX_LINE_LENGTH)])
+		# 	for i in range(_text.length() / MAX_LINE_LENGTH):
+		# 		var line = _text.substr(i * MAX_LINE_LENGTH, (i + 1) * MAX_LINE_LENGTH - 1)
+		# 		lines.push_back(line)
+		# 		print("line[%d] = %s" % [i, line])
+		# 	_text = "\n".join(lines)
+				
 		text = _text
 		duration = _duration
 
@@ -45,12 +57,15 @@ func _process(_delta: float) -> void:
 		await show_message(message_queue.pop_front())
 	pass
 
-func queue_string(message: String, duration: float=message_duration):
-	message_queue.push_back(Message.new(message, duration))
+func queue_string(message: String, duration: float=message_duration) -> void:
+	queue_message(Message.new(message, duration))
 
-func queue_message(messageKey: MessageKey, context: Array=[], duration: float=message_duration) -> void:
+func queue_message_key(messageKey: MessageKey, context: Array=[], duration: float=message_duration) -> void:
 	queue_string(messages[messageKey] % context, duration)
 	pass
+
+func queue_message(message: Message) -> void:
+	message_queue.push_back(message)
 
 func show_message(message: Message) -> void:
 	print("start message : ", message)
@@ -71,10 +86,10 @@ func ui_show() -> void:
 	hud.show()
 
 func _on_player_obtain_key_object(object_type: KeyObjectType) -> void:
-	queue_message(MessageKey.RECEIVED_KEY_OBJECT, [KeyObjectTypeDescriptor[object_type]])
+	queue_message_key(MessageKey.RECEIVED_KEY_OBJECT, [KeyObjectTypeDescriptor[object_type]])
 	if GameController.player.power_core.core_for_key_object(object_type) != null \
 			and GameController.player.power_core.number_of_active_cores > 1:
-		queue_message(MessageKey.CYCLE_POWER_REMINDER, [])
+		queue_message_key(MessageKey.CYCLE_POWER_REMINDER, [])
 
 
 func _on_player_changed_equipped_power(power: PowerCore.Power) -> void:

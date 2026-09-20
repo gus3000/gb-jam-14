@@ -38,14 +38,8 @@ theme = ExtResource("1_nf4gj")
 [node name="Label" type="Label" parent="Dialog/PanelContainer/MarginContainer" unique_id=161414353]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "A
-very
-long
-text
-aaa
-bbbb
-cccc
-dddd"
+text = "123456789ABCDEFGH
+17 chars"
 label_settings = ExtResource("1_jxero")
 horizontal_alignment = 1
 vertical_alignment = 1

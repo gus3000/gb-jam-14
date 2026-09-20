@@ -8,7 +8,7 @@ const Power := PowerCore.Power
 
 signal current_animation(player_animation: PlayerAnimation, direction: Direction)
 signal obtain_key_object(object_type: KeyObjectType)
-signal observation(message: String)
+# signal observation(message: String)
 signal changed_equipped_power(power: Power)
 signal movement_just_paused(paused: bool)
 signal gained_gold
@@ -60,7 +60,7 @@ var movement_paused: bool = false:
 			if number_of_pauses == 1:
 				movement_just_paused.emit(value)
 			number_of_pauses -= 1
-		# print("post-pause n=", number_of_pauses)
+# print("post-pause n=", number_of_pauses)
 
 var looked_at_raycasts: Array[RayCast2D]:
 	get:
@@ -205,13 +205,20 @@ func obtain(object_type: KeyObjectType):
 func has_key_object(object_type: KeyObjectType) -> bool:
 	return bag.has_key_object(object_type)
 
+func can_buy_escape() -> bool:
+	return mining_core.power_level == mining_core.max_power_level \
+			and power_core.jetpack_core.power_level == power_core.jetpack_core.max_power_level \
+			and bag.power_level == bag.max_power_level
+
+
 func unlock_cheat() -> void:
 	for core in power_core.cores:
 		core.power_level = core.max_power_level
 	bag.power_level = bag.max_power_level
 	for object_type in KeyObjectType.values():
 		bag._on_player_obtain_key_object(object_type)
-	observation.emit("Unlocked\neverything !")
+	gold += 100_000
+	GameController.ui.queue_string("Unlocked\neverything !", 1)
 	GameController.earthquake()
 
 func unlock_baby_cheat() -> void:
@@ -220,7 +227,7 @@ func unlock_baby_cheat() -> void:
 	bag.power_level = 1
 	for object_type in KeyObjectType.values():
 		bag._on_player_obtain_key_object(object_type)
-	observation.emit("Unlocked\nbasic stuff !")
+	GameController.ui.queue_string("Unlocked\nbasic stuff !",1)
 
 func add_gold(to_add: int):
 	gold += to_add

@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cfb1kee3islvj" path="res://Assets/Sprites/Screens/story intro images/Part 6_ship landing.png" id="7_6resr"]
 [ext_resource type="Script" uid="uid://dqb62drci1k64" path="res://Scripts/Cutscenes/cutscene_victory.gd" id="11_6resr"]
 [ext_resource type="Script" uid="uid://j73f31g27qgw" path="res://Scripts/camera_rig.gd" id="11_54d8w"]
-[ext_resource type="Texture2D" uid="uid://xhc1da3bvhug" path="res://Assets/Sprites/Screens/story end images/Part 7_Repair.png" id="12_qbh0k"]
+[ext_resource type="Texture2D" uid="uid://clcfbdb4d22x4" path="res://Assets/Sprites/Screens/story end images/Part 7b_Repair.png" id="12_78a8o"]
 [ext_resource type="Texture2D" uid="uid://dnrbipubs3cvw" path="res://Assets/Sprites/Screens/story end images/Part 8_Leaving planet.png" id="13_qorc0"]
 [ext_resource type="Texture2D" uid="uid://1qckkcpkxbav" path="res://Assets/Sprites/Screens/story end images/Part 8_Ship.png" id="14_78a8o"]
 
@@ -122,6 +122,15 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2v2sx"]
 _data = {
 &"default": SubResource("Animation_yukay")
+}
+
+[sub_resource type="Animation" id="Animation_2v2sx"]
+resource_name = "default"
+length = 6.000003646257892
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ig286"]
+_data = {
+&"default": SubResource("Animation_2v2sx")
 }
 
 [sub_resource type="Animation" id="Animation_er6la"]
@@ -262,10 +271,10 @@ script = ExtResource("11_6resr")
 
 [node name="1" type="Sprite2D" parent="Cutscenes/Victory" unique_id=1420938290]
 visible = false
-texture = ExtResource("12_qbh0k")
+texture = ExtResource("12_78a8o")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Victory/1" unique_id=327437558]
-libraries/ = SubResource("AnimationLibrary_gubyq")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Victory/1" unique_id=897917555]
+libraries/ = SubResource("AnimationLibrary_ig286")
 
 [node name="2" type="Sprite2D" parent="Cutscenes/Victory" unique_id=1408992501]
 visible = false

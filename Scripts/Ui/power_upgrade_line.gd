@@ -14,8 +14,8 @@ enum Upgradable {
 
 const UpgradeCost: Dictionary[Upgradable, Array] = {
 	Upgradable.SHOVEL: [0, 1000, 5000, 25_000, 100_000, 1_000_000],
-	Upgradable.JETPACK: [0, 10, 100, 1000, 10_000, 100_000],
-	Upgradable.BAG: [0, 10, 100, 1000, 10_000, 100_000],
+	Upgradable.JETPACK: [0, 1000, 4000, 10_000, 20_000, 50_000],
+	Upgradable.BAG: [0, 2000, 8000, 20_000, 40_000, 100_000],
 }
 
 var focused_label_settings: LabelSettings = preload("res://Resources/LabelSettings/menu_item_focus.tres")

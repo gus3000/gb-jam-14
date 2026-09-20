@@ -20,11 +20,11 @@ var objects: Dictionary[KeyObjectType, int]
 var max_dirt: int:
 	get: match (power_level):
 		0: return 0
-		1: return 1500
-		2: return 5000
-		3: return 10000
-		4: return 20000
-		5: return 100000
+		1: return 5_000
+		2: return 15_000
+		3: return 40_000
+		4: return 80_000
+		5: return 200_000
 		_: return 10_000_000
 
 func _ready() -> void:

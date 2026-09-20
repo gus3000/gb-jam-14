@@ -3,8 +3,8 @@ extends Node
 const TerrainType := DiggableTileMap.TerrainType
 const CutsceneType := Cutscene.CutsceneType
 
-# const penta_scale: Array[int] = [0, 3, 5, 7, 10, 12, 15, 17, 19, 22]
-const penta_scale: Array[int] = [0, 3, 5]
+const penta_scale: Array[int] = [0, 3, 5, 7, 10, 12, 15, 17, 19, 22]
+# const penta_scale: Array[int] = [0, 3, 5]
 
 @onready var generated: AudioPlayer = $Generated
 @onready var mining: AudioPlayer = $Player/Mining/Mining
@@ -80,8 +80,10 @@ func setup_signals():
 	CutsceneController.cutscene_starts_playing.connect(_on_cutscene_starts_playing)
 	CutsceneController.cutscene_stops_playing.connect(_on_cutscene_stops_playing)
 
-func random_penta_scale_pitch() -> float:
-	return pow(2, (penta_scale.pick_random() - 3) / 12.)
+func random_penta_scale_pitch(bonus: int=0) -> float:
+	var random_index: int = randi_range(0, 2)
+	# return pow(2, (penta_scale.pick_random() - 3) / 12.)
+	return pow(2, (penta_scale[random_index + bonus] - 3) / 12.)
 
 func debug_audio() -> void:
 	print("debug audio")
@@ -104,12 +106,24 @@ func set_volume(volume: int, music_only: bool):
 		for player in sfx:
 			player.change_volume(db)
 
+func get_block_bonus(block: Block)->int:
+	if block.multiplier>99:
+		return 3
+	if block.multiplier>9:
+		return 2
+	if block.multiplier>.9:
+		return 1
+	return 0
+
 func _on_player_started_mining(block: Block) -> void:
 	if block.type == TerrainType.BEDROCK:
 		fail.play()
 
 func _on_player_block_mined(_block: Block) -> void:
-	mining.pitch_scale = random_penta_scale_pitch()
+	var bonus: int = get_block_bonus(_block)
+	var scale: float = random_penta_scale_pitch(bonus)
+	mining.pitch_scale = scale
+	print("mining with specs : scale=%s bonus=%s" % [scale, bonus])
 	mining.play()
 
 func _on_player_gained_gold() -> void:

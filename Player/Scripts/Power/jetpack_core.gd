@@ -35,6 +35,7 @@ func boot() -> void:
 	pass
 
 func shutdown() -> void:
+	flames.hide()
 	pass
 
 func get_power() -> PowerCore.Power:

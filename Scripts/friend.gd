@@ -5,7 +5,7 @@ const KeyObjectType := KeyObject.KeyObjectType
 @onready var things_to_say_start: Array[String] = [
 	"Hey Captain !",
 	"I had big plans\nbut it seems\nthey've\n\"fallen\"\n short.",
-	"Talk to me later\nif you find\nyour stuff.)"
+	"Talk to me later\nif you find\nyour stuff."
 ]
 
 @onready var things_to_say_shovel: Array[String] = [

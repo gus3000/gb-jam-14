@@ -10,12 +10,13 @@ var x: int
 var y: int
 var type: TerrainType
 var toughness: int
+var multiplier: float
 var dirt: int
 
 var position: Vector2i:
 	get: return Vector2i(x, y)
 
-func _init(_x: int, _y: int, terrain_type: TerrainType, multiplier: float):
+func _init(_x: int, _y: int, terrain_type: TerrainType, _multiplier: float):
 	x = _x
 	y = _y
 	type = terrain_type
@@ -26,6 +27,7 @@ func _init(_x: int, _y: int, terrain_type: TerrainType, multiplier: float):
 		_:
 			toughness = 10000000
 	toughness = max(toughness, 1)
+	multiplier = _multiplier
 	dirt = ceili(toughness * multiplier)
 
 func _to_string() -> String:

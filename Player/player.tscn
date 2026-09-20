@@ -153,8 +153,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dayrp"]
-radius = 2.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvbdg"]
+size = Vector2(6, 5)
 
 [node name="Player" type="CharacterBody2D" unique_id=963057457 groups=["player"]]
 script = ExtResource("1_btcbx")
@@ -248,7 +248,7 @@ position = Vector2(0, -10)
 script = ExtResource("13_p5o4e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Helmet" unique_id=385176244]
-shape = SubResource("CircleShape2D_dayrp")
+shape = SubResource("RectangleShape2D_uvbdg")
 
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
 [connection signal="movement_just_paused" from="." to="Sprite" method="_on_player_movement_just_paused"]

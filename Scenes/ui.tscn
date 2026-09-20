@@ -9,17 +9,16 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nf4gj"]
 texture = ExtResource("1_qdvrb")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 4.0
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
 
 [node name="Ui" type="CanvasLayer" unique_id=556782816]
 process_mode = 3
 script = ExtResource("1_2246s")
 
 [node name="Dialog" type="VBoxContainer" parent="." unique_id=174421350]
-visible = false
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,8 +37,14 @@ theme = ExtResource("1_nf4gj")
 [node name="Label" type="Label" parent="Dialog/PanelContainer/MarginContainer" unique_id=161414353]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "It's locked!
-oops"
+text = "A
+very
+long
+text
+aaa
+bbbb
+cccc
+dddd"
 label_settings = ExtResource("1_jxero")
 horizontal_alignment = 1
 vertical_alignment = 1

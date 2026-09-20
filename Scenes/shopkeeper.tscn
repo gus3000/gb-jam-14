@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dcfyvxas2033x"]
+[gd_scene format=3 uid="uid://c6lda1somckav"]
 
 [ext_resource type="Script" uid="uid://cxb4526p4ebnk" path="res://Scripts/shopkeeper.gd" id="1_fdy00"]
 [ext_resource type="Texture2D" uid="uid://bg1but63md3mw" path="res://Assets/Sprites/npc_idle_right.png" id="2_7scxg"]

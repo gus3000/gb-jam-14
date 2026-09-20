@@ -36,7 +36,7 @@ func on_load():
 		background.play("SwtichOn")
 		GameController.earthquake()
 		await background.animation_finished
-		await get_tree().create_timer(3).timeout
+		# await get_tree().create_timer(3).timeout
 		if GameController.player.bag.dirt > 0:
 			gold_pan.start()
 			await gold_pan.finished

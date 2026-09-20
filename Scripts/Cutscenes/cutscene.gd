@@ -8,7 +8,10 @@ enum CutsceneType {
 
 signal slide_ended
 
+## (seconds)
 const DEFAULT_DURATION:float = 3
+
+## (seconds)
 var duration: float = 3
 var should_skip: bool = false
 
@@ -42,7 +45,7 @@ func play() -> void:
 			anim_player = anim_players.front()
 			anim_player.play("default")
 			anim_player.animation_finished.connect(_slide_ended_cause_animation_finished)
-			duration = 1000
+			duration = INF
 		else:
 			duration = DEFAULT_DURATION
 		# print("anim_player = ", anim_player)

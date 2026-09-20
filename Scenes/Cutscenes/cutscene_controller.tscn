@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://cfb1kee3islvj" path="res://Assets/Sprites/Screens/story intro images/Part 6_ship landing.png" id="7_6resr"]
 [ext_resource type="Script" uid="uid://dqb62drci1k64" path="res://Scripts/Cutscenes/cutscene_victory.gd" id="11_6resr"]
 [ext_resource type="Script" uid="uid://j73f31g27qgw" path="res://Scripts/camera_rig.gd" id="11_54d8w"]
-[ext_resource type="Texture2D" uid="uid://dxe3ubqr7p4p5" path="res://Assets/Sprites/Placeholder/Placeholder-victory.png" id="12_qbh0k"]
+[ext_resource type="Texture2D" uid="uid://xhc1da3bvhug" path="res://Assets/Sprites/Screens/story end images/Part 7_Repair.png" id="12_qbh0k"]
+[ext_resource type="Texture2D" uid="uid://dnrbipubs3cvw" path="res://Assets/Sprites/Screens/story end images/Part 8_Leaving planet.png" id="13_qorc0"]
+[ext_resource type="Texture2D" uid="uid://1qckkcpkxbav" path="res://Assets/Sprites/Screens/story end images/Part 8_Ship.png" id="14_78a8o"]
 
 [sub_resource type="Animation" id="Animation_wllsk"]
 resource_name = "Intro"
@@ -48,27 +50,57 @@ _data = {
 &"default": SubResource("Animation_qbh0k")
 }
 
+[sub_resource type="Animation" id="Animation_78a8o"]
+length = 0.001
+step = 0.1
+
 [sub_resource type="Animation" id="Animation_soblh"]
 resource_name = "default"
 length = 4.000003541949764
-tracks/0/type = "method"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gubyq"]
+_data = {
+&"RESET": SubResource("Animation_78a8o"),
+&"default": SubResource("Animation_soblh")
+}
+
+[sub_resource type="Animation" id="Animation_er6la"]
+length = 0.001
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../../..")
+tracks/0/path = NodePath("Ship:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"vibrate"
-}]
+"update": 0,
+"values": [Vector2(1, -12)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gubyq"]
+[sub_resource type="Animation" id="Animation_cxaf0"]
+resource_name = "default"
+length = 4.0000100596047945
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ship:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(0.5, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, -12), Vector2(1, -15), Vector2(1, -12), Vector2(1, -9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_er6la"]
 _data = {
-&"default": SubResource("Animation_soblh")
+&"RESET": SubResource("Animation_er6la"),
+&"default": SubResource("Animation_cxaf0")
 }
 
 [sub_resource type="Curve2D" id="Curve2D_6resr"]
@@ -171,6 +203,21 @@ script = ExtResource("11_6resr")
 [node name="1" type="Sprite2D" parent="Cutscenes/Victory" unique_id=1420938290]
 visible = false
 texture = ExtResource("12_qbh0k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Victory/1" unique_id=327437558]
+libraries/ = SubResource("AnimationLibrary_gubyq")
+
+[node name="2" type="Sprite2D" parent="Cutscenes/Victory" unique_id=1408992501]
+visible = false
+texture = ExtResource("13_qorc0")
+
+[node name="Ship" type="Sprite2D" parent="Cutscenes/Victory/2" unique_id=2042253090]
+position = Vector2(1, -12)
+texture = ExtResource("14_78a8o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Victory/2" unique_id=1468101786]
+libraries/ = SubResource("AnimationLibrary_er6la")
+autoplay = &"default"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1981412846 node_paths=PackedStringArray("target")]
 enabled = false

@@ -41,7 +41,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_qbh0k"]
 resource_name = "default"
-length = 2.6666701390776786
+length = 5.666670295539871
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qorc0"]
 _data = {
@@ -50,7 +50,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_soblh"]
 resource_name = "default"
-length = 1.0000033854875714
+length = 4.000003541949764
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -124,6 +124,9 @@ size_flags_horizontal = 6
 text = "Let's get rich !"
 label_settings = ExtResource("3_soblh")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/2" unique_id=659585569]
+libraries/ = SubResource("AnimationLibrary_qorc0")
+
 [node name="3" type="Sprite2D" parent="Cutscenes/Intro" unique_id=1700288296]
 visible = false
 texture = ExtResource("4_soblh")
@@ -137,6 +140,9 @@ offset_bottom = 72.0
 size_flags_horizontal = 6
 text = "Almost there..."
 label_settings = ExtResource("6_soblh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/3" unique_id=1460216200]
+libraries/ = SubResource("AnimationLibrary_qorc0")
 
 [node name="4" type="Sprite2D" parent="Cutscenes/Intro" unique_id=1163179419]
 visible = false

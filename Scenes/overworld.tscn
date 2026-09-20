@@ -18,7 +18,7 @@
 
 [node name="Player" parent="." unique_id=1227295312 instance=ExtResource("2_ihd0w")]
 z_index = 1
-position = Vector2(15, 52)
+position = Vector2(-220, 78)
 metadata/_edit_group_ = true
 
 [node name="Camera" parent="." unique_id=895522267 node_paths=PackedStringArray("target") groups=["camera"] instance=ExtResource("6_0jggw")]

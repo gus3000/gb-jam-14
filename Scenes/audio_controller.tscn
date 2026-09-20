@@ -103,5 +103,4 @@ script = ExtResource("3_6o502")
 
 [node name="Intro" type="AudioStreamPlayer" parent="Music" unique_id=1992092282]
 stream = ExtResource("15_t18y6")
-parameters/looping = true
 script = ExtResource("3_6o502")

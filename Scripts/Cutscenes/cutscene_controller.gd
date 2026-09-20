@@ -16,8 +16,9 @@ signal cutscene_stops_playing(cutscene: CutsceneType)
 }
 
 var current_cutscene: Cutscene = null
-# func _ready() -> void:
-# 	animation_player.animation_finished.connect(resume_game)
+
+func _ready() -> void:
+	play.call_deferred(CutsceneType.INTRO)
 
 func _process(delta: float) -> void:
 	if not OS.is_debug_build():

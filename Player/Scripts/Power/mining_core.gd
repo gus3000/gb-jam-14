@@ -61,6 +61,7 @@ func mining_power() -> float:
 		5: return 100
 		_: return 1000
 
+## in milliseconds
 func mining_time(block: Block) -> float:
 	return block.toughness / mining_power()
 

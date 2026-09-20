@@ -12,10 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://bhtwxpx6pctix" path="res://Assets/Sprites/Placeholder/Placeholder-flame.png" id="11_apopc"]
 [ext_resource type="Script" uid="uid://cibkd0wpqwwc3" path="res://Player/Scripts/Power/jetpack_core.gd" id="12_5htga"]
 [ext_resource type="Script" uid="uid://bht5yy6x7gqkq" path="res://Player/Scripts/Power/Bag/bag_sprite.gd" id="13_gu6f8"]
+[ext_resource type="Script" uid="uid://bpnxdwh1op1nd" path="res://Player/Scripts/helmet.gd" id="13_p5o4e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dayrp"]
 radius = 3.5
-height = 12.0
+height = 10.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b1ygp"]
 atlas = ExtResource("11_apopc")
@@ -152,6 +153,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dayrp"]
+radius = 2.0
+
 [node name="Player" type="CharacterBody2D" unique_id=963057457 groups=["player"]]
 script = ExtResource("1_btcbx")
 LAND_ANIMATION_TIME = 300
@@ -160,12 +164,12 @@ LAND_ANIMATION_TIME = 300
 z_index = 1
 position = Vector2(0, -8)
 sprite_frames = ExtResource("2_btcbx")
-animation = &"Land"
+animation = &"Idle"
 autoplay = "Idle"
 script = ExtResource("3_gwnis")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=809159382]
-position = Vector2(0, -7)
+position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_dayrp")
 
 [node name="Rays" type="Node2D" parent="." unique_id=455368027]
@@ -239,6 +243,13 @@ script = ExtResource("13_gu6f8")
 [node name="Opening" type="Node2D" parent="PowerCore/Bag" unique_id=774960964]
 position = Vector2(-7, -6)
 
+[node name="Helmet" type="Area2D" parent="." unique_id=1210586613]
+position = Vector2(0, -10)
+script = ExtResource("13_p5o4e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Helmet" unique_id=385176244]
+shape = SubResource("CircleShape2D_dayrp")
+
 [connection signal="current_animation" from="." to="Sprite" method="slot_animation"]
 [connection signal="movement_just_paused" from="." to="Sprite" method="_on_player_movement_just_paused"]
 [connection signal="obtain_key_object" from="." to="PowerCore" method="_on_player_obtain_key_object"]
@@ -250,3 +261,4 @@ position = Vector2(-7, -6)
 [connection signal="started_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="start_mining"]
 [connection signal="stopped_mining" from="PowerCore/MiningCore" to="PowerCore/MiningCore/MiningIndicator" method="stop_mining"]
 [connection signal="dirt_amount_changed" from="PowerCore/Bag" to="PowerCore/Bag/BagSprite" method="_on_bag_dirt_amount_changed"]
+[connection signal="body_entered" from="Helmet" to="Helmet" method="_on_body_entered"]

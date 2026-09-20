@@ -63,8 +63,13 @@ func get_block_position(collision_position: Vector2) -> Vector2:
 
 func get_block_at_point(collision_position: Vector2) -> Block:
 	var pos := get_block_map_position(collision_position)
-	var data := get_cell_tile_data(pos)
+	return get_block_at_map_position(pos)
 
+
+func get_block_at_map_position(map_pos: Vector2i) -> Block:
+	var data := get_cell_tile_data(map_pos)
+	if data == null:
+		return null
 	var terrain := data.terrain
 	if terrain < 0:
 		terrain = TerrainType.BEDROCK
@@ -72,7 +77,7 @@ func get_block_at_point(collision_position: Vector2) -> Block:
 	# print("cell at %s : %s (x%s)" % [pos, data.terrain, multiplier])
 
 	# return Block.new(pos.x, pos.y, (pos.y - ground_boundaries.position.y + 1) * toughness_per_depth_unit)
-	return Block.new(pos.x, pos.y, terrains[terrain], multiplier)
+	return Block.new(map_pos.x, map_pos.y, terrains[terrain], multiplier)
 
 func adjust_probabilites(base_probabilities: Array[float], depth: int) -> Array[float]:
 	return [

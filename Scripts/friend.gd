@@ -10,7 +10,7 @@ const KeyObjectType := KeyObject.KeyObjectType
 
 @onready var things_to_say_shovel: Array[String] = [
 	"Nice find !",
-	"You can DIG\nthrough the dirt\by holding\nB button !",
+	"You can DIG\nthrough the dirt\nby holding\nB button !",
 	"On a keyboard\nit's the\nX or K\nkeys",
 	"What do\nyou mean\n\"What's a\nB button ?\"",
 	"Oh, and see\nif you can't\nfind the\nSHIP's KEY !",

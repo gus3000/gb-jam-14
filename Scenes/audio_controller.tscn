@@ -14,17 +14,12 @@
 [ext_resource type="AudioStream" uid="uid://dsn5l4i1ljpvh" path="res://Assets/Audio/SFX/Walking.wav" id="10_y5jvc"]
 [ext_resource type="AudioStream" uid="uid://c218g6hkxja44" path="res://Assets/Audio/SFX/Jump.wav" id="11_40amf"]
 [ext_resource type="AudioStream" uid="uid://c4u2euxk0rabs" path="res://Assets/Audio/SFX/Digging.wav" id="14_uc8ob"]
+[ext_resource type="AudioStream" uid="uid://b4et886hpr3u1" path="res://Assets/Audio/Music/SpaceCadet.ogg" id="15_t18y6"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_dayrp"]
 
 [node name="AudioController" type="Node" unique_id=660215452]
 script = ExtResource("1_sa2nx")
-
-[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2062687234]
-stream = ExtResource("3_t0xn5")
-autoplay = true
-parameters/looping = true
-script = ExtResource("3_6o502")
 
 [node name="Generated" type="AudioStreamPlayer" parent="." unique_id=570216921]
 stream = SubResource("AudioStreamGenerator_dayrp")
@@ -96,4 +91,17 @@ script = ExtResource("3_6o502")
 
 [node name="HitGround" type="AudioStreamPlayer" parent="Mole" unique_id=2035596378]
 stream = ExtResource("14_uc8ob")
+script = ExtResource("3_6o502")
+
+[node name="Music" type="Node" parent="." unique_id=1507621991]
+
+[node name="Main" type="AudioStreamPlayer" parent="Music" unique_id=2062687234]
+stream = ExtResource("3_t0xn5")
+autoplay = true
+parameters/looping = true
+script = ExtResource("3_6o502")
+
+[node name="Intro" type="AudioStreamPlayer" parent="Music" unique_id=1992092282]
+stream = ExtResource("15_t18y6")
+parameters/looping = true
 script = ExtResource("3_6o502")

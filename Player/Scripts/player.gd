@@ -51,7 +51,7 @@ var number_of_pauses: int = 0
 var movement_paused: bool = false:
 	get: return number_of_pauses > 0
 	set(value):
-		print("(%s) pre-pause n=%s" % [value, number_of_pauses])
+		# print("(%s) pre-pause n=%s" % [value, number_of_pauses])
 		if value:
 			if number_of_pauses == 0:
 				movement_just_paused.emit(value)
@@ -60,7 +60,7 @@ var movement_paused: bool = false:
 			if number_of_pauses == 1:
 				movement_just_paused.emit(value)
 			number_of_pauses -= 1
-		print("post-pause n=", number_of_pauses)
+		# print("post-pause n=", number_of_pauses)
 
 var looked_at_raycasts: Array[RayCast2D]:
 	get:

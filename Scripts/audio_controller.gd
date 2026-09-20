@@ -1,11 +1,11 @@
 extends Node
 
 const TerrainType := DiggableTileMap.TerrainType
+const CutsceneType := Cutscene.CutsceneType
 
 # const penta_scale: Array[int] = [0, 3, 5, 7, 10, 12, 15, 17, 19, 22]
 const penta_scale: Array[int] = [0, 3, 5]
 
-@onready var music: AudioPlayer = $Music
 @onready var generated: AudioPlayer = $Generated
 @onready var mining: AudioPlayer = $Player/Mining/Mining
 @onready var earthquake: AudioPlayer = $Earthquake
@@ -23,6 +23,14 @@ const penta_scale: Array[int] = [0, 3, 5]
 
 @onready var mole_hit_ground: AudioStreamPlayer = $Mole/HitGround
 
+@onready var main_music: AudioPlayer = $Music/Main
+@onready var intro_music: AudioStreamPlayer = $Music/Intro
+
+@onready var music:Array[AudioPlayer] = [
+	main_music,
+	intro_music
+]
+
 @onready var sfx: Array[AudioPlayer] = [
 	generated,
 	mining,
@@ -34,6 +42,10 @@ const penta_scale: Array[int] = [0, 3, 5]
 	jetpack_extend,
 	jetpack_end,
 ]
+
+@onready var cutscenes_music: Dictionary[CutsceneType, AudioStreamPlayer] = {
+	CutsceneType.INTRO: $Music/Intro
+}
 
 var base_mining_pitch: float = 0.5
 var note_length: float = .3
@@ -65,6 +77,8 @@ func setup_signals():
 	GameController.player.jumped.connect(_on_player_jumped)
 	GameController.world_shuffle.connect(_on_world_shuffle)
 	GameController.won.connect(_on_won)
+	CutsceneController.cutscene_starts_playing.connect(_on_cutscene_starts_playing)
+	CutsceneController.cutscene_stops_playing.connect(_on_cutscene_stops_playing)
 
 func random_penta_scale_pitch() -> float:
 	return pow(2, (penta_scale.pick_random() - 3) / 12.)
@@ -84,7 +98,8 @@ func debug_audio() -> void:
 func set_volume(volume: int, music_only: bool):
 	var db := (volume - 5) * 4 if volume > 0 else -80
 	if music_only:
-		music.change_volume(db)
+		for player in music:
+			player.change_volume(db)
 	else:
 		for player in sfx:
 			player.change_volume(db)
@@ -103,14 +118,14 @@ func _on_player_gained_gold() -> void:
 
 func _on_player_gained_key_object(_object_type: KeyObject.KeyObjectType) -> void:
 	# music.stream_paused = true
-	music.volume_db -= 8
+	main_music.volume_db -= 8
 	await get_tree().create_timer(.3).timeout
 
 	key_item_gain.play()
 	await key_item_gain.finished
 	await get_tree().create_timer(.5).timeout
 	# music.stream_paused = false
-	music.volume_db += 8
+	main_music.volume_db += 8
 
 func _on_player_failed() -> void:
 	fail.play()
@@ -156,9 +171,23 @@ func _on_world_shuffle(_intensity: float=-1) -> void:
 	pass
 
 func _on_won() -> void:
-	music.stream_paused = true
+	main_music.stream_paused = true
 	win.play()
 
-func _on_mole_hit_ground()->void:
+func _on_mole_hit_ground() -> void:
 	mole_hit_ground.play()
+	pass
+
+func _on_cutscene_starts_playing(cutscene: CutsceneType) -> void:
+	if cutscenes_music.has(cutscene):
+		main_music.stream_paused = true
+		cutscenes_music[cutscene].play()
+	pass
+
+func _on_cutscene_stops_playing(cutscene: CutsceneType) -> void:
+	if cutscenes_music.has(cutscene):
+		cutscenes_music[cutscene].stop()
+		await get_tree().create_timer(1).timeout
+		main_music.stream_paused = false
+		main_music.seek(0)
 	pass

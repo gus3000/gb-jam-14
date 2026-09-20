@@ -76,7 +76,7 @@ vertical_alignment = 1
 [node name="ReturnToShip" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer/Options" unique_id=1418870183]
 layout_mode = 2
 text = "RETURN
-TO SHIP"
+TO START"
 label_settings = ExtResource("3_47p6n")
 horizontal_alignment = 1
 vertical_alignment = 1

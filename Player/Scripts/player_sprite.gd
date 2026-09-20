@@ -54,7 +54,7 @@ func slot_animation(player_animation: PlayerAnimation, direction: Direction) -> 
 
 
 func _on_player_movement_just_paused(paused: bool) -> void:
-	print("sprite got that movement just paused ! ", paused)
+	# print("sprite got that movement just paused ! ", paused)
 	if paused:
 		pause()
 	else:

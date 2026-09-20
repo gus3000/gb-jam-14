@@ -39,9 +39,18 @@ _data = {
 &"RESET": SubResource("Animation_b0jkv")
 }
 
+[sub_resource type="Animation" id="Animation_qbh0k"]
+resource_name = "default"
+length = 2.6666701390776786
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qorc0"]
+_data = {
+&"default": SubResource("Animation_qbh0k")
+}
+
 [sub_resource type="Animation" id="Animation_soblh"]
 resource_name = "default"
-length = 5.0
+length = 1.0000033854875714
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -88,6 +97,7 @@ visible = false
 texture = ExtResource("2_o4qpm")
 
 [node name="Label" type="Label" parent="Cutscenes/Intro/1" unique_id=706257165]
+visible = false
 offset_left = -57.0
 offset_top = 40.0
 offset_right = 55.0
@@ -97,11 +107,15 @@ text = "This planet is
 full of gold !"
 label_settings = ExtResource("3_soblh")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/1" unique_id=1635235378]
+libraries/ = SubResource("AnimationLibrary_qorc0")
+
 [node name="2" type="Sprite2D" parent="Cutscenes/Intro" unique_id=82402363]
 visible = false
 texture = ExtResource("3_pv66m")
 
 [node name="Label" type="Label" parent="Cutscenes/Intro/2" unique_id=411940101]
+visible = false
 offset_left = -60.0
 offset_top = 49.0
 offset_right = 68.0
@@ -115,6 +129,7 @@ visible = false
 texture = ExtResource("4_soblh")
 
 [node name="Label" type="Label" parent="Cutscenes/Intro/3" unique_id=522582897]
+visible = false
 offset_left = -60.0
 offset_top = 49.0
 offset_right = 68.0

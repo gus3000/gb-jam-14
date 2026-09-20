@@ -77,6 +77,8 @@ func _process(_delta: float) -> void:
 		return
 	if Input.is_physical_key_pressed(KEY_KP_1) and not is_debugging:
 		await debug()
+	if Input.is_physical_key_pressed(KEY_ESCAPE):
+		CutsceneController.skip()
 	if Input.is_action_just_pressed("debug_increase_mining"):
 		player.mining_core.power_level += 1
 		GameController.ui.queue_string("Mining increased\nto %s" % player.mining_core.power_level, 1)
@@ -150,11 +152,11 @@ func earthquake(intensity: float=-1) -> void:
 func teleport_to_start() -> void:
 	# TODO add transition
 	ui.queue_string("Teleported to start")
-	# ui.queue_string("Hopefully there\nwill be a\nnice animation\nin the future")
 	player.position = player_start_position
 	player.velocity = Vector2.UP * 50
 	player.bag.dirt = 0
-	earthquake()
+	if player.has_key_object(KeyObject.KeyObjectType.JETPACK):
+		earthquake()
 	player.movement_paused = true
 	await get_tree().create_timer(2).timeout
 	player.movement_paused = false
@@ -194,6 +196,9 @@ func spawn_random_mole() -> void:
 	print("spawning mole")
 	if get_tree().get_node_count_in_group("mole") > 10:
 		print("too many moles")
+		return
+	if CutsceneController.current_cutscene != null:
+		print("cutscene playing don't spawn a mole")
 		return
 	var mole: Mole = mole_prefab.instantiate()
 	mole.global_position = player.global_position + Vector2.RIGHT * 64

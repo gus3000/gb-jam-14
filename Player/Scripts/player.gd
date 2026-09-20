@@ -15,6 +15,9 @@ signal gained_gold
 signal failed
 signal started_jetpack
 signal stopped_jetpack
+signal started_walking
+signal stopped_walking
+signal jumped
 
 @export var SPEED: int = 100
 @export var GRAVITY: int = 1000
@@ -138,8 +141,12 @@ func handle_horizontal_movement() -> void:
 	if velocity.x != 0:
 		facing_direction = Direction.LEFT if velocity.x < 0 else Direction.RIGHT
 		last_left_right_direction = facing_direction
+		if not walking:
+			started_walking.emit()
 		walking = true
 	else:
+		if walking:
+			stopped_walking.emit()
 		walking = false
 
 func handle_vertical_movement() -> void:
@@ -148,6 +155,8 @@ func handle_vertical_movement() -> void:
 		last_landing_time = Time.get_ticks_msec()
 
 	jumping = is_on_floor() and Input.is_action_just_pressed("gb_a")
+	if jumping:
+		jumped.emit()
 	holding_jump = Input.is_action_pressed("gb_a")
 	var looking: float = Input.get_axis("up", "down")
 

@@ -5,24 +5,26 @@ const TerrainType := DiggableTileMap.TerrainType
 # const penta_scale: Array[int] = [0, 3, 5, 7, 10, 12, 15, 17, 19, 22]
 const penta_scale: Array[int] = [0, 3, 5]
 
-@onready var music: AudioStreamPlayer = $Music
-@onready var generated: AudioStreamPlayer = $Generated
-@onready var mining: AudioStreamPlayer = $Mining/Mining
-@onready var mining_fail: AudioStreamPlayer = $Mining/MiningFail
-@onready var earthquake: AudioStreamPlayer = $Earthquake
-@onready var gold_gain: AudioStreamPlayer = $GoldGain
-@onready var key_item_gain: AudioStreamPlayer = $KeyItemGain
-@onready var fail: AudioStreamPlayer = $Fail
-@onready var win: AudioStreamPlayer = $Win
+@onready var music: AudioPlayer = $Music
+@onready var generated: AudioPlayer = $Generated
+@onready var mining: AudioPlayer = $Player/Mining/Mining
+@onready var earthquake: AudioPlayer = $Earthquake
+@onready var gold_gain: AudioPlayer = $Player/GoldGain
+@onready var key_item_gain: AudioPlayer = $Player/KeyItemGain
+@onready var fail: AudioPlayer = $Fail
+@onready var win: AudioPlayer = $Win
 
-@onready var jetpack_begin: AudioStreamPlayer = $Jetpack/Begin
-@onready var jetpack_extend: AudioStreamPlayer = $Jetpack/Extend
-@onready var jetpack_end: AudioStreamPlayer = $Jetpack/End
+@onready var jetpack_begin: AudioPlayer = $Player/Jetpack/Begin
+@onready var jetpack_extend: AudioPlayer = $Player/Jetpack/Extend
+@onready var jetpack_end: AudioPlayer = $Player/Jetpack/End
 
-@onready var sfx: Array[AudioStreamPlayer] = [
+@onready var walking: AudioPlayer = $Player/Walking
+@onready var jump: AudioPlayer = $Player/Jump
+
+@onready var sfx: Array[AudioPlayer] = [
 	generated,
 	mining,
-	mining_fail,
+	fail,
 	earthquake,
 	gold_gain,
 	key_item_gain,
@@ -56,6 +58,9 @@ func setup_signals():
 	GameController.player.failed.connect(_on_player_failed)
 	GameController.player.started_jetpack.connect(_on_player_started_jetpack)
 	GameController.player.stopped_jetpack.connect(_on_player_stopped_jetpack)
+	GameController.player.started_walking.connect(_on_player_started_walking)
+	GameController.player.stopped_walking.connect(_on_player_stopped_walking)
+	GameController.player.jumped.connect(_on_player_jumped)
 	GameController.world_shuffle.connect(_on_world_shuffle)
 	GameController.won.connect(_on_won)
 
@@ -77,14 +82,14 @@ func debug_audio() -> void:
 func set_volume(volume: int, music_only: bool):
 	var db := (volume - 5) * 4 if volume > 0 else -80
 	if music_only:
-		music.volume_db = db
+		music.change_volume(db)
 	else:
 		for player in sfx:
-			player.volume_db = db
+			player.change_volume(db)
 
 func _on_player_started_mining(block: Block) -> void:
 	if block.type == TerrainType.BEDROCK:
-		mining_fail.play()
+		fail.play()
 
 func _on_player_block_mined(_block: Block) -> void:
 	mining.pitch_scale = random_penta_scale_pitch()
@@ -128,6 +133,13 @@ func _on_player_stopped_jetpack() -> void:
 	else:
 		jetpack_end.play()
 	jetpack_extend.stop()
+	pass
+
+func _on_player_started_walking() -> void:
+	pass
+func _on_player_stopped_walking() -> void:
+	pass
+func _on_player_jumped() -> void:
 	pass
 
 func _on_world_shuffle(_intensity: float=-1) -> void:

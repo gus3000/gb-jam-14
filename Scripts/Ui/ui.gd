@@ -13,6 +13,8 @@ enum MessageKey {
 }
 
 signal ui_accept
+signal ui_move
+signal ui_fail
 
 const message_duration: float = 4.0
 @export var messages: Dictionary[MessageKey, String] = {
@@ -44,9 +46,12 @@ func _process(_delta: float) -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("gb_a") \
+	if is_showing_message and (
+			event.is_action_pressed("gb_a") \
 			or event.is_action_pressed("gb_b") \
-			or event.is_action_pressed("gb_start"):
+			or event.is_action_pressed("gb_start")
+	):
+		print("ui accept")
 		ui_accept.emit()
 
 func queue_string(message: String) -> void:

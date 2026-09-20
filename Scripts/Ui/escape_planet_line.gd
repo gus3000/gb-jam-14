@@ -22,10 +22,10 @@ func unfocus() -> void:
 	label.label_settings = unfocused_label_settings
 
 
-func activate() -> void:
+func activate() -> bool:
 	if GameController.player.gold < cost:
-		GameController.player.failed.emit()
-		return
+		return false
 	
 	GameController.player.gold -= cost
 	buy.emit()
+	return true

@@ -34,7 +34,10 @@ func _input(event: InputEvent) -> void:
 		select_previous_upgrade()
 	elif event.is_action_pressed("gb_a") or event.is_action_pressed("gb_start"):
 		accept_event()
-		current_upgrade_line.activate()
+		if current_upgrade_line.activate():
+			GameController.ui.ui_accept.emit()
+		else:
+			GameController.ui.ui_fail.emit()
 		escape_planet.visible = GameController.player.can_buy_escape()
 	elif event.is_action_pressed("gb_b"):
 		close_menu()
@@ -64,6 +67,7 @@ func _update_index(selected_upgrade: Upgradable) -> void:
 	current_upgrade = selected_upgrade
 	current_upgrade_line.focus()
 	current_index = upgrade_lines.keys().find(current_upgrade)
+	GameController.ui.ui_move.emit()
 	return
 
 func select_previous_upgrade() -> void:

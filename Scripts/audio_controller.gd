@@ -24,7 +24,10 @@ const penta_scale: Array[int] = [0, 3, 5, 7, 10, 12, 15, 17, 19, 22]
 @onready var mole_hit_ground: AudioStreamPlayer = $Mole/HitGround
 
 @onready var main_music: AudioPlayer = $Music/Main
-@onready var intro_music: AudioStreamPlayer = $Music/Intro
+@onready var intro_music: AudioPlayer = $Music/Intro
+
+@onready var ui_move: AudioPlayer = $UI/Move
+@onready var ui_select: AudioPlayer = $UI/Select
 
 @onready var music: Array[AudioPlayer] = [
 	main_music,
@@ -41,6 +44,11 @@ const penta_scale: Array[int] = [0, 3, 5, 7, 10, 12, 15, 17, 19, 22]
 	jetpack_begin,
 	jetpack_extend,
 	jetpack_end,
+	walking,
+	jump,
+	mole_hit_ground,
+	ui_move,
+	ui_select,
 ]
 
 @onready var cutscenes_music: Dictionary[CutsceneType, AudioStreamPlayer] = {
@@ -69,7 +77,7 @@ func setup_signals():
 	GameController.player.mining_core.block_mined.connect(_on_player_block_mined)
 	GameController.player.gained_gold.connect(_on_player_gained_gold)
 	GameController.player.obtain_key_object.connect(_on_player_gained_key_object)
-	GameController.player.failed.connect(_on_player_failed)
+	GameController.player.failed.connect(_on_failed)
 	GameController.player.started_jetpack.connect(_on_player_started_jetpack)
 	GameController.player.stopped_jetpack.connect(_on_player_stopped_jetpack)
 	GameController.player.started_walking.connect(_on_player_started_walking)
@@ -79,6 +87,9 @@ func setup_signals():
 	GameController.won.connect(_on_won)
 	CutsceneController.cutscene_starts_playing.connect(_on_cutscene_starts_playing)
 	CutsceneController.cutscene_stops_playing.connect(_on_cutscene_stops_playing)
+	GameController.ui.ui_accept.connect(_on_ui_select)
+	GameController.ui.ui_move.connect(_on_ui_move)
+	GameController.ui.ui_fail.connect(_on_failed)
 
 func random_penta_scale_pitch(bonus: int=0) -> float:
 	var random_index: int = randi_range(0, 2)
@@ -106,12 +117,12 @@ func set_volume(volume: int, music_only: bool):
 		for player in sfx:
 			player.change_volume(db)
 
-func get_block_bonus(block: Block)->int:
-	if block.multiplier>99:
+func get_block_bonus(block: Block) -> int:
+	if block.multiplier > 99:
 		return 3
-	if block.multiplier>9:
+	if block.multiplier > 9:
 		return 2
-	if block.multiplier>.9:
+	if block.multiplier > .9:
 		return 1
 	return 0
 
@@ -141,7 +152,7 @@ func _on_player_gained_key_object(_object_type: KeyObject.KeyObjectType) -> void
 	# music.stream_paused = false
 	main_music.volume_db += 8
 
-func _on_player_failed() -> void:
+func _on_failed() -> void:
 	fail.play()
 
 func _on_player_started_jetpack() -> void:
@@ -208,3 +219,9 @@ func _on_cutscene_stops_playing(cutscene: CutsceneType) -> void:
 		main_music.stream_paused = false
 		main_music.seek(0)
 	pass
+
+func _on_ui_select() -> void:
+	ui_select.play()
+
+func _on_ui_move() -> void:
+	ui_move.play()

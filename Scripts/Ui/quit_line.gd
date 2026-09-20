@@ -17,5 +17,6 @@ func unfocus() -> void:
 	# print("unfocusing ", power_label.text)
 	label.label_settings = unfocused_label_settings
 
-func activate() -> void:
+func activate() -> bool:
 	quit.emit()
+	return true

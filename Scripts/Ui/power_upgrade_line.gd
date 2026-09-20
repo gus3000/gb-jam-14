@@ -74,15 +74,15 @@ func unfocus() -> void:
 	# print("unfocusing ", power_label.text)
 	power_label.label_settings = unfocused_label_settings
 
-func activate() -> void:
+func activate() -> bool:
 	print("upgrade ", power_label.text)
 	var cost: int = get_cost()
 	if GameController.player.gold < cost \
 			or get_level() == 0 \
 			or get_level() >= get_power_node().max_power_level:
-		GameController.player.failed.emit()
-		return
+		return false
 
 	GameController.player.gold -= cost
 	get_power_node().power_level += 1
 	update_line()
+	return true

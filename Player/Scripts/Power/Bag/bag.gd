@@ -52,7 +52,8 @@ func extract_dirt(amount: int) -> int:
 	return amount
 
 func _on_mining_core_block_mined(block: Block) -> void:
-	add_dirt(block.toughness)
+	print("[BAG] add %s dirt" % block.dirt)
+	add_dirt(block.dirt)
 
 func has_key_object(object_type: KeyObjectType) -> bool:
 	return object_type in objects.keys() and objects[object_type] > 0

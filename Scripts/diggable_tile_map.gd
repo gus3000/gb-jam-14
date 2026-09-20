@@ -64,14 +64,23 @@ func get_block_position(collision_position: Vector2) -> Vector2:
 func get_block_at_point(collision_position: Vector2) -> Block:
 	var pos := get_block_map_position(collision_position)
 	var data := get_cell_tile_data(pos)
-	
+
 	var terrain := data.terrain
 	if terrain < 0:
 		terrain = TerrainType.BEDROCK
-	# print("cell at %s : %s" % [pos, data.terrain])
+	var multiplier = data.get_custom_data("multiplier")
+	# print("cell at %s : %s (x%s)" % [pos, data.terrain, multiplier])
 
 	# return Block.new(pos.x, pos.y, (pos.y - ground_boundaries.position.y + 1) * toughness_per_depth_unit)
-	return Block.new(pos.x, pos.y, terrains[terrain])
+	return Block.new(pos.x, pos.y, terrains[terrain], multiplier)
+
+func adjust_probabilites(base_probabilities: Array[float], depth: int) -> Array[float]:
+	return [
+		base_probabilities[0],
+		base_probabilities[1] * pow(depth, .1),
+		base_probabilities[2] * pow(depth, .5),
+		base_probabilities[3] * pow(depth, 1),
+	]
 
 # /!\ Resets the ground !
 func earthquake(_intensity: float=-1) -> void:
@@ -93,7 +102,12 @@ func earthquake(_intensity: float=-1) -> void:
 		for x in range(ground_boundaries.position.x, ground_boundaries.end.x):
 			if y == ground_boundaries.position.y:
 				continue
-			var chosen_cell = Utils.random_with_weights(stone_variations_coords, stone_variations_probabilities)
+			# adjust probabilites with depth
+			var adjusted_probabilities: Array[float] = adjust_probabilites(
+					stone_variations_probabilities,
+					y - ground_boundaries.position.y
+			)
+			var chosen_cell = Utils.random_with_weights(stone_variations_coords, adjusted_probabilities)
 			set_cell(Vector2i(x, y), 1, chosen_cell)
 
 	set_pattern(ground_boundaries.position, crust_pattern)

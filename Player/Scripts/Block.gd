@@ -10,21 +10,23 @@ var x: int
 var y: int
 var type: TerrainType
 var toughness: int
+var dirt: int
 
 var position: Vector2i:
 	get: return Vector2i(x, y)
 
-func _init(_x: int, _y: int, terrain_type: TerrainType):
+func _init(_x: int, _y: int, terrain_type: TerrainType, multiplier: float):
 	x = _x
 	y = _y
 	type = terrain_type
 	match terrain_type:
 		TerrainType.FANCY_STONE, TerrainType.STONE:
 			toughness = (y - STARTING_LAYER + 1) * TOUGHNESS_PER_DEPTH_UNIT
-			# toughness = log(y - STARTING_LAYER + 1) * TOUGHNESS_PER_DEPTH_UNIT
+		# toughness = log(y - STARTING_LAYER + 1) * TOUGHNESS_PER_DEPTH_UNIT
 		_:
 			toughness = 10000000
 	toughness = max(toughness, 1)
+	dirt = ceili(toughness * multiplier)
 
 func _to_string() -> String:
 	return "Block(%s,%s,%s)" % [x, y, toughness]

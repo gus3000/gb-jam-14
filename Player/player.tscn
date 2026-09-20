@@ -53,10 +53,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x3vf3"]
-atlas = ExtResource("4_vtle1")
-region = Rect2(0, 0, 8, 8)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_apopc"]
 atlas = ExtResource("4_vtle1")
 region = Rect2(16, 0, 8, 8)
@@ -64,6 +60,10 @@ region = Rect2(16, 0, 8, 8)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5htga"]
 atlas = ExtResource("4_vtle1")
 region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3vf3"]
+atlas = ExtResource("4_vtle1")
+region = Rect2(0, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5o4e"]
 atlas = ExtResource("4_vtle1")
@@ -73,13 +73,13 @@ region = Rect2(0, 0, 8, 8)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x3vf3")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_apopc")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5htga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3vf3")
 }],
 "loop": 1,
 "name": &"blinking",
@@ -222,7 +222,7 @@ debug_point = NodePath("MiningIndicator")
 visible = false
 position = Vector2(15, 0)
 sprite_frames = SubResource("SpriteFrames_dayrp")
-animation = &"blinking"
+autoplay = "default"
 script = ExtResource("8_od3ui")
 
 [node name="Bag" type="Node2D" parent="PowerCore" unique_id=1939375753]

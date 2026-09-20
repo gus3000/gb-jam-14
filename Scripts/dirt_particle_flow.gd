@@ -24,37 +24,14 @@ func burst(duration:float):
 	lifetime = duration
 	print("generating %s particles" % amount)
 	restart()
-	# for i in range(particles_to_generate):
-	# 	# TODO figure out how to do this in the web export
-	# 	emit_particle(
-	# 			Transform2D(0, get_particle_start_position()),
-	# 			Vector2.UP,
-	# 			Color.BLACK,
-	# 			Color.BLACK,
-	# 			EMIT_FLAG_POSITION | EMIT_FLAG_VELOCITY
-	# 	)
 	pass
-
-# func _on_bag_dirt_amount_changed(dirt_amount: int):
-# 	if dirt_amount >= 0:
-# 		return
-# var particles_to_generate: int = max(1, log(-dirt_amount))
-# for i in range(particles_to_generate):
-# 	# TODO figure out how to do this in the web export
-# 	emit_particle(
-# 			Transform2D(0, get_particle_start_position()),
-# 			Vector2.UP,
-# 			Color.BLACK,
-# 			Color.BLACK,
-# 			EMIT_FLAG_POSITION | EMIT_FLAG_VELOCITY
-# 	)
 
 
 func get_particle_start_position() -> Vector2:
 	var base_pos := GameController.player.bag.opening.global_position
 
 	var displacement_angle: float = randf_range(0, TAU)
-	var displacement_magnitude: float = randf_range(0.01, displacement_max_magnitude)
+	var displacement_magnitude: float = randf_range(1, displacement_max_magnitude)
 	base_pos += Vector2.from_angle(displacement_angle) * displacement_magnitude
 
 	return base_pos

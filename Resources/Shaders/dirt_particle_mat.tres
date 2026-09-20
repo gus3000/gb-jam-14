@@ -4,4 +4,5 @@
 
 [resource]
 shader = ExtResource("1_5yeh6")
+shader_parameter/start_position = Vector2(0, 0)
 shader_parameter/target_position = Vector2(37, -15)

@@ -49,7 +49,6 @@ func extract_dirt(amount: int) -> int:
 	if amount > dirt:
 		amount = dirt
 	dirt -= amount
-	print("%s dirt extracted, %d remaining" % [amount, dirt])
 	return amount
 
 func _on_mining_core_block_mined(block: Block) -> void:

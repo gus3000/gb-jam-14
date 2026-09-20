@@ -22,6 +22,7 @@ func _on_key_object_pickup() -> void:
 	GameController.earthquake()
 	await get_tree().create_timer(3).timeout
 	GameController.player.movement_paused = false
+	upgrade_menu_interact.show()
 
 
 func blink() -> void:
@@ -48,5 +49,7 @@ func on_unload():
 	pass
 
 func _on_upgrade_menu_interact() -> void:
-	upgrade_menu.open_menu()
-	
+	if GameController.player.power_core.has_power(PowerCore.Power.JETPACK):
+		upgrade_menu.open_menu()
+	else:
+		GameController.player.failed.emit()

@@ -75,7 +75,7 @@ func unfocus() -> void:
 func activate() -> void:
 	print("upgrade ", power_label.text)
 	var cost: int = get_cost()
-	if GameController.player.gold < cost:
+	if GameController.player.gold < cost or get_level() == 0:
 		GameController.player.failed.emit()
 		return
 

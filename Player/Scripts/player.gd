@@ -200,9 +200,6 @@ func handle_jumping(delta: float) -> void:
 
 func obtain(object_type: KeyObjectType):
 	obtain_key_object.emit(object_type)
-	movement_paused = true
-	await get_tree().create_timer(2).timeout
-	movement_paused = false
 	pass
 
 func has_key_object(object_type: KeyObjectType) -> bool:

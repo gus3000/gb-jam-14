@@ -72,6 +72,8 @@ const KeyObjectType := KeyObject.KeyObjectType
 
 
 func _on_sign_interact() -> void:
+	if GameController.ui.is_showing_message:
+		return 
 	var things_to_say: Array[String] = get_things_to_say()
 	for thing in things_to_say:
 		GameController.ui.queue_string(thing)

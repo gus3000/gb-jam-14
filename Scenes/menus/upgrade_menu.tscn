@@ -15,7 +15,7 @@ texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
-[node name="UpgradeMenu" type="Control" unique_id=985072601]
+[node name="UpgradeMenu" type="Control" unique_id=985072601 groups=["upgrade_menu"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,7 +90,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
-text = "1 000 000"
+text = "10 000 000"
 label_settings = ExtResource("2_lrwef")
 
 [node name="Dollar" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer/Options/EscapePlanet/Amount" unique_id=2033838509]

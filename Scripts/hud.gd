@@ -69,8 +69,15 @@ func change_volume(value: int, music: bool):
 
 	pass
 
+func upgrade_menu_visible() -> bool:
+	var upgrade_menu: Node = get_tree().get_first_node_in_group("upgrade_menu")
+	if upgrade_menu == null:
+		return false
+	return upgrade_menu.visible
+	
+
 func _unhandled_input(event: InputEvent) -> void:
-	if not pause_menu.visible and event.is_action_pressed("gb_start"):
+	if not pause_menu.visible and not upgrade_menu_visible() and event.is_action_pressed("gb_start"):
 		open_menu() ;
 	elif pause_menu.visible:
 		if event.is_action_pressed("gb_a"):

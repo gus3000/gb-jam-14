@@ -4,6 +4,7 @@
 [ext_resource type="LabelSettings" uid="uid://b76tuudykixus" path="res://Assets/Fonts/default_label_settings.tres" id="1_jxero"]
 [ext_resource type="Theme" uid="uid://cuo02oet7himq" path="res://Resources/ui_theme.tres" id="1_nf4gj"]
 [ext_resource type="Texture2D" uid="uid://c67rm6k0f4vl3" path="res://Assets/Sprites/textbox.png" id="1_qdvrb"]
+[ext_resource type="Texture2D" uid="uid://b6go8fi630rai" path="res://Assets/Sprites/ui_arrow.png" id="5_smcll"]
 [ext_resource type="PackedScene" uid="uid://ciojwqlve1l2n" path="res://Scenes/menus/hud.tscn" id="6_m78vo"]
 [ext_resource type="LabelSettings" uid="uid://du1t4foy6nd1d" path="res://Assets/Fonts/default_label_settings_dark_mode.tres" id="6_smcll"]
 
@@ -14,12 +15,49 @@ texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
+[sub_resource type="Animation" id="Animation_smcll"]
+resource_name = "Blink"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ryf15"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ryf15"]
+_data = {
+&"Blink": SubResource("Animation_smcll"),
+&"RESET": SubResource("Animation_ryf15")
+}
+
 [node name="Ui" type="CanvasLayer" unique_id=556782816]
 process_mode = 3
 script = ExtResource("1_2246s")
 
 [node name="Dialog" type="VBoxContainer" parent="." unique_id=174421350]
-visible = false
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,6 +81,18 @@ text = "123456789ABCDEFGH
 label_settings = ExtResource("1_jxero")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Arrow" type="TextureRect" parent="Dialog/PanelContainer/MarginContainer" unique_id=370250282]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+offset_transform_enabled = true
+texture = ExtResource("5_smcll")
+stretch_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dialog/PanelContainer/MarginContainer/Arrow" unique_id=486793694]
+libraries/ = SubResource("AnimationLibrary_ryf15")
+autoplay = &"Blink"
 
 [node name="HUD" parent="." unique_id=211123488 instance=ExtResource("6_m78vo")]
 

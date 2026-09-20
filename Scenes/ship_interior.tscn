@@ -104,7 +104,7 @@ position = Vector2(0, -8)
 text = "Upgrade"
 to_focus = false
 
-[node name="UpgradeMenu" parent="." unique_id=985072601 instance=ExtResource("12_31vnk")]
+[node name="UpgradeMenu" parent="." unique_id=985072601 groups=["upgrade_menu"] instance=ExtResource("12_31vnk")]
 visible = false
 z_index = 4
 offset_left = 67.0

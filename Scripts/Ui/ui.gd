@@ -12,22 +12,7 @@ enum MessageKey {
 	CYCLE_POWER_REMINDER,
 }
 
-class Message:
-	var text: String
-	var duration: float
-	func _init(_text: String, _duration: float) -> void:
-		# if _text.length() > MAX_LINE_LENGTH and not _text.contains("\n"):
-		# 	var lines: Array[String] = []
-		# 	print("calculs :")
-		# 	print("%d / %d = %d" % [_text.length(), MAX_LINE_LENGTH, (_text.length()/MAX_LINE_LENGTH)])
-		# 	for i in range(_text.length() / MAX_LINE_LENGTH):
-		# 		var line = _text.substr(i * MAX_LINE_LENGTH, (i + 1) * MAX_LINE_LENGTH - 1)
-		# 		lines.push_back(line)
-		# 		print("line[%d] = %s" % [i, line])
-		# 	_text = "\n".join(lines)
-				
-		text = _text
-		duration = _duration
+signal ui_accept
 
 const message_duration: float = 4.0
 @export var messages: Dictionary[MessageKey, String] = {
@@ -37,11 +22,12 @@ const message_duration: float = 4.0
 
 @onready var hud: CanvasLayer = $HUD
 @onready var dialog: Control = $Dialog
+@onready var arrow: TextureRect = $Dialog/PanelContainer/MarginContainer/Arrow
 @onready var label: Label = $Dialog/PanelContainer/MarginContainer/Label
 @onready var equipped_power_indicator: UiPowerIcon = $HUD/EquippedPowerIndicator
 @onready var gold: Label = $Gold
 
-var message_queue: Array[Message] = []
+var message_queue: Array[String] = []
 
 var is_showing_message: bool = false
 
@@ -57,23 +43,30 @@ func _process(_delta: float) -> void:
 		await show_message(message_queue.pop_front())
 	pass
 
-func queue_string(message: String, duration: float=message_duration) -> void:
-	queue_message(Message.new(message, duration))
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("gb_a") \
+			or event.is_action_pressed("gb_b") \
+			or event.is_action_pressed("gb_start"):
+		ui_accept.emit()
 
-func queue_message_key(messageKey: MessageKey, context: Array=[], duration: float=message_duration) -> void:
-	queue_string(messages[messageKey] % context, duration)
-	pass
-
-func queue_message(message: Message) -> void:
+func queue_string(message: String) -> void:
 	message_queue.push_back(message)
 
-func show_message(message: Message) -> void:
-	print("start message : ", message)
+func queue_message_key(messageKey: MessageKey, context: Array=[]) -> void:
+	queue_string(messages[messageKey] % context)
+	pass
+
+func show_message(text: String) -> void:
+	print("start message : ", text)
 	is_showing_message = true
 	dialog.show()
-	label.text = message.text
-	await get_tree().create_timer(message.duration).timeout
-	print("end message : ", message)
+	label.text = text
+	GameController.pause()
+	#TODO put small arrow
+	# await get_tree().create_timer(message.duration).timeout
+	await ui_accept
+	GameController.unpause.call_deferred()
+	print("end message : ", text)
 	is_showing_message = false
 	dialog.hide()
 

@@ -221,7 +221,7 @@ func unlock_cheat() -> void:
 	for object_type in KeyObjectType.values():
 		bag._on_player_obtain_key_object(object_type)
 	gold += 100_000
-	GameController.ui.queue_string("Unlocked\neverything !", 1)
+	GameController.ui.queue_string("Unlocked\neverything !")
 	GameController.earthquake()
 
 func unlock_baby_cheat() -> void:
@@ -230,7 +230,7 @@ func unlock_baby_cheat() -> void:
 	bag.power_level = 1
 	for object_type in KeyObjectType.values():
 		bag._on_player_obtain_key_object(object_type)
-	GameController.ui.queue_string("Unlocked\nbasic stuff !", 1)
+	GameController.ui.queue_string("Unlocked\nbasic stuff !")
 
 func add_gold(to_add: int):
 	gold += to_add

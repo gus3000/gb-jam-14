@@ -81,7 +81,7 @@ func _process(_delta: float) -> void:
 		CutsceneController.skip()
 	if Input.is_action_just_pressed("debug_increase_mining"):
 		player.mining_core.power_level += 1
-		GameController.ui.queue_string("Mining increased\nto %s" % player.mining_core.power_level, 1)
+		GameController.ui.queue_string("Mining increased\nto %s" % player.mining_core.power_level)
 	if Input.is_action_just_pressed("debug_increase_bag"):
 		player.bag.add_dirt(ceili(player.bag.max_dirt * 0.1))
 	if Input.is_action_just_pressed("cheat"):

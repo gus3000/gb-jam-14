@@ -172,7 +172,6 @@ hframes = 3
 [node name="Detection" type="Area2D" parent="." unique_id=287467373]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" unique_id=202645380]
-position = Vector2(0, -30)
 shape = SubResource("RectangleShape2D_dayrp")
 
 [connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]

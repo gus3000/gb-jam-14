@@ -32,9 +32,12 @@ func _input(event: InputEvent) -> void:
 		select_next_upgrade()
 	elif event.is_action_pressed("up"):
 		select_previous_upgrade()
-	elif event.is_action_pressed("gb_a"):
+	elif event.is_action_pressed("gb_a") or event.is_action_pressed("gb_start"):
+		accept_event()
 		current_upgrade_line.activate()
 		escape_planet.visible = GameController.player.can_buy_escape()
+	elif event.is_action_pressed("gb_b"):
+		close_menu()
 
 
 func open_menu() -> void:
@@ -50,7 +53,7 @@ func close_menu() -> void:
 	if not visible:
 		return
 	hide()
-	GameController.unpause()
+	GameController.unpause.call_deferred()
 
 
 func _update_index(selected_upgrade: Upgradable) -> void:

@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://63qxgbb48n7b" path="res://Assets/Audio/Music/PLACEHOLDER-final-fantasy-vii-victory-fanfare-1.mp3" id="10_xxf2r"]
 [ext_resource type="AudioStream" uid="uid://dsn5l4i1ljpvh" path="res://Assets/Audio/SFX/Walking.wav" id="10_y5jvc"]
 [ext_resource type="AudioStream" uid="uid://c218g6hkxja44" path="res://Assets/Audio/SFX/Jump.wav" id="11_40amf"]
+[ext_resource type="AudioStream" uid="uid://c4u2euxk0rabs" path="res://Assets/Audio/SFX/Digging.wav" id="14_uc8ob"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_dayrp"]
 
@@ -89,4 +90,10 @@ script = ExtResource("3_6o502")
 
 [node name="KeyItemGain" type="AudioStreamPlayer" parent="Player" unique_id=89266544]
 stream = ExtResource("4_ncnt2")
+script = ExtResource("3_6o502")
+
+[node name="Mole" type="Node" parent="." unique_id=1182294547]
+
+[node name="HitGround" type="AudioStreamPlayer" parent="Mole" unique_id=2035596378]
+stream = ExtResource("14_uc8ob")
 script = ExtResource("3_6o502")

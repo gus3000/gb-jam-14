@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://dcbeb2uo5lve8"]
+
+[ext_resource type="Script" uid="uid://cbai7okdrp3j2" path="res://Scripts/mole.gd" id="1_x1pqu"]
+[ext_resource type="Texture2D" uid="uid://dgjhylmk8ped4" path="res://Assets/Sprites/Mole/mole.png" id="2_756yi"]
+[ext_resource type="Texture2D" uid="uid://b7pegcpwl0i8i" path="res://Assets/Sprites/stuff/Dirtbreak-Sheet.png" id="3_owylb"]
+
+[sub_resource type="Animation" id="Animation_lxbeb"]
+resource_name = "Appear"
+length = 1.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.40000004, 0.5, 0.6, 0.70000005, 0.8000001, 0.9000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 12, 11, 11, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DirtSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8000001, 0.9000001, 1.0000001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DirtSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8000001, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_owylb"]
+resource_name = "Flee"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8, 9, 10]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DirtSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DirtSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_hit_ground"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nyk4a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DirtSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DirtSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nyk4a"]
+_data = {
+&"Appear": SubResource("Animation_lxbeb"),
+&"Flee": SubResource("Animation_owylb"),
+&"RESET": SubResource("Animation_nyk4a")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dayrp"]
+size = Vector2(100, 60)
+
+[node name="Mole" type="Node2D" unique_id=2083927355]
+script = ExtResource("1_x1pqu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1874528901]
+libraries/ = SubResource("AnimationLibrary_nyk4a")
+autoplay = &"Appear"
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=318343548]
+position = Vector2(0, -6)
+texture = ExtResource("2_756yi")
+hframes = 11
+vframes = 2
+frame = 4
+
+[node name="DirtSprite" type="Sprite2D" parent="." unique_id=2082043116]
+visible = false
+position = Vector2(1, 0)
+texture = ExtResource("3_owylb")
+hframes = 3
+
+[node name="Detection" type="Area2D" parent="." unique_id=287467373]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection" unique_id=202645380]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_dayrp")
+
+[connection signal="body_entered" from="Detection" to="." method="_on_detection_body_entered"]

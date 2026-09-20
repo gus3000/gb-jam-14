@@ -25,6 +25,8 @@ signal won
 
 @onready var root: Node = $".."
 
+@onready var mole_prefab: PackedScene = preload("res://Scenes/mole.tscn")
+
 var loadable_scenes: Dictionary[LoadableSceneEnum, LoadableScene]
 
 # var ship_interior_scene: PackedScene = preload("res://Scenes/ship_interior.tscn")
@@ -39,6 +41,7 @@ var ui: Ui
 var world: WorldController
 
 var player_start_position: Vector2
+var random_mole_spawn_timer: Timer
 
 var is_debugging: bool = false
 
@@ -64,6 +67,10 @@ func _ready() -> void:
 		)
 	}
 	player_start_position = player.position
+	random_mole_spawn_timer = Timer.new()
+	add_child(random_mole_spawn_timer)
+	random_mole_spawn_timer.start(5)
+	random_mole_spawn_timer.timeout.connect(spawn_random_mole)
 
 func _process(_delta: float) -> void:
 	if not OS.is_debug_build():
@@ -79,6 +86,10 @@ func _process(_delta: float) -> void:
 		player.unlock_cheat()
 	if Input.is_action_just_pressed("baby_cheat"):
 		player.unlock_baby_cheat()
+	if Input.is_action_just_pressed("debug_mole"):
+		spawn_random_mole()
+
+
 func debug() -> void:
 	is_debugging = true
 	earthquake()
@@ -132,6 +143,8 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 
 func earthquake(intensity: float=-1) -> void:
 	world_shuffle.emit(intensity)
+	for i in range(4):
+		spawn_random_mole()
 	pass
 
 func teleport_to_start() -> void:
@@ -155,7 +168,7 @@ func toggle_pause(should_pause: bool) -> void:
 	player.movement_paused = should_pause
 	player.set_process_input(should_pause)
 	player.power_core.set_process_input(should_pause)
-	# get_tree().paused = should_pause
+# get_tree().paused = should_pause
 
 func pause() -> void:
 	toggle_pause(true)
@@ -177,6 +190,19 @@ func show_game() -> void:
 	camera.make_current()
 	pass
 
-func win()->void:
+func spawn_random_mole() -> void:
+	print("spawning mole")
+	if get_tree().get_node_count_in_group("mole") > 10:
+		print("too many moles")
+		return
+	var mole: Mole = mole_prefab.instantiate()
+	mole.global_position = player.global_position + Vector2.RIGHT * 64
+	mole.scale.x = [-1, 1].pick_random()
+	mole.global_position.y = 68.0
+	mole.global_position.x = randf_range(4, 140) if randf() < .5 else randf_range(342, 500)
+	world.add_child(mole)
+	mole.add_to_group("mole")
+
+func win() -> void:
 	won.emit()
 	CutsceneController.play(CutsceneController.CutsceneType.VICTORY)

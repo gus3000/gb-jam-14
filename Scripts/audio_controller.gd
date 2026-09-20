@@ -21,6 +21,8 @@ const penta_scale: Array[int] = [0, 3, 5]
 @onready var walking: AudioPlayer = $Player/Walking
 @onready var jump: AudioPlayer = $Player/Jump
 
+@onready var mole_hit_ground: AudioStreamPlayer = $Mole/HitGround
+
 @onready var sfx: Array[AudioPlayer] = [
 	generated,
 	mining,
@@ -156,3 +158,7 @@ func _on_world_shuffle(_intensity: float=-1) -> void:
 func _on_won() -> void:
 	music.stream_paused = true
 	win.play()
+
+func _on_mole_hit_ground()->void:
+	mole_hit_ground.play()
+	pass

@@ -43,7 +43,8 @@ func _invoke_option(value: int=0) -> void:
 			change_volume(value, menu_index == 2)
 
 		4:
-			get_tree().quit()
+			if value == 0:
+				get_tree().quit()
 
 func open_menu() -> void:
 	_update_index(-menu_index)

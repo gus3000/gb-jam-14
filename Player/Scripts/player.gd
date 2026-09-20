@@ -206,9 +206,9 @@ func has_key_object(object_type: KeyObjectType) -> bool:
 	return bag.has_key_object(object_type)
 
 func can_buy_escape() -> bool:
-	return mining_core.power_level == mining_core.max_power_level \
-			and power_core.jetpack_core.power_level == power_core.jetpack_core.max_power_level \
-			and bag.power_level == bag.max_power_level
+	return mining_core.power_level >= mining_core.max_power_level \
+			and power_core.jetpack_core.power_level >= power_core.jetpack_core.max_power_level \
+			and bag.power_level >= bag.max_power_level
 
 
 func unlock_cheat() -> void:

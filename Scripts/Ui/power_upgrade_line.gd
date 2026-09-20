@@ -62,6 +62,8 @@ func get_cost(level=-1) -> int:
 		return -1
 	if level < 0:
 		level = get_level()
+	if level >= get_power_node().max_power_level:
+		return INT32_MAX
 	return UpgradeCost[upgrade_type][level]
 
 func focus() -> void:
@@ -75,7 +77,9 @@ func unfocus() -> void:
 func activate() -> void:
 	print("upgrade ", power_label.text)
 	var cost: int = get_cost()
-	if GameController.player.gold < cost or get_level() == 0:
+	if GameController.player.gold < cost \
+			or get_level() == 0 \
+			or get_level() >= get_power_node().max_power_level:
 		GameController.player.failed.emit()
 		return
 

@@ -255,6 +255,7 @@ libraries/ = SubResource("AnimationLibrary_gubyq")
 [node name="5" type="Sprite2D" parent="Cutscenes/Intro" unique_id=357144396]
 visible = false
 texture = ExtResource("6_54d8w")
+flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/5" unique_id=1803784865]
 libraries/ = SubResource("AnimationLibrary_yukay")

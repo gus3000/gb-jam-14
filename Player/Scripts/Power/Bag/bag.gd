@@ -25,7 +25,7 @@ var max_dirt: int:
 		3: return 40_000
 		4: return 80_000
 		5: return 200_000
-		_: return 10_000_000
+		_: return 10_000_000 #TODO faire grossir celui-là comme le lv5, et le faire clignoter que au max
 
 func _ready() -> void:
 	for object_type in KeyObjectType.values():

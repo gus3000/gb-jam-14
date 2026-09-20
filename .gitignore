@@ -1,7 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-/build/linux/*
-/build/web/*
-/build/windows/*
+/build/linux*
+/build/web*
+/build/windows*
 /.DS_Store

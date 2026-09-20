@@ -20,6 +20,7 @@ func _on_key_object_pickup() -> void:
 	GameController.player.movement_paused = true
 	await blink()
 	GameController.earthquake()
+	GameController.ui.queue_string("The ship\nstarting up\nmakes the\nearth SHAKE !")
 	await get_tree().create_timer(3).timeout
 	GameController.player.movement_paused = false
 	upgrade_menu_interact.show()

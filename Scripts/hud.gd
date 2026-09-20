@@ -36,15 +36,11 @@ func _invoke_option(value: int=0) -> void:
 		1:
 			if value == 0:
 				close_menu()
-				await GameController.teleport_to_start()
+				GameController.teleport_to_start()
 		2, 3:
 			if value == 0:
 				value = 1
 			change_volume(value, menu_index == 2)
-
-		4:
-			if value == 0:
-				get_tree().quit()
 
 func open_menu() -> void:
 	_update_index(-menu_index)

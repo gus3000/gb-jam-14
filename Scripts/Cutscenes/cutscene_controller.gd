@@ -19,6 +19,11 @@ var current_cutscene: Cutscene = null
 
 func _ready() -> void:
 	play.call_deferred(CutsceneType.INTRO)
+	await cutscene_stops_playing
+	GameController.ui.queue_string("What a landing !")
+	GameController.ui.queue_string("I hope\nmy friend\nis okay.")
+	GameController.ui.queue_string("And the ship.")
+	GameController.ui.queue_string("...probably\nnot.")
 
 func _process(delta: float) -> void:
 	if not OS.is_debug_build():

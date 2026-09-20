@@ -45,6 +45,8 @@ var random_mole_spawn_timer: Timer
 
 var is_debugging: bool = false
 
+var is_in_loaded_scene: bool = false
+
 func _ready() -> void:
 	camera = get_tree().get_first_node_in_group("camera")
 	main_scene = get_tree().get_first_node_in_group("main_scene")
@@ -124,6 +126,7 @@ func load_scene_additive(scene: LoadableSceneEnum) -> void:
 	camera.position = loadable_scene.camera_position
 	enter_fixed_scene.emit()
 	instance.on_load.call_deferred()
+	is_in_loaded_scene = true
 	pass
 
 func unload_scene_additive(scene: LoadableSceneEnum):
@@ -141,6 +144,7 @@ func unload_scene_additive(scene: LoadableSceneEnum):
 	player.scale = Vector2.ONE
 	camera.position = return_point
 	leave_fixed_scene.emit()
+	is_in_loaded_scene = false
 
 
 func earthquake(intensity: float=-1) -> void:
@@ -150,16 +154,15 @@ func earthquake(intensity: float=-1) -> void:
 	pass
 
 func teleport_to_start() -> void:
+	if is_in_loaded_scene:
+		return
 	# TODO add transition
-	ui.queue_string("Teleported to start")
+	ui.queue_string("Teleported\nto start")
 	player.position = player_start_position
 	player.velocity = Vector2.UP * 50
 	player.bag.dirt = 0
 	if player.has_key_object(KeyObject.KeyObjectType.JETPACK):
 		earthquake()
-	player.movement_paused = true
-	await get_tree().create_timer(2).timeout
-	player.movement_paused = false
 
 func player_exited_world() -> void:
 	print("exited world")

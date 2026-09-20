@@ -10,10 +10,10 @@ const KeyObjectType := KeyObject.KeyObjectType
 
 @onready var things_to_say_shovel: Array[String] = [
 	"Nice find !",
-	"You can DIG\nthrough the dirt\nby holding\nB button !",
+	"You can DIG\nthrough the dirt\nby holding\nthe B button !",
 	"On a keyboard\nit's the\nX or K\nkeys",
 	"What do\nyou mean\n\"What's a\nB button ?\"",
-	"Oh, and see\nif you can't\nfind the\nSHIP's KEY !",
+	"Oh, and see\nif you can\nfind the\nSHIP's KEY !",
 	"We can't\nfix the ship\nif it's locked.",
 ]
 
@@ -54,10 +54,10 @@ const KeyObjectType := KeyObject.KeyObjectType
 	"Wow, that's\nsome GOOD\ngear you have\nhere.",
 	"With that,\nwe can definitely\ngather enough\nGOLD !",
 	"Sorry, I mean\nYOU can.",
-	"I have to\nstay here,\nyou know.",
+	"I have to\nstay up here,\nyou know.",
 	"The MOLES.",
 	"I'm starting\nto like them.",
-	"I wonder how\nthey'll fare\nonce we're gone ?)"
+	"I wonder how\nthey'll fare\nonce we're gone ?"
 ]
 
 @onready var things_to_say_enough_gold_to_leave: Array[String] = [

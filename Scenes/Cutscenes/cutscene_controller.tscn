@@ -56,12 +56,72 @@ step = 0.1
 
 [sub_resource type="Animation" id="Animation_soblh"]
 resource_name = "default"
-length = 6.000003646257892
+length = 4.000003541949764
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"vibrate"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gubyq"]
 _data = {
 &"RESET": SubResource("Animation_78a8o"),
 &"default": SubResource("Animation_soblh")
+}
+
+[sub_resource type="Animation" id="Animation_v7nmc"]
+resource_name = "default"
+length = 4.000003541949764
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"vibrate"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yukay"]
+_data = {
+&"default": SubResource("Animation_v7nmc")
+}
+
+[sub_resource type="Animation" id="Animation_yukay"]
+resource_name = "default"
+length = 4.000003541949764
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"vibrate"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2v2sx"]
+_data = {
+&"default": SubResource("Animation_yukay")
 }
 
 [sub_resource type="Animation" id="Animation_er6la"]
@@ -187,15 +247,15 @@ libraries/ = SubResource("AnimationLibrary_gubyq")
 visible = false
 texture = ExtResource("6_54d8w")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/5" unique_id=704858822]
-libraries/ = SubResource("AnimationLibrary_gubyq")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/5" unique_id=1803784865]
+libraries/ = SubResource("AnimationLibrary_yukay")
 
 [node name="6" type="Sprite2D" parent="Cutscenes/Intro" unique_id=1356300940]
 visible = false
 texture = ExtResource("7_6resr")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/6" unique_id=1673272909]
-libraries/ = SubResource("AnimationLibrary_gubyq")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/6" unique_id=713492343]
+libraries/ = SubResource("AnimationLibrary_2v2sx")
 
 [node name="Victory" type="Node2D" parent="Cutscenes" unique_id=543579286]
 script = ExtResource("11_6resr")

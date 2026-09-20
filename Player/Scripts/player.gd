@@ -139,14 +139,17 @@ func handle_horizontal_movement() -> void:
 		speed = max(abs(velocity.x), speed)
 	velocity.x = round(Input.get_axis("left", "right")) * speed
 	if velocity.x != 0:
+		if not was_on_floor_last_frame and is_on_floor():
+			started_walking.emit()
+		elif not walking:
+			started_walking.emit()
+		elif was_on_floor_last_frame and not is_on_floor():
+			stopped_walking.emit()
 		facing_direction = Direction.LEFT if velocity.x < 0 else Direction.RIGHT
 		last_left_right_direction = facing_direction
-		if not walking:
-			started_walking.emit()
 		walking = true
 	else:
-		if walking:
-			stopped_walking.emit()
+		stopped_walking.emit()
 		walking = false
 
 func handle_vertical_movement() -> void:
@@ -227,7 +230,7 @@ func unlock_baby_cheat() -> void:
 	bag.power_level = 1
 	for object_type in KeyObjectType.values():
 		bag._on_player_obtain_key_object(object_type)
-	GameController.ui.queue_string("Unlocked\nbasic stuff !",1)
+	GameController.ui.queue_string("Unlocked\nbasic stuff !", 1)
 
 func add_gold(to_add: int):
 	gold += to_add

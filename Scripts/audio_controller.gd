@@ -26,7 +26,7 @@ const penta_scale: Array[int] = [0, 3, 5]
 @onready var main_music: AudioPlayer = $Music/Main
 @onready var intro_music: AudioStreamPlayer = $Music/Intro
 
-@onready var music:Array[AudioPlayer] = [
+@onready var music: Array[AudioPlayer] = [
 	main_music,
 	intro_music
 ]
@@ -153,10 +153,13 @@ func _on_player_stopped_jetpack() -> void:
 	pass
 
 func _on_player_started_walking() -> void:
+	walking.play()
 	pass
 func _on_player_stopped_walking() -> void:
+	walking.stop()
 	pass
 func _on_player_jumped() -> void:
+	jump.play()
 	pass
 
 func _on_world_shuffle(_intensity: float=-1) -> void:

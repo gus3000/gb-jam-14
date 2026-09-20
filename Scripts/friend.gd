@@ -5,7 +5,7 @@ const KeyObjectType := KeyObject.KeyObjectType
 
 @onready var things_to_say_start: Array[Message] = [
 	Message.new("Hey Captain !", 1),
-	Message.new("I had big plans\nbut it seems\nthey've\n\"fallen\"\n short", 5),
+	Message.new("I had big plans\nbut it seems\nthey've\n\"fallen\"\n short.", 5),
 	Message.new("Talk to me later\nif you find\nyour stuff.", 3)
 ]
 

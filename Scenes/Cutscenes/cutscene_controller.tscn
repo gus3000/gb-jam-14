@@ -56,7 +56,7 @@ step = 0.1
 
 [sub_resource type="Animation" id="Animation_soblh"]
 resource_name = "default"
-length = 4.000003541949764
+length = 6.000003646257892
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gubyq"]
 _data = {

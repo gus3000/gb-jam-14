@@ -42,7 +42,7 @@ func update_line() -> void:
 		return
 
 	level_label.text = "%s" % get_level()
-	cost_label.text = "%s" % get_cost()
+	cost_label.text = "%s" % Utils.format_int(get_cost())
 
 func get_power_node() -> Node2D:
 	match (upgrade_type):

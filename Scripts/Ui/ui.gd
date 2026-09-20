@@ -82,5 +82,5 @@ func _on_player_changed_equipped_power(power: PowerCore.Power) -> void:
 
 func _on_gold_change(new_amount: int) -> void:
 	print("ui gold changed to ", new_amount)
-	gold.text = "%d$" % new_amount
+	gold.text = "%s$" % Utils.format_int(new_amount)
 	pass

@@ -10,7 +10,7 @@ signal buy
 @onready var amount_label: Label = $Amount
 
 func _ready() -> void:
-	amount_label.text = "%s" % cost
+	amount_label.text = "%s" % Utils.format_int(cost)
 	pass
 
 func focus() -> void:

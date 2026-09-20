@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/KeepDigging.ogg-2e39db901c1b326ad55d74ee91149
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

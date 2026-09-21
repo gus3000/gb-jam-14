@@ -8,17 +8,17 @@ signal cutscene_stops_playing(cutscene: CutsceneType)
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var cutscene_camera: CameraRig = $Camera2D
 @onready var cutscene_node: Dictionary[CutsceneType, Cutscene] = {
+	CutsceneType.START_MENU: $Cutscenes/StartMenu,
 	CutsceneType.INTRO: $Cutscenes/Intro,
 	CutsceneType.VICTORY: $Cutscenes/Victory
 }
-@onready var cutscene_music: Dictionary[CutsceneType, Cutscene] = {
-	CutsceneType.INTRO: $Cutscenes/Intro,
-}
 
 var current_cutscene: Cutscene = null
+var is_playing_any_cutscene: bool:
+	get: return current_cutscene != null
 
 func _ready() -> void:
-	play.call_deferred(CutsceneType.INTRO)
+	play.call_deferred(CutsceneType.START_MENU)
 	await cutscene_stops_playing
 	GameController.ui.queue_string("What a landing !")
 	GameController.ui.queue_string("I hope\nmy friend\nis okay.")

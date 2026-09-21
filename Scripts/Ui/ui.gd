@@ -46,7 +46,9 @@ func _process(_delta: float) -> void:
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_showing_message and (
+	if is_showing_message \
+			and not CutsceneController.is_playing_any_cutscene\
+			and (
 			event.is_action_pressed("gb_a") \
 			or event.is_action_pressed("gb_b") \
 			or event.is_action_pressed("gb_start")

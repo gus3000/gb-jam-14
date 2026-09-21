@@ -74,7 +74,10 @@ func upgrade_menu_visible() -> bool:
 	
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not pause_menu.visible and not upgrade_menu_visible() and event.is_action_pressed("gb_start"):
+	if not pause_menu.visible \
+			and not upgrade_menu_visible()\
+			and not CutsceneController.is_playing_any_cutscene\
+			and event.is_action_pressed("gb_start"):
 		open_menu() ;
 	elif pause_menu.visible:
 		if event.is_action_pressed("gb_a"):

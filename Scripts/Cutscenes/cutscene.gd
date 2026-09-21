@@ -2,14 +2,16 @@ class_name Cutscene
 extends Node2D
 
 enum CutsceneType {
+	START_MENU,
 	INTRO,
 	VICTORY,
 }
 
 signal slide_ended
+signal cutscene_ended
 
 ## (seconds)
-const DEFAULT_DURATION:float = 3
+const DEFAULT_DURATION: float = 3
 
 ## (seconds)
 var duration: float = 3
@@ -29,7 +31,7 @@ func _process(delta: float) -> void:
 		slide_ended.emit()
 
 func play() -> void:
-	# print("starting cutscene ", name)
+	print("starting cutscene ", name)
 	is_playing = true
 	show()
 	var children: Array[Node] = get_children()
@@ -51,14 +53,18 @@ func play() -> void:
 		# print("anim_player = ", anim_player)
 		slide_started_at = Time.get_unix_time_from_system()
 		# await get_tree().create_timer(3).timeout
-		await slide_ended
+		if is_instance_of(c, CutsceneSlide):
+			await c.ended
+		else:
+			await slide_ended
 		c.hide()
 
 	hide()
 	slide_started_at = 0
 	should_skip = false
 	is_playing = false
-# print("ending cutscene ", name)
+	print("ending cutscene ", name)
+	cutscene_ended.emit()
 
 func _slide_ended_cause_animation_finished(_whatever) -> void:
 	slide_ended.emit()

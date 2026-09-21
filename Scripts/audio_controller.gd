@@ -66,6 +66,7 @@ var jetpack_extend_timer: Timer = Timer.new()
 func _ready() -> void:
 	setup_signals.call_deferred()
 	generated.stream.buffer_length = note_length
+	main_music.stream_paused = true
 
 
 func _process(_delta: float) -> void:
@@ -207,18 +208,19 @@ func _on_mole_hit_ground() -> void:
 	pass
 
 func _on_cutscene_starts_playing(cutscene: CutsceneType) -> void:
+	print("pausing main music")
+	main_music.stream_paused = true
 	if cutscenes_music.has(cutscene):
-		main_music.stream_paused = true
 		cutscenes_music[cutscene].play()
 	pass
 
 func _on_cutscene_stops_playing(cutscene: CutsceneType) -> void:
+	main_music.stream_paused = false
+	main_music.seek(0)
 	if cutscenes_music.has(cutscene):
 		cutscenes_music[cutscene].stop()
-		await get_tree().create_timer(1).timeout
-		main_music.stream_paused = false
-		main_music.seek(0)
 	pass
+
 
 func _on_ui_select() -> void:
 	ui_select.play()

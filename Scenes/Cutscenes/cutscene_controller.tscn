@@ -3,8 +3,11 @@
 [ext_resource type="Script" uid="uid://dgm4t7m8sb671" path="res://Scripts/Cutscenes/cutscene_controller.gd" id="1_y6v41"]
 [ext_resource type="Script" uid="uid://can1nqsr7vf2v" path="res://Scripts/Cutscenes/cutscene_intro.gd" id="2_54d8w"]
 [ext_resource type="Texture2D" uid="uid://c80xr8aoojyto" path="res://Assets/Sprites/Screens/story intro images/Part 1_breifing.png" id="2_o4qpm"]
+[ext_resource type="Script" uid="uid://e7m530vnyooi" path="res://Scripts/Cutscenes/cutscene_start_menu.gd" id="2_v7nmc"]
+[ext_resource type="Texture2D" uid="uid://bar41jppw6rhm" path="res://Assets/Sprites/Screens/story end images/TITLE SCREEN.png" id="3_cxaf0"]
 [ext_resource type="Texture2D" uid="uid://c47wpdstxhuf3" path="res://Assets/Sprites/Screens/story intro images/Part 2_departure.png" id="3_pv66m"]
 [ext_resource type="LabelSettings" uid="uid://b76tuudykixus" path="res://Assets/Fonts/default_label_settings.tres" id="3_soblh"]
+[ext_resource type="Script" uid="uid://dwq75783a4c2e" path="res://Scripts/Cutscenes/cutscene_slide_start_menu.gd" id="4_er6la"]
 [ext_resource type="Texture2D" uid="uid://dfuulaxw0r3op" path="res://Assets/Sprites/Screens/story intro images/Part 3_flying.png" id="4_soblh"]
 [ext_resource type="Texture2D" uid="uid://b65nxo06r7yis" path="res://Assets/Sprites/Screens/story intro images/Part 4_warning.png" id="5_gubyq"]
 [ext_resource type="Texture2D" uid="uid://dxph8ltsoa2de" path="res://Assets/Sprites/Screens/story intro images/Part 5_crash.png" id="6_54d8w"]
@@ -39,6 +42,14 @@ length = 0.001
 _data = {
 &"Intro": SubResource("Animation_wllsk"),
 &"RESET": SubResource("Animation_b0jkv")
+}
+
+[sub_resource type="Animation" id="Animation_ig286"]
+resource_name = "default"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sxflp"]
+_data = {
+&"default": SubResource("Animation_ig286")
 }
 
 [sub_resource type="Animation" id="Animation_qbh0k"]
@@ -190,14 +201,35 @@ libraries/ = SubResource("AnimationLibrary_jqxjc")
 [node name="Cutscenes" type="Node2D" parent="." unique_id=625438666]
 z_index = 1
 
+[node name="StartMenu" type="Node2D" parent="Cutscenes" unique_id=2104327514]
+script = ExtResource("2_v7nmc")
+
+[node name="0" type="Sprite2D" parent="Cutscenes/StartMenu" unique_id=2064432906]
+texture = ExtResource("3_cxaf0")
+script = ExtResource("4_er6la")
+
+[node name="Label" type="Label" parent="Cutscenes/StartMenu/0" unique_id=706257165]
+offset_left = -57.0
+offset_top = 40.0
+offset_right = 55.0
+offset_bottom = 63.0
+size_flags_horizontal = 6
+text = "Press start"
+label_settings = ExtResource("6_soblh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/StartMenu/0" unique_id=1330964132]
+libraries/ = SubResource("AnimationLibrary_sxflp")
+
 [node name="Intro" type="Node2D" parent="Cutscenes" unique_id=637505367]
 script = ExtResource("2_54d8w")
 
-[node name="1" type="Sprite2D" parent="Cutscenes/Intro" unique_id=2064432906]
+[node name="1" type="Sprite2D" parent="Cutscenes/Intro" unique_id=1035024361]
 visible = false
 texture = ExtResource("2_o4qpm")
 
-[node name="Label" type="Label" parent="Cutscenes/Intro/1" unique_id=706257165]
+[node name="Label" type="Label" parent="Cutscenes/Intro/1" unique_id=1614480524]
 visible = false
 offset_left = -57.0
 offset_top = 40.0
@@ -208,7 +240,7 @@ text = "This planet is
 full of gold !"
 label_settings = ExtResource("3_soblh")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/1" unique_id=1635235378]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscenes/Intro/1" unique_id=1022386377]
 libraries/ = SubResource("AnimationLibrary_qorc0")
 
 [node name="2" type="Sprite2D" parent="Cutscenes/Intro" unique_id=82402363]

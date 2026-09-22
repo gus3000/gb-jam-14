@@ -4,7 +4,7 @@ echo "compressing build results to separate zips"
 
 pushd build
 
-for d in (find . -type d -not -path ".")
+for d in web linux windows
   echo "see dir $d"
   zip -r "$d.zip" "$d"
 end

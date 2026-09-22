@@ -67,6 +67,8 @@ func _ready() -> void:
 	setup_signals.call_deferred()
 	generated.stream.buffer_length = note_length
 	main_music.stream_paused = true
+	main_music.set_deferred("stream_paused", true)
+	main_music.volume_db = -80
 
 
 func _process(_delta: float) -> void:
@@ -210,12 +212,14 @@ func _on_mole_hit_ground() -> void:
 func _on_cutscene_starts_playing(cutscene: CutsceneType) -> void:
 	print("pausing main music")
 	main_music.stream_paused = true
+	main_music.volume_db = -80
 	if cutscenes_music.has(cutscene):
 		cutscenes_music[cutscene].play()
 	pass
 
 func _on_cutscene_stops_playing(cutscene: CutsceneType) -> void:
 	main_music.stream_paused = false
+	main_music.volume_db = 0
 	main_music.seek(0)
 	if cutscenes_music.has(cutscene):
 		cutscenes_music[cutscene].stop()
